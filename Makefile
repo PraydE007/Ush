@@ -6,7 +6,13 @@ LIB_A = ./libmx/libmx.a \
 
 HEADERS = ush.h \
 
-FILES = main
+FILES = main \
+	mx_create_ush \
+	mx_dealloc_ush \
+	mx_create_termconf \
+	mx_read_termconf \
+	mx_dealloc_termconf \
+	mx_read_input \
 
 INC_H = $(addprefix "inc/", $(HEADERS))
 

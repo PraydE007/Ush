@@ -66,6 +66,7 @@ FILES = mx_atoi \
 	mx_strncpy \
 	mx_strndup \
 	mx_strnew \
+	mx_strnew_x \
 	mx_strsplit \
 	mx_strstr \
 	mx_strtrim \

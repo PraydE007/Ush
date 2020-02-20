@@ -46,6 +46,7 @@ char *mx_strjoin_free(char *s1, const char *s2);
 char *mx_strncpy(char *dst, const char *src, int len);
 char *mx_strndup(const char *s1, size_t n);
 char *mx_strnew(const int size);
+char *mx_strnew_x(const int size);
 char *mx_str_size_cpy(char *dst, const char *src, int start, int end);
 char *mx_str_size_dup(const char *s1, size_t start, size_t end);
 char *mx_str_size_dup_free(char *s1, size_t start, size_t end);
