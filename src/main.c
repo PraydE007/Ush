@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     t_t_node *head = NULL;
 
     mx_push_t_node_back(&(head), "ls -la");
-    mx_push_t_node_back(&(head), "echo \'A\\B\' \'A\\B\' \'A\\B\' A");
+    mx_push_t_node_back(&(head), "echo\'A\\B\' \'A\\B\'X\'A\\B\'");
     //mx_push_t_node_back(&(head), "ABC lol \'A\"B\'");
     mx_parse_block(&head);
 

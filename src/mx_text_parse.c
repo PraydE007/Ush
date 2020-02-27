@@ -2,7 +2,7 @@
 
 char *mx_text_parse(char *str, int *piv) {
     char *res = NULL;
-    int i = 1;
+    int i = 0;
 
     while (str) {
         if (str[i] == ' ' || str[i] == '\\'
@@ -14,6 +14,6 @@ char *mx_text_parse(char *str, int *piv) {
         }
         i++;
     }
-    (*piv) += (i - 1);
+    (*piv) += (i == 1 ? (i - 1) : i);
     return res;
 }

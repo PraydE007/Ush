@@ -11,10 +11,9 @@ t_b_node *mx_parse_block(t_t_node **head) {
     int ch = 0;
 
     while (p) {
+        len = mx_strlen(p->text);
         
         while (p->text[i] != '\0' && len >= i) {
-
-            fprintf(stdout, "CO: %i, CH: %c\n", i, p->text[i]);
 
             ch = i;
             if (p->text[i] == '\'')
@@ -34,6 +33,8 @@ t_b_node *mx_parse_block(t_t_node **head) {
                 fprintf(stderr, MX_PIZDA, p->text[ch]);
                 exit(666);
             }
+
+            fprintf(stdout, "CO: %i, CH: %c\n", ch, p->text[ch]);
 
             i++;
         }

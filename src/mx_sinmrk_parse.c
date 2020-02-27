@@ -8,9 +8,10 @@ char *mx_sinmrk_parse(char *str, int *piv) {
         if (str[i] == '\'') {
             res = mx_strnew_x(i);
             strncpy(res, &str[1], i - 1);
+            break;
         }
         i++;
     }
-    (*piv) += (i - 1);
+    (*piv) += i;
     return res;
 }
