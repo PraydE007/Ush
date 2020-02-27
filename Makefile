@@ -13,6 +13,24 @@ FILES = main \
 	mx_read_termconf \
 	mx_dealloc_termconf \
 	mx_read_input \
+	mx_get_twidth \
+	mx_restore_buffer \
+	mx_term_width_check \
+	mx_buf_push \
+	mx_buf_drop \
+	mx_get_buf_type \
+	mx_parse_buf \
+	mx_create_block_node \
+	mx_pop_block_front \
+	mx_push_block_back \
+	mx_lstlen \
+	mx_create_text_node \
+	mx_pop_t_node_front \
+	mx_push_t_node_back \
+	mx_sinmrk_parse \
+	mx_doumrk_parse \
+	mx_text_parse \
+	mx_parse_block \
 
 INC_H = $(addprefix "inc/", $(HEADERS))
 
@@ -22,7 +40,7 @@ SRC_C = $(addprefix "src/", $(ROOT_C))
 
 ROOT_O = $(addsuffix ".o", $(FILES))
 
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
+CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -ltermcap
 
 all: install
 
@@ -35,7 +53,7 @@ install:
 #	@clang $(CFLAGS) $(ROOT_O) $(ROOT_A) -o $(NAME)
 	#TEST MODE
 	@clang -c $(ROOT_C)
-	@clang $(ROOT_O) $(ROOT_A) -o $(NAME)
+	@clang -ltermcap $(ROOT_O) $(ROOT_A) -o $(NAME)
 	@mkdir -p obj
 	@cp $(ROOT_O) obj/
 	@rm -rf $(ROOT_O)
