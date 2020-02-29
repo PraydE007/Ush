@@ -8,5 +8,6 @@ t_ush *mx_create_ush() {
     ush->buf_size = 1;
     ush->buf = mx_strnew_x(ush->buf_size);
     ush->termconf = mx_create_termconf();
+    ush->blocks = NULL;
     return ush;
 }

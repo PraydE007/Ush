@@ -1,46 +1,46 @@
 #include "ush.h"
 
 static bool count_slashes(char *str, int *i, int *sl) {
-    while (str[(*i)] != '\0') {
-        if (str[(*i)] == '\"') {
-            if (str[(*i) - 1] == '\\')
-                (*sl) += 1;
-            else
-                return true;
-        }
+    int len = mx_strlen(str);
+
+    while ((*i) <= len) {
+        if (str[(*i)] == '\0')
+            break;
+        // OTHER CASES
+        if (str[(*i)] == '\"' && str[(*i) - 1] != '\\')
+            return true;
         (*i) += 1;
     }
     return false;
 }
 
-static void copy_source(char *res, char *str, int *i, int *j) {
-    for ((*i) = 1; str[(*i)] != '\0' && res != NULL; (*i) += 1) {
-        if (str[(*i)] == '\"') {
-            if (str[(*i) - 1] == '\\')
-                res[(*j) - 1] = '\"';
-            else
-                break;
-        }
+static void copy_source(char *res, char *str, int *i) {
+    int len = mx_strlen(str);
+    int k = 0;
+
+    // i = 0 here       \/
+    for (int j = 0, k = 0; k <= len /*&& res*/; k += 1) {
+        // OTHER CASES
+        if (str[k] == '\"' && str[k - 1] != '\\')
+            break;
         else {
-            res[(*j)] = str[(*i)];
-            (*j) += 1;
+            res[j] = str[k];
+            j += 1;
         }
     }
-    // res[(*j) += 1] = '\0';
+    (*i) = k;
 }
 
 char *mx_doumrk_parse(char *str, int *piv) {
     char *res = NULL;
-    int i = 1;
-    int j = 0;
+    int len = mx_strlen(str);
+    int i = 0;
     int sl = 0;
 
-    if (mx_strlen(str) <= 0)
-        return NULL;
     if (!count_slashes(str, &i, &sl))
         return NULL;
     res = mx_strnew_x(i - sl);
-    copy_source(res, str, &i, &j);
-    (*piv) += (i - 1);
+    copy_source(res, str, &i);
+    (*piv) += i + 1;
     return res;
 }

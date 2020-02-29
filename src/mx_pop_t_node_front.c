@@ -5,6 +5,7 @@ void mx_pop_t_node_front(t_t_node **head) {
 
     if ((*head != NULL) && (head != NULL)) {
         p = (*head)->next;
+        mx_strdel(&((*head)->text));
         free(*head);
         (*head) = p;
     }

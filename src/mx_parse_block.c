@@ -2,52 +2,35 @@
 
 t_b_node *mx_parse_block(t_t_node **head) {
     t_t_node *p = (*head);
-    // t_b_node *b_node = NULL; JUST REFORM AFTER PARSE
-    t_t_node *array = NULL;
+    t_b_node *blocks = NULL;
+    t_b_node *p_b = NULL;
     char *buf = NULL;
-    // int piv = 0;
-    int len = mx_strlen(p->text);
-    int i = 0;
-    int ch = 0;
+    int err_ch = 0;
 
     while (p) {
-        len = mx_strlen(p->text);
-        
-        while (p->text[i] != '\0' && len >= i) {
-
-            ch = i;
-            if (p->text[i] == '\'')
-                buf = mx_sinmrk_parse(&(p->text[i]), &i);
+        p_b = mx_push_block_back(&blocks, NULL);
+        for (int i = 0; p->text[i] != '\0'; i++) {
+            err_ch = i;
+            // ADD OTHER CASES
+            if (p->text[i] == ' ')
+                buf = mx_space_parse(&(p->text[i]), &i);
+            else if (p->text[i] == '\'')
+                buf = mx_sinmrk_parse(&(p->text[i + 1]), &i);
             else if (p->text[i] == '\"')
-                buf = mx_doumrk_parse(&(p->text[i]), &i);
+                buf = mx_doumrk_parse(&(p->text[i + 1]), &i);
             else
                 buf = mx_text_parse(&(p->text[i]), &i);
 
-            //mx_printstr(" | ");
-
-            if (buf) {
-                mx_push_t_node_back(&array, buf);
-                buf = NULL;
-            }
+            if (buf)
+                mx_push_t_node_back(&(p_b->t_node), buf);
             else {
-                fprintf(stderr, MX_PIZDA, p->text[ch]);
+                fprintf(stderr, MX_PIZDA, p->text[err_ch]);
+                // fprintf(stdout, "CO: %i, CH: %c\n", err_ch, p->text[err_ch]);
                 exit(666);
             }
-
-            fprintf(stdout, "CO: %i, CH: %c\n", ch, p->text[ch]);
-
-            i++;
+            // fprintf(stdout, "CO: %i, CH: %c\n", err_ch, p->text[err_ch]);
         }
-
-        i = 0;
-        t_t_node *x = array;
-        while (x != NULL) {
-            mx_printstr(x->text);
-            mx_printstr("\n");
-            x = x->next;
-        }
-        array = NULL;
         p = p->next;
     }
-    return NULL;
+    return blocks;
 }

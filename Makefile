@@ -31,6 +31,8 @@ FILES = main \
 	mx_doumrk_parse \
 	mx_text_parse \
 	mx_parse_block \
+	mx_space_parse \
+	mx_dealloc_blocks \
 
 INC_H = $(addprefix "inc/", $(HEADERS))
 
