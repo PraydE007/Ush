@@ -5,6 +5,7 @@ HEADERS = libmx.h \
 FILES = mx_atoi \
 	mx_binary_search \
 	mx_bubble_sort \
+	mx_count_dbl_words \
 	mx_count_substr \
 	mx_count_words \
 	mx_create_datanode \
@@ -51,6 +52,7 @@ FILES = mx_atoi \
 	mx_sort_list \
 	mx_spacedel \
 	mx_sqrt \
+	mx_str_dbl_split \
 	mx_str_reverse \
 	mx_str_size_cpy \
 	mx_str_size_dup \
