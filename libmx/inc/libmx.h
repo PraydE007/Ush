@@ -37,6 +37,7 @@ char *mx_itoa(long long number);
 char *mx_nbr_to_hex(unsigned long nbr);
 char *mx_replace_substr(const char *str, const char *sub,
 const char *replace);
+int mx_count_dbl_words(const char *str, char c, char b);
 char *mx_spacedel(char *newstr, const char *str);
 char *mx_strcat(char *s1, const char *s2);
 char *mx_strcpy(char *dst, const char *src);
@@ -47,6 +48,7 @@ char *mx_strncpy(char *dst, const char *src, int len);
 char *mx_strndup(const char *s1, size_t n);
 char *mx_strnew(const int size);
 char *mx_strnew_x(const int size);
+char **mx_str_dbl_split(const char *s, char c, char b);
 char *mx_str_size_cpy(char *dst, const char *src, int start, int end);
 char *mx_str_size_dup(const char *s1, size_t start, size_t end);
 char *mx_str_size_dup_free(char *s1, size_t start, size_t end);

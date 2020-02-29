@@ -53,10 +53,11 @@ void mx_read_input(t_ush *ush) {
         mx_printstr("\x1B[0m");
         mx_printstr(ush->buf);
     }
-    tcsetattr(0, TCSAFLUSH, &(ush->termconf->savetty));
+    // tcsetattr(0, TCSAFLUSH, &(ush->termconf->savetty));
     mx_printstr("\x1B[38;05;243m");
     mx_printstr("u$h> ");
     mx_printstr(ush->buf);
     mx_printstr("\x1B[0m");
     mx_printstr("\n");
+    tcsetattr(0, TCSAFLUSH, &(ush->termconf->savetty));
 }
