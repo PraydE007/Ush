@@ -1,5 +1,22 @@
 #include "ush.h"
 
+static void outlst(t_ush *ush) {
+    t_b_node *block = ush->blocks;
+    t_t_node *x = NULL;
+
+    while (block) {
+        x = block->t_node;
+        while (x != NULL) {
+            fprintf(stdout, "\x1b[32m [\x1b[0m %s \x1b[32m]\x1b[0m ", x->text);
+            fflush(stdout);
+            x = x->next;
+        }
+        mx_printstr("\n");
+        block = block->next;
+    }
+    fprintf(stdout, "\n");
+}
+
 static bool is_builtin(t_ush *ush, char **comn, char **env) {
         if (mx_strcmp("exit", comn[0]) == 0) {
             ush->active = false;
@@ -19,6 +36,8 @@ static bool is_builtin(t_ush *ush, char **comn, char **env) {
             mx_export(&ush->export_list, comn, env);
             return true;
         }
+        else
+            outlst(ush);
     return false;
 }
 

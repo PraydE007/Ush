@@ -1,63 +1,48 @@
 #include "ush.h"
 
-static void push_char(char **buf, int *buf_size, char ch) {
-    (*buf_size) += 1;
-    (*buf) = (char *)realloc(*buf, (*buf_size));
-    (*buf)[*buf_size - 1] = '\0';
-    (*buf)[(*buf_size) - 2] = ch;
-}
-
-static void drop_char(char **buf, int *buf_size) {
-    if ((*buf_size) > 1) {
-        (*buf)[(*buf_size) - 2] = '\0';
-        (*buf_size) -= 1;
-        (*buf) = (char *)realloc((*buf), (*buf_size));
-    }
-}
-
-static short get_buf_type(char ch) {
-    if (32 <= ch && ch <= 126)
-        return 0;
-    else
-        return 1;
-}
-
-static void do_stuff(char **buf, int *buf_size, char ch, short type) {
+static int do_stuff(char **buf, int *buf_size, char ch, short type) {
     if (type == 0)
-        push_char(buf, buf_size, ch);
+        return mx_buf_push(buf, buf_size, ch);
     if (type == 1)
-        drop_char(buf, buf_size);
+        return mx_buf_drop(buf, buf_size);
+    return 1;
 }
 
-void mx_read_input(t_ush *ush) {
-    char ch = 0;
-
-    if (ush->buf) {
-        mx_strdel(&(ush->buf));
-        ush->buf_size = 1;
-        ush->buf = mx_strnew_x(ush->buf_size);
-    }
+static void on_read_start(t_ush *ush) {
+    mx_restore_buffer(ush);
     tcsetattr(0, TCSAFLUSH, &(ush->termconf->tty));
-    mx_printstr("\x1B[s");
-    mx_printstr("\x1B[38;05;155m");
-    mx_printstr("u$h> ");
+    fprintf(stdout, "\x1B[38;05;155mu$h> ");
+    fflush(stdout);
+}
+
+static int reading_cycle(t_ush *ush) {
+    char ch = 0;
+    int term = mx_get_twidth();
+    int len = 4;
+
     while (1) {
         read(0, &ch, 1);
-        mx_printstr("\x1B[u");
-        mx_printstr("\x1B[0K");
         if (ch == '\n')
             break;
-        do_stuff(&(ush->buf), &(ush->buf_size), ch, get_buf_type(ch));
-        mx_printstr("\x1B[38;05;155m");
-        mx_printstr("u$h> ");
-        mx_printstr("\x1B[0m");
-        mx_printstr(ush->buf);
+        if (do_stuff(&(ush->buf), &(ush->buf_size), ch, mx_get_buf_type(ch)))
+            return 1;
+        if (mx_term_width_check(ush, &len, &term))
+            return 1;
+        fprintf(stdout, "\r\x1B[0J\x1B[38;05;155mu$h> \x1B[0m%s", ush->buf);
+        fflush(stdout);
     }
-    // tcsetattr(0, TCSAFLUSH, &(ush->termconf->savetty));
-    mx_printstr("\x1B[38;05;243m");
-    mx_printstr("u$h> ");
-    mx_printstr(ush->buf);
-    mx_printstr("\x1B[0m");
-    mx_printstr("\n");
+    return 0;
+}
+
+static void on_read_ended(t_ush *ush) {
     tcsetattr(0, TCSAFLUSH, &(ush->termconf->savetty));
+    fprintf(stdout, "\r\x1B[0J\x1B[38;05;243mu$h> %s\x1B[0m\n", ush->buf);
+}
+
+int mx_read_input(t_ush *ush) {
+    on_read_start(ush);
+    if (reading_cycle(ush))
+        return 1;
+    on_read_ended(ush);
+    return 0;
 }
