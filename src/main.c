@@ -14,12 +14,12 @@ int main(int argc, char *argv[]) {
     while (ush->active) {
         mx_read_input(ush);
         line = mx_str_dbl_split(ush->buf, ' ', ';');
-        mx_check_commands(ush, line, environ);
+        if (line != NULL)
+            mx_check_commands(ush, line, environ);
         // PARSE
         // PROCESSES
         mx_del_strarr(&line);
     }
-
     exit_code = ush->exit_code;
     mx_dealloc_ush(&ush);
     system("leaks -q ush");

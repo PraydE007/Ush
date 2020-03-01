@@ -14,6 +14,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include "libmx/inc/libmx.h"
+// #include "libmx.h"
 
 /* -------- */
 
@@ -67,6 +68,7 @@ void mx_read_environment(t_export **export_list, char **env);
 void mx_read_input(t_ush *ush);
 void mx_read_termconf(t_termconf *termconf);
 t_export *mx_exportnode_creation(void);
+t_variable *mx_variablenode_creation(void);
 // t_env *mx_envnode_creation(void);
 t_termconf *mx_create_termconf();
 t_ush *mx_create_ush();

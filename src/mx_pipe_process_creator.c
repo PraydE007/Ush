@@ -1,6 +1,6 @@
 #include "ush.h"
 
-void mx_process_creator(char **line) {
+void mx_pipe_process_creator(char **line) {
     pid_t pid = 0;
     pid_t wpid = 0;
     int status = 0;
