@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 int mx_lstlen(t_b_node **head) {
     t_b_node *p = (*head);

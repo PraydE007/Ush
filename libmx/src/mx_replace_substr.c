@@ -1,7 +1,7 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 char *mx_replace_substr(const char *str, const char *sub,
-                                                        const char *replace) {
+                        const char *replace) {
     char *news = NULL;
     int j = 0;
     int count = 0;

@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 int mx_term_width_check(t_ush *ush, int *len, int *term) {
     (*len) = mx_strlen(ush->buf) + 4;

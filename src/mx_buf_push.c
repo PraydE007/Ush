@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 int mx_buf_push(char **buf, int *buf_size, char ch) {
     (*buf_size) += 1;

@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 static void printerr(const char *s) {
     write(2, s, mx_strlen(s));

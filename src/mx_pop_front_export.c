@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 void mx_pop_front_export(t_export **head) {
     t_export  *pl = NULL;

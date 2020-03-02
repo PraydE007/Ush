@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 void mx_pop_front_variable(t_variable **head) {
     t_variable  *pl = NULL;

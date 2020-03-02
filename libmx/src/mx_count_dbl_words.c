@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 int mx_count_dbl_words(const char *str, char c, char b) {
     int count = 0;

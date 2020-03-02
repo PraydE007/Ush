@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 void mx_dealloc_ush(t_ush **ush) {
     mx_strdel(&((*ush)->buf));

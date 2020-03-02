@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 static char **splitcycle(const char *s, char **ns, char c, char b) {
     int i = 0;

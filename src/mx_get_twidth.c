@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 int mx_get_twidth() {
     char *termtype = getenv("TERM");

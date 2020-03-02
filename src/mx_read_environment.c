@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 static char **key_value_creation(char *environ) {
     char **kv = NULL;

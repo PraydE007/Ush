@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 void mx_dealloc_termconf(t_termconf **termconf) {
     free(*termconf);

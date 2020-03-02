@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 // static char **export_split(char *str) {
 //     char **newstr = NULL;

@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 char *mx_strnew_x(const int size) {
     char *p_arr = NULL;

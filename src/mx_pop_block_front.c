@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 void mx_pop_block_front(t_b_node **head) {
     t_b_node *p = NULL;

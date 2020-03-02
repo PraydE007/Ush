@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 t_export  *mx_exportnode_creation(void) {
     t_export *node = (t_export*)malloc(sizeof(t_export));

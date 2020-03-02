@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 void mx_dealloc_blocks(t_b_node **head) {
     t_t_node *x = NULL;

@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 void mx_pipe_process_creator(char **line) {
     pid_t pid = 0;

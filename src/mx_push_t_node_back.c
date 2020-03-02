@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 void mx_push_t_node_back(t_t_node **head, char *text) {
     t_t_node *new_node = mx_create_text_node(text);

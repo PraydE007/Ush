@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 static void outlst(t_ush *ush) {
     t_b_node *block = ush->blocks;

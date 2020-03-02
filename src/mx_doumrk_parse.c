@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 static bool count_slashes(char *str, int *i, int *sl) {
     int len = mx_strlen(str);

@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 void mx_restore_buffer(t_ush *ush) {
     if (ush->buf) {

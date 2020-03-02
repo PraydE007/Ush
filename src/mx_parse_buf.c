@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 void mx_parse_buf(t_ush *ush) {
     t_t_node *t_node = NULL;

@@ -18,8 +18,8 @@
 #include <term.h>
 #include <stdio.h>
 #include <string.h>
-#include "libmx/inc/libmx.h"
-// #include "libmx.h"
+#include "../libmx/inc/libmx.h"
+//#include "libmx.h"
 
 /* -------- */
 

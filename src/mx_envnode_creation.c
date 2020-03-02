@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 t_env  *mx_envnode_creation(void) {
     t_env *node = (t_env *)malloc(sizeof(t_env));

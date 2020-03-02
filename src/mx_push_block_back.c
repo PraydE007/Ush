@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 t_b_node *mx_push_block_back(t_b_node **head, t_t_node *t_node) {
     t_b_node *new_node = mx_create_block_node(t_node);

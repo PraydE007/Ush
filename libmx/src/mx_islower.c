@@ -1,4 +1,4 @@
-#include <stdbool.h>
+#include "../inc/libmx.h"
 
 bool mx_islower(int c) {
     bool y;

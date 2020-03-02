@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 int main(int argc, char *argv[]) {
     t_ush *ush = mx_create_ush();
