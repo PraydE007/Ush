@@ -75,8 +75,6 @@ FILES = mx_atoi \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 
-DEL_SRC = $(addsuffix .c, $(FILES))
-
 SRC = $(addsuffix .c, $(SRC_PREFFIX))
 
 OBJ = $(addsuffix .o, $(FILES))

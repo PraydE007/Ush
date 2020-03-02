@@ -42,10 +42,6 @@ SRC_PREFFIX = $(addprefix src/, $(FILES))
 
 HEADER = inc/ush.h
 
-DEL_SRC = $(addsuffix .c, $(FILES))
-
-SRC = $(addsuffix .c, $(SRC_PREFFIX))
-
 SRC_COMPILE = $(addsuffix .c, $(SRC_PREFFIX))
 
 OBJ = $(addsuffix .o, $(FILES))
@@ -56,9 +52,9 @@ LIB_A = libmx/libmx.a
 
 all: install
 
-install: uls
+install: ush
 
-uls : $(SRC) $(INC)
+ush : $(SRC) $(INC)
 	@make -C libmx install
 #	@clang $(CFLAGS) -c $(SRC_COMPILE)
 #	@clang $(CFLAGS) $(OBJ) $(LIB_A) -o $(NAME)
