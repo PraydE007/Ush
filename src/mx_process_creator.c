@@ -1,35 +1,54 @@
 #include "ush.h"
 
-void mx_process_creator(char **line) {
+// static char **command_matrix_creator(t_t_node **comn) {
+//     t_t_node *pc = *comn;
+//     int size = mx_tlist_len(comn);
+//     int i = 0;
+//     char **com_mat = NULL;
+
+//     com_mat = (char **)malloc(sizeof(char *) * size);
+//     com_mat[size] = NULL;
+//     while (pc) {
+//         if (strcmp(pc->text, " ") != 0) {
+//             com_mat[i] = mx_strdup(pc->text);
+//             i++;
+//         }
+//         pc = pc->next;
+//     }
+//     return com_mat;
+// }
+
+void mx_process_creator(char **command) {
     pid_t pid = 0;
     pid_t wpid = 0;
     int status = 0;
-    char *line2[] = {"cat", "-e", NULL};
-    int i = 0;
-    // while (line[i]) {
-    //     mx_printstr(line[i]);
-    // mx_printstr("\n");
-    // i++;
-    // }
-    // while (list) {
-        pid = fork();
-        if (pid == 0) {
-            if (execvp(line[0], line) == -1)
-                perror("ush");
-            exit(EXIT_FAILURE);
-        }
-        else if (pid < 0) {
-            perror("ush");
-        }
-        else if (pid > 0) {
-            wpid = waitpid(pid, &status, WUNTRACED);
-            while (!WIFEXITED(status) && !WIFSIGNALED(status)) {
-            wpid = waitpid(pid, &status, WUNTRACED);
-            }
-        }
-        // 
-        
 
-    //     mx_pop_line(list);
-    // }
+// int i = 0;
+// mx_printstr("line:\n");
+// while (line[i]) {
+// mx_printstr(line[i]);
+// mx_printstr("\n");
+// i++;
+// }
+    pid = fork();
+    if (pid == 0) {
+        if (getenv("PATH") != 0) {
+            if (execvp(command[0], command) == -1)
+                 perror("ush");
+        }
+        else {
+            if (execv(command[0], command) == -1)
+                 perror("ush");
+        }
+        exit(EXIT_FAILURE);
+    }
+    else if (pid < 0) {
+        perror("ush");
+    }
+    else if (pid > 0) {
+        wpid = waitpid(pid, &status, WUNTRACED);
+        while (!WIFEXITED(status) && !WIFSIGNALED(status)) {
+            wpid = waitpid(pid, &status, WUNTRACED);
+        }
+    }
 }

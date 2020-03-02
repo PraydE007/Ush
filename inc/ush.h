@@ -41,13 +41,13 @@ typedef struct s_b_node {
     t_t_node *t_node;
     struct s_b_node *next;
 }              t_b_node;
-
+// check if needs this structure
 typedef struct s_env {
     char *key;
     char *value;
     struct s_env *next;
 }              t_env;
-
+// check if needs this structure
 typedef struct s_export {
     char *key;
     char *value;
@@ -71,16 +71,18 @@ typedef struct s_ush {
     t_variable *variable_list;
 }              t_ush;
 
+char **mx_command_matrix_creator(t_t_node **comn);
 char *mx_space_parse(char *str, int *piv);
 char *mx_text_parse(char *str, int *piv);
 char *mx_sinmrk_parse(char *str, int *piv);
 char *mx_doumrk_parse(char *str, int *piv);
+int mx_blist_len(t_b_node **head);
 int mx_buf_drop(char **buf, int *buf_size);
 int mx_buf_push(char **buf, int *buf_size, char ch);
 int mx_get_twidth();
-int mx_lstlen(t_b_node **head);
 int mx_read_input(t_ush *ush);
 int mx_strarrlen(char **arr);
+int mx_tlist_len(t_t_node **head);
 int mx_term_width_check(t_ush *ush, int *len, int *term);
 short mx_get_buf_type(char ch);
 // t_env *mx_envnode_creation(void);
@@ -91,17 +93,17 @@ t_b_node *mx_push_block_back(t_b_node **head, t_t_node *t_node);
 t_termconf *mx_create_termconf();
 t_t_node *mx_create_text_node(char *text);
 t_ush *mx_create_ush();
-void mx_check_commands(t_ush *ush, char **line, char **env);
+void mx_check_commands(t_ush *ush, char **env);
 void mx_dealloc_blocks(t_b_node **head);
 void mx_dealloc_termconf(t_termconf **termconf);
 void mx_dealloc_ush(t_ush **ush);
-void mx_export(t_export **export_list, char **command, char **env);
+void  mx_export(char **command, char **env);
 void mx_parse_buf(t_ush *ush);
 void mx_pop_block_front(t_b_node **head);
 void mx_pop_front_export(t_export **head);
 void mx_pop_front_variable(t_variable **head);
 void mx_pop_t_node_front(t_t_node **head);
-void mx_process_creator(char **line);
+void mx_process_creator(char **commands);
 void mx_push_t_node_back(t_t_node **head, char *text);
 void mx_push_back_export(t_export **export, char **kv);
 void mx_read_environment(t_export **export_list, char **env);

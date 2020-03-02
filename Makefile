@@ -7,7 +7,9 @@ LIB_A = ./libmx/libmx.a \
 HEADERS = ush.h \
 
 FILES = main \
+	mx_blist_len \
 	mx_check_commands \
+	mx_command_matrix_creator \
 	mx_create_termconf \
 	mx_create_ush \
 	mx_dealloc_termconf \
@@ -31,13 +33,13 @@ FILES = main \
 	mx_create_block_node \
 	mx_pop_block_front \
 	mx_push_block_back \
-	mx_lstlen \
 	mx_create_text_node \
 	mx_pop_t_node_front \
 	mx_push_t_node_back \
 	mx_sinmrk_parse \
 	mx_doumrk_parse \
 	mx_text_parse \
+	mx_tlist_len \
 	mx_parse_block \
 	mx_space_parse \
 	mx_dealloc_blocks \

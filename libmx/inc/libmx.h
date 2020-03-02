@@ -89,6 +89,7 @@ void *mx_memmove(void *dst, const void *src, size_t len);
 void *mx_memrchr(const void *s, int c, size_t n);
 void *mx_memset(void *b, int c, size_t len);
 void mx_printchar(char c);
+void mx_printerr(const char *s);
 void mx_printint(int n);
 void mx_printstr(const char *s);
 void mx_print_strarr(char **arr, const char *delim);
