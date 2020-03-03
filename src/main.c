@@ -24,6 +24,12 @@ int main(int argc, char *argv[]) {
                 ush->active = false;
         }
     // }
+    t_variable *list = ush->variable_list;
+    while (list) {
+            printf("%s", list->key);
+            printf("%s\n", list->value);
+            list = list->next;
+    }
     exit_code = ush->exit_code;
     mx_dealloc_ush(&ush);
     system("leaks -q ush"); //

@@ -1,9 +1,11 @@
 NAME = ush
 
 FILES = main \
+		mx_adding_variable \
 		mx_buf_drop \
 		mx_buf_push \
 		mx_check_commands \
+		mx_check_key_allow \
 		mx_command_matrix_creator\
 		mx_create_block_node \
 		mx_create_termconf \
@@ -20,8 +22,10 @@ FILES = main \
 		mx_get_buf_type \
 		mx_get_twidth \
 		mx_have_equals \
+		mx_key_value_creation \
 		mx_parse_buf \
 		mx_parse_block \
+		mx_pop_back_variable \
 		mx_pop_block_front \
 		mx_pop_front_export \
 		mx_pop_front_variable \
@@ -29,6 +33,7 @@ FILES = main \
 		mx_process_creator \
 		mx_push_block_back \
 		mx_push_back_export \
+		mx_push_back_variable \
 		mx_push_t_node_back \
 		mx_read_environment \
 		mx_read_input \
@@ -41,6 +46,8 @@ FILES = main \
 		mx_term_width_check \
 		mx_text_parse \
 		mx_tlist_len \
+		mx_variablenode_creation \
+		mx_variable_list_len \
 		
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

@@ -1,6 +1,6 @@
 #include "../inc/ush.h"
 
-bool mx_have_equals(char *env) {
+bool mx_have_equals(t_ush *ush, char *env) {
     int i = 0;
 
     while (env[i]) {
@@ -9,6 +9,7 @@ bool mx_have_equals(char *env) {
                 mx_printerr("ush: ");
                 mx_printerr(&env[i + 2]);
                 mx_printerr(" not found\n");
+                ush->equals = true;
                 return false;
             }
         }

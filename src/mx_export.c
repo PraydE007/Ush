@@ -19,44 +19,44 @@
 //     return false;
 // }
 
-static bool check_key_allow(char **kv) {
-    int i = 0;
+// static bool check_key_allow(char **kv) {
+//     int i = 0;
 
-    while (kv[0][i]) {
-        if ((kv[0][i] < 48 || (kv[0][i] > 57 && kv[0][i] < 65)
-            || (kv[0][i] > 90 && kv[0][i] < 97) || kv[0][i] > 122)
-            && (kv[0][i] != 36 && kv[0][i] != 95)) {
-            return false;
-        }
-        i++;
-    }
-    return true;
-}
+//     while (kv[0][i]) {
+//         if ((kv[0][i] < 48 || (kv[0][i] > 57 && kv[0][i] < 65)
+//             || (kv[0][i] > 90 && kv[0][i] < 97) || kv[0][i] > 122)
+//             && (kv[0][i] != 36 && kv[0][i] != 95)) {
+//             return false;
+//         }
+//         i++;
+//     }
+//     return true;
+// }
 
-static char **key_value_creation(char *env) {
-    char **kv = NULL;
+// static char **key_value_creation(t_ush *ush, char *env) {
+//     char **kv = NULL;
 
-    if (mx_have_equals(env)) {
-        kv = mx_strsplit(env, '=');
-    }
-    return kv;
-}
+//     if (mx_have_equals(ush, env)) {
+//         kv = mx_strsplit(env, '=');
+//     }
+//     return kv;
+// }
 
 static void export_error(char *str) {
-    mx_printerr("ush: not valid in this context:");
+    mx_printerr("ush: not valid in this context: ");
     mx_printerr(str);
     mx_printerr("\n");
 }
 
-static void  export_making(char **command, char **env) {
+static void  export_making(t_ush *ush, char **command, char **env) {
     char **kv = NULL;
 
     for (int i = 1; command[i]; i++) {
-        kv = key_value_creation(command[i]);
+        kv = mx_key_value_creation(ush, command[i]);
         if (kv != NULL) {
-            if (mx_strarrlen(kv) > 1 && check_key_allow(kv))
+            if (mx_strarrlen(kv) > 1 && mx_check_key_allow(kv))
                 setenv(kv[0], kv[1], 1);
-            else if (check_key_allow(kv))
+            else if (mx_check_key_allow(kv))
                 setenv(kv[0], "", 1);
             else
                 export_error(kv[0]);
@@ -65,7 +65,7 @@ static void  export_making(char **command, char **env) {
     }
 }
 
-void  mx_export(char **command, char **env) {
+void  mx_export(t_ush *ush, char **command, char **env) {
     char **export = NULL;
     char **kv = NULL;
     int lenth = mx_strarrlen(command);
@@ -77,5 +77,5 @@ void  mx_export(char **command, char **env) {
         mx_del_strarr(&export);
     }
     else 
-        export_making(command, env);
+        export_making(ush, command, env);
 }

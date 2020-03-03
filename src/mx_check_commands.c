@@ -18,11 +18,14 @@ static void outlst(t_ush *ush) {
 }
 
 static bool is_builtin(t_ush *ush, char **command, char **env) {
-        if (mx_strcmp("exit", command[0]) == 0) {
-            ush->active = false;
-            return true;
-        }
-        else if (mx_strcmp("export", command[0]) == 0) {
+    char **kv = mx_key_value_creation(ush, command[0]);
+
+    if (mx_strcmp("exit", command[0]) == 0) {
+        ush->active = false;
+        mx_del_strarr(&kv);
+        return true;
+    }
+    else if (mx_strcmp("export", command[0]) == 0) {
     //             t_export *export_list = NULL;
     // char **env = NULL;
     //         env = mx_read_environment(&export_list);
@@ -33,11 +36,29 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
     //                 printf("%s\n", env[i]);
     //                 i++;
                 // }
-            mx_export(command, env);
-            return true;
+        mx_export(ush, command, env);
+        mx_del_strarr(&kv);
+        return true;
+    }
+    else if (kv != NULL || ush->equals) {
+        // kv = key_value_creation(command[0]);
+        if (kv != NULL ) {
+            mx_adding_variable(ush, command, kv);
+            // if (check_key_allow(kv)) {
+            //     mx_push_back_variable(&ush->variable_list, kv);
+            // }
+            // else{
+            //     mx_printerr("ush: command not found: ");
+            //     mx_printerr(command[0]);
+            //     mx_printerr("\n");
+            // }
         }
-        else
-            outlst(ush);
+        mx_del_strarr(&kv);
+        return true;
+    }
+    else
+        outlst(ush);
+    mx_del_strarr(&kv);
     return false;
 }
 
@@ -52,4 +73,5 @@ void mx_check_commands(t_ush *ush, char **env) {
         mx_del_strarr(&command);
         block = block->next;
     }
+    // system("leaks -q ush");
 }
