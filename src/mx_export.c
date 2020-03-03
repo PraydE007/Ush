@@ -47,7 +47,7 @@ static void export_error(char *str) {
     mx_printerr(str);
     mx_printerr("\n");
 }
-
+// correct a lot of line
 void  mx_export(char **command, char **env) {
     char **kv = NULL;
     int lenth = mx_strarrlen(command);
