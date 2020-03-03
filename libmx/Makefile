@@ -37,6 +37,7 @@ FILES = mx_atoi \
         	mx_pop_front \
         	mx_pow \
         	mx_printchar \
+			mx_printerr \
         	mx_printint \
         	mx_printstr \
         	mx_print_strarr \

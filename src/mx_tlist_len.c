@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 //clean "if (strcmp(p->text, " ") != 0)"" when parsing is ready
 int mx_tlist_len(t_t_node **head) {

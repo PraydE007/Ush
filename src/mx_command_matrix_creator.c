@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 //clean "if (strcmp(p->text, " ") != 0)"" when parsing is ready
 char **mx_command_matrix_creator(t_t_node **comn) {

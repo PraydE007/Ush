@@ -2,7 +2,6 @@
 
 static bool have_equals(char *env) {
     int i = 0;
-    // printf("11111\n");
 
     while (env[i]) {
         if (env[i + 2]) {
@@ -20,6 +19,20 @@ static bool have_equals(char *env) {
     return false;
 }
 
+static bool check_key_allow(char **kv) {
+    int i = 0;
+
+    while (kv[0][i]) {
+        if ((kv[0][i] < 48 || (kv[0][i] > 57 && kv[0][i] < 65)
+            || (kv[0][i] > 90 && kv[0][i] < 97) || kv[0][i] > 122)
+            && (kv[0][i] != 36 && kv[0][i] != 95)) {
+            return false;
+        }
+        i++;
+    }
+    return true;
+}
+
 static char **key_value_creation(char *env) {
     char **kv = NULL;
 
@@ -29,46 +42,32 @@ static char **key_value_creation(char *env) {
     return kv;
 }
 
+static void export_error(char *str) {
+    mx_printerr("ush: not valid in this context:");
+    mx_printerr(str);
+    mx_printerr("\n");
+}
+
 void  mx_export(char **command, char **env) {
-    // t_export *pex = *export_list;
-    // t_t_node *pc = *command;
     char **kv = NULL;
     int lenth = mx_strarrlen(command);
-                // setenv("DDDD", "", 1);
-                // printf("env2222: \n");
-                // int i = 0;
-                // while (env[i]) {
-                //     printf("%s\n", env[i]);
-                //     i++;
-                // }
+
     if (lenth == 1) {
         for (int i = 0; env[i]; i++)
             printf("%s\n", env[i]);
-        // while (pex) {
-        //     mx_printstr(pex->key);
-        //     mx_printstr("=");
-        //     if (pex->value)
-        //         mx_printstr(pex->value);
-        //     else
-        //         mx_printstr("''");
-        //     mx_printstr("\n");
-        //     pex = pex->next;
-        // }
     }
     else {
         for (int i = 1; command[i]; i++) {
             kv = key_value_creation(command[i]);
-            // printf("22222\n");
             if (kv != NULL) {
-                if (mx_strarrlen(kv) > 1) {
+                if (mx_strarrlen(kv) > 1 && check_key_allow(kv))
                     setenv(kv[0], kv[1], 1);
-                }
-                else
+                else if (check_key_allow(kv))
                     setenv(kv[0], "", 1);
+                else
+                    export_error(kv[0]);
+                mx_del_strarr(&kv);
             }
-            // perror("ush");
-            mx_del_strarr(&kv);
         }
     }
-    // printf("33333\n");
 }
