@@ -16,7 +16,7 @@ static void outlst(t_ush *ush) {
     }
     fprintf(stdout, "\n");
 }
-
+// do kv ONLY IN ELSE
 static bool is_builtin(t_ush *ush, char **command, char **env) {
     char **kv = mx_key_value_creation(ush, command[0]);
 
