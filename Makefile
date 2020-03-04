@@ -47,6 +47,7 @@ FILES = main \
 		mx_term_width_check \
 		mx_text_parse \
 		mx_tlist_len \
+		mx_unset \
 		mx_variablenode_creation \
 		mx_variable_list_len \
 		
