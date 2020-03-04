@@ -53,6 +53,7 @@ FILES = main \
 		mx_variablenode_creation \
 		mx_variable_list_len \
 		mx_pop_specific \
+		mx_env \
 		
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 
@@ -70,7 +71,7 @@ all: install
 
 install: ush
 
-ush : $(SRC) $(INC)
+ush : $(SRC_COMPILE) $(HEADER)
 	@make -C libmx install
 #	@clang $(CFLAGS) -c $(SRC_COMPILE)
 #	@clang $(CFLAGS) $(OBJ) $(LIB_A) -o $(NAME)
