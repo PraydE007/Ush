@@ -117,6 +117,7 @@ void mx_pop_back_variable(t_variable **head);
 void mx_pop_block_front(t_b_node **head);
 void mx_pop_front_export(t_export **head);
 void mx_pop_front_variable(t_variable **head);
+void mx_pop_specific(t_variable **list, int index);
 void mx_pop_t_node_front(t_t_node **head);
 void mx_process_creator(char **commands);
 void mx_push_t_node_back(t_t_node **head, char *text);

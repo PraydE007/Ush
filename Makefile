@@ -52,6 +52,7 @@ FILES = main \
 		mx_unset \
 		mx_variablenode_creation \
 		mx_variable_list_len \
+		mx_pop_specific \
 		
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 
