@@ -24,7 +24,7 @@ char **mx_str_dbl_split(const char *s, char c, char b) {
 
     if (s == NULL)
         return NULL;
-    news = (char **)malloc(sizeof(char **) * mx_count_dbl_words(s, c, b) + 1);
+    news = (char **)malloc(sizeof(char **) * (mx_count_dbl_words(s, c, b) + 1));
     news[mx_count_dbl_words(s, c, b)] = NULL;
     news = splitcycle(s, news, c, b);
     return news;
