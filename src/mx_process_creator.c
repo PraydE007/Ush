@@ -35,6 +35,7 @@ void mx_process_creator(char **command) {
         if (getenv("PATH") != 0) {
             if (execvp(command[0], command) == -1)
                  perror("ush");
+            exit(1);
         }
         else {
             if (execv(command[0], command) == -1)
