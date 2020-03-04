@@ -1,47 +1,5 @@
 #include "../inc/ush.h"
 
-// static bool have_equals(char *env) {
-//     int i = 0;
-
-//     while (env[i]) {
-//         if (env[i + 2]) {
-//             if (env[i] == '=' && env[i + 1] == '=') {
-//                 mx_printerr("ush: ");
-//                 mx_printerr(&env[i + 2]);
-//                 mx_printerr(" not found\n");
-//                 return false;
-//             }
-//         }
-//         if (env[i] == '=')
-//             return true;
-//         i++;
-//     }
-//     return false;
-// }
-
-// static bool check_key_allow(char **kv) {
-//     int i = 0;
-
-//     while (kv[0][i]) {
-//         if ((kv[0][i] < 48 || (kv[0][i] > 57 && kv[0][i] < 65)
-//             || (kv[0][i] > 90 && kv[0][i] < 97) || kv[0][i] > 122)
-//             && (kv[0][i] != 36 && kv[0][i] != 95)) {
-//             return false;
-//         }
-//         i++;
-//     }
-//     return true;
-// }
-
-// static char **key_value_creation(t_ush *ush, char *env) {
-//     char **kv = NULL;
-
-//     if (mx_have_equals(ush, env)) {
-//         kv = mx_strsplit(env, '=');
-//     }
-//     return kv;
-// }
-
 static void export_error(char *str) {
     mx_printerr("ush: not valid in this context: ");
     mx_printerr(str);

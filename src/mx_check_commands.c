@@ -27,16 +27,6 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
         return true;
     }
     else if (mx_strcmp("export", command[0]) == 0) {
-    //             t_export *export_list = NULL;
-    // char **env = NULL;
-    //         env = mx_read_environment(&export_list);
-    //             setenv("JJJ", "!!!!!!!!!", 1);
-    //             printf("env: \n");
-    //             int i = 0;
-    //             while (env[i]) {
-    //                 printf("%s\n", env[i]);
-    //                 i++;
-                // }
         mx_export(ush, command, env);
         mx_del_strarr(&kv);
         return true;
@@ -44,19 +34,11 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
     else if (mx_strcmp("unset", command[0]) == 0)
         mx_unset(command, env, ush);
     else if (kv != NULL || ush->equals) {
-        // kv = key_value_creation(command[0]);
         if (kv != NULL ) {
             mx_adding_variable(ush, command, kv);
-            // if (check_key_allow(kv)) {
-            //     mx_push_back_variable(&ush->variable_list, kv);
-            // }
-            // else{
-            //     mx_printerr("ush: command not found: ");
-            //     mx_printerr(command[0]);
-            //     mx_printerr("\n");
-            // }
+            mx_del_strarr(&kv);
         }
-        mx_del_strarr(&kv);
+        ush->equals = false;
         return true;
     }
     else
@@ -68,13 +50,11 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
 void mx_check_commands(t_ush *ush, char **env) {
     t_b_node *block = ush->blocks;
     char **command = NULL;
-
     while (block) {
         command = mx_command_matrix_creator(&block->t_node);
         is_builtin(ush, command, env)
-                  ? 0 : mx_process_creator(command);
+        ? 0 : mx_process_creator(command);
         mx_del_strarr(&command);
         block = block->next;
     }
-    // system("leaks -q ush");
 }

@@ -23,6 +23,7 @@ FILES = main \
 		mx_get_buf_type \
 		mx_get_twidth \
 		mx_have_equals \
+		mx_isvariable \
 		mx_key_value_creation \
 		mx_parse_buf \
 		mx_parse_block \
@@ -44,9 +45,11 @@ FILES = main \
 		mx_space_parse \
 		mx_strarrlen \
 		mx_strcmp_export \
+		mx_strsplit_first_meeting \
 		mx_term_width_check \
 		mx_text_parse \
 		mx_tlist_len \
+		mx_unset \
 		mx_variablenode_creation \
 		mx_variable_list_len \
 		
