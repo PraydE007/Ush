@@ -3,10 +3,10 @@
 static char **key_value_creation(char *environ) {
     char **kv = NULL;
 
-    kv = mx_strsplit(environ, '=');
+    kv = mx_strsplit_first_meeting(environ, '=');
     return kv;
 }
-
+// CHECK IF WE NEED THIS FUCTION
 void mx_read_environment(t_export **export_list, char **env) {
     char **kv = NULL;
 

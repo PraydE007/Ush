@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+// LINE LENTH
 static void variable_cleaning(t_ush *ush, int *count) {
     int lenth = 0;
 
@@ -15,40 +15,60 @@ static void variable_error_printing(t_ush *ush, char *comn, int *count) {
     variable_cleaning(ush, count);
 }
 
+
+static void variable_adding_condition(t_ush *ush, char **command,
+                                      char **k_v2, int *count) {
+    if (k_v2 != NULL ) {
+        if (mx_check_key_allow(k_v2) && mx_isvariable (&ush->variable_list, k_v2)) {
+            mx_push_back_variable(&ush->variable_list, k_v2);
+            (*count)++;
+        }
+        else {
+            variable_error_printing(ush, command[ush->storage], count);
+            ush->trigger = true;
+        }
+    }
+    else {
+        mx_del_strarr(&k_v2);
+        for (ush->storage += 1; command[ush->storage]; ush->storage++) {
+            k_v2 = mx_key_value_creation(ush, command[ush->storage]);
+            if (k_v2 == NULL)
+                variable_cleaning(ush, count);
+            mx_del_strarr(&k_v2);
+        }
+        ush->trigger = true;;
+    }
+}
+
+static void variable_adding_cycle(t_ush *ush, char **command,
+                                  char **k_v2, int *count) {
+    for (int i = 1; command[i]; i++) {
+        k_v2 = mx_key_value_creation(ush, command[i]);
+        if (k_v2 != NULL || ush->equals) {
+            ush->storage = i;
+            variable_adding_condition(ush, command, k_v2, count);
+            if (ush->trigger == true) {
+                ush->trigger = false;
+                ush->equals = false;
+                mx_del_strarr(&k_v2);
+                break;
+            }
+        }
+        else
+            variable_error_printing(ush, command[i], count);
+        mx_del_strarr(&k_v2);
+    }
+    // ush->storage = 0;
+}
 void mx_adding_variable(t_ush *ush, char **command, char **kv) {
     char **k_v2 = NULL;
     int count = 0;
     int lenth = 0;
 
-    mx_push_back_variable(&ush->variable_list, kv);
-    count++;
-    for (int i = 1; command[i]; i++) {
-        k_v2 = mx_key_value_creation(ush, command[i]);
-        if (k_v2 != NULL || ush->equals) {
-            if (k_v2 != NULL ) {
-                if (mx_check_key_allow(k_v2)) {
-                    mx_push_back_variable(&ush->variable_list, k_v2);
-                    count++;
-                }
-                else{
-                    variable_error_printing(ush, command[i], &count);
-                    mx_del_strarr(&k_v2);
-                    break;
-                }
-            }
-            else {
-                mx_del_strarr(&k_v2);
-                for (i += 1; command[i]; i++) {
-                    k_v2 = mx_key_value_creation(ush, command[i]);
-                    if (k_v2 == NULL)
-                        variable_cleaning(ush, &count);
-                    mx_del_strarr(&k_v2);
-                }
-                break;
-            }
-        }
-        else
-            variable_error_printing(ush, command[i], &count);
-        mx_del_strarr(&k_v2);
+    if (mx_isvariable (&ush->variable_list, kv)) {
+        mx_push_back_variable(&ush->variable_list, kv);
+        count++;
     }
+    variable_adding_cycle(ush, command, k_v2, &count);
+    ush->storage = 0;
 }

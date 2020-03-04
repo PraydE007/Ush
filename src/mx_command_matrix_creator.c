@@ -7,7 +7,7 @@ char **mx_command_matrix_creator(t_t_node **comn) {
     int i = 0;
     char **com_mat = NULL;
 
-    com_mat = (char **)malloc(sizeof(char *) * size + 1);
+    com_mat = (char **)malloc(sizeof(char *) * (size + 1));
     com_mat[size] = NULL;
     while (pc) {
         if (strcmp(pc->text, " ") != 0) {
