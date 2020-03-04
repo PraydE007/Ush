@@ -31,6 +31,11 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
         mx_del_strarr(&kv);
         return true;
     }
+    else if (mx_strcmp("unset", command[0]) == 0) {
+        mx_unset(command, env, ush);
+//        mx_del_strarr(&kv);
+        return true;
+    }
     else if (kv != NULL || ush->equals) {
         if (kv != NULL ) {
             mx_adding_variable(ush, command, kv);
