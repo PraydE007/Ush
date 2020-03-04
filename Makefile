@@ -16,6 +16,7 @@ FILES = main \
 		mx_dealloc_ush \
 		mx_doumrk_parse \
 		mx_envnode_creation \
+		mx_exit \
 		mx_export \
 		mx_export_matrix_creator \
 		mx_exportnode_creation \

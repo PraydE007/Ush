@@ -91,6 +91,7 @@ int mx_strcmp_export(const char *s1, const char *s2);
 int mx_tlist_len(t_t_node **head);
 int mx_term_width_check(t_ush *ush, int *len, int *term);
 int mx_variable_list_len(t_variable **head);
+int mx_exit(char **command);
 short mx_get_buf_type(char ch);
 // t_env *mx_envnode_creation(void);
 t_export *mx_exportnode_creation(void);
