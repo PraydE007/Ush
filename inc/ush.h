@@ -63,11 +63,13 @@ typedef struct s_variable {
 typedef struct s_ush {
     bool active;
     bool equals;
-    int exit_code;
-    int buf_size;
+    bool trigger;
     char *buf;
-    t_termconf *termconf;
+    int buf_size;
+    int exit_code;
+    int storage;
     t_b_node *blocks;
+    t_termconf *termconf;
     // t_export *export_list;
     t_variable *variable_list;
 }              t_ush;
@@ -77,9 +79,11 @@ bool mx_have_equals(t_ush *ush, char *env);
 char **mx_command_matrix_creator(t_t_node **comn);
 char *mx_doumrk_parse(char *str, int *piv);
 char **mx_export_matrix_creator(char **env);
+bool mx_isvariable (t_variable **list, char **k_v);
 char **mx_key_value_creation(t_ush *ush, char *env);
 char *mx_sinmrk_parse(char *str, int *piv);
 char *mx_space_parse(char *str, int *piv);
+char **mx_strsplit_first_meeting(const char *s, char c);
 char *mx_text_parse(char *str, int *piv);
 int mx_blist_len(t_b_node **head);
 int mx_buf_drop(char **buf, int *buf_size);
