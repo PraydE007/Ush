@@ -60,6 +60,12 @@ typedef struct s_variable {
     struct s_variable *next;
 }              t_variable;
 
+typedef struct s_env_flags {
+    bool P;
+    bool i;
+    bool u;
+}              t_env_flags;
+
 typedef struct s_ush {
     bool active;
     bool equals;
