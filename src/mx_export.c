@@ -12,14 +12,18 @@ static void  export_making(t_ush *ush, char **command, char **env) {
     for (int i = 1; command[i]; i++) {
         kv = mx_key_value_creation(ush, command[i]);
         if (kv != NULL) {
-            if (mx_strarrlen(kv) > 1 && mx_check_key_allow(kv))
-                setenv(kv[0], kv[1], 1);
-            else if (mx_check_key_allow(kv))
-                setenv(kv[0], "", 1);
+            if (mx_strarrlen(kv) > 1 && mx_check_key_allow(kv)) {
+                mx_isvariable(&ush->variable_list, kv);// setenv(kv[0], kv[1], 1);
+            }
+            else if (mx_check_key_allow(kv)) {
+                mx_isvariable(&ush->variable_list, kv);// setenv(kv[0], "", 1);
+            }
             else
                 export_error(kv[0]);
             mx_del_strarr(&kv);
         }
+        else
+            mx_env_variable_checking(&ush->variable_list, command[i]);
     }
 }
 
