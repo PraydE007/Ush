@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 void mx_push_back_export(t_export **list, char **kv) {
     t_export *node = mx_exportnode_creation();

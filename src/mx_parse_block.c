@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 t_b_node *mx_parse_block(t_t_node **head) {
     t_t_node *p = (*head);

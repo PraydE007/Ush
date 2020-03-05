@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 bool mx_control_slash(char **res, char *str, int *res_size) {
     bool trg = 0;

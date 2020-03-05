@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 void mx_read_termconf(t_termconf *termconf) {
     t_term savetty;

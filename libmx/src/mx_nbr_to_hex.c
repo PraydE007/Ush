@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 static void nbr_to_hex_cycle(unsigned long store, int i, char *hex) {
     unsigned long hexSymbol;

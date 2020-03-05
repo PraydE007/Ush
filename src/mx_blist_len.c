@@ -1,6 +1,6 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
-int mx_lstlen(t_b_node **head) {
+int mx_blist_len(t_b_node **head) {
     t_b_node *p = (*head);
     int len = 0;
 

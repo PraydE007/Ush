@@ -1,39 +1,43 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
-// static char **export_split(char *str) {
-//     char **newstr = NULL;
+static void export_error(char *str) {
+    mx_printerr("ush: not valid in this context: ");
+    mx_printerr(str);
+    mx_printerr("\n");
+}
 
-//     newstr
+static void  export_making(t_ush *ush, char **command, char **env) {
+    char **kv = NULL;
 
-// }
-
-void  mx_export(t_export **export_list, char **command, char **env) {
-    t_export *pex = *export_list;
-                // setenv("DDDD", "", 1);
-                // printf("env2222: \n");
-                // int i = 0;
-                // while (env[i]) {
-                //     printf("%s\n", env[i]);
-                //     i++;
-                // }
-    if (mx_strarrlen(command) == 1) {
-        while (pex) {
-            mx_printstr(pex->key);
-            mx_printstr("=");
-            if (pex->value)
-                mx_printstr(pex->value);
+    for (int i = 1; command[i]; i++) {
+        kv = mx_key_value_creation(ush, command[i]);
+        if (kv != NULL) {
+            if (mx_strarrlen(kv) > 1 && mx_check_key_allow(kv)) {
+                mx_isvariable(&ush->variable_list, kv);// setenv(kv[0], kv[1], 1);
+            }
+            else if (mx_check_key_allow(kv)) {
+                mx_isvariable(&ush->variable_list, kv);// setenv(kv[0], "", 1);
+            }
             else
-                mx_printstr("''");
-            mx_printstr("\n");
-            pex = pex->next;
+                export_error(kv[0]);
+            mx_del_strarr(&kv);
         }
+        else
+            mx_env_variable_checking(&ush->variable_list, command[i]);
     }
-    else {
-        for (int i = 1; command[i]; i++) {
-            // mx_push_back_env(command[i]);
-            // t_env *env =  list->data;
-            // env->key
-            // ((t_env*)list->data)->key
-        }
-    }	
+}
+
+void  mx_export(t_ush *ush, char **command, char **env) {
+    char **export = NULL;
+    char **kv = NULL;
+    int lenth = mx_strarrlen(command);
+
+    if (lenth == 1) {
+        export = mx_export_matrix_creator(env);
+        for (int i = 0; export[i]; i++)
+            printf("%s\n", export[i]);
+        mx_del_strarr(&export);
+    }
+    else 
+        export_making(ush, command, env);
 }

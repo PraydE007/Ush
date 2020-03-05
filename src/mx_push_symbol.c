@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 int mx_push_symbol(char **res, char ch, int *res_size) {
     (*res_size) += 1;

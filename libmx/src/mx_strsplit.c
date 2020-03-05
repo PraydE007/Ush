@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 char **mx_strsplit(const char *s, char c) {
     char **news = NULL;
@@ -7,7 +7,7 @@ char **mx_strsplit(const char *s, char c) {
 
     if (s == NULL)
         return NULL;
-    news = (char **)malloc(sizeof(char **) * mx_count_words(s, c) + 1);
+    news = (char **)malloc(sizeof(char **) * (mx_count_words(s, c) + 1));
     news[mx_count_words(s, c)] = NULL;
     while (s[i]) {
         for (; s[i] == c && s[i] != '\0'; i++);

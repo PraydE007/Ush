@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 t_lints *mx_create_lintnode() {
     t_lints *node = (t_lints *)malloc(sizeof(t_lints));

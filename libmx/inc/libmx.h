@@ -10,7 +10,7 @@
 typedef struct  s_list {
     void  *data;
     struct s_list *next;
-} t_list;
+}               t_list;
 
 typedef struct  s_data {
     size_t i;
@@ -18,7 +18,7 @@ typedef struct  s_data {
     size_t buf_size;
     char delim;
     char *buf;
-} t_data;
+}               t_data;
 
 typedef struct  s_lints {
     unsigned int pivot ;
@@ -27,7 +27,7 @@ typedef struct  s_lints {
     unsigned int count;
     unsigned int newL;
     unsigned int newR;
-} t_lints;
+}               t_lints;
 
 bool mx_isdigit(int c);
 bool mx_isspace(char c);
@@ -89,6 +89,7 @@ void *mx_memmove(void *dst, const void *src, size_t len);
 void *mx_memrchr(const void *s, int c, size_t n);
 void *mx_memset(void *b, int c, size_t len);
 void mx_printchar(char c);
+void mx_printerr(const char *s);
 void mx_printint(int n);
 void mx_printstr(const char *s);
 void mx_print_strarr(char **arr, const char *delim);

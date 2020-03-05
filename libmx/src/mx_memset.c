@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 void *mx_memset(void *b, int c, size_t len) {
     char *p_b = (char *) b;

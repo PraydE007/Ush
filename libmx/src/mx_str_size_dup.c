@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 char *mx_str_size_dup(const char *s1, size_t start, size_t end) {
     char *copy = NULL;

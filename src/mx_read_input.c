@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 static int do_stuff(char **buf, int *buf_size, char ch, short type) {
     if (type == 0)

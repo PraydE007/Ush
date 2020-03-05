@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 char *mx_space_parse(char *str, int *piv) {
     char *res = NULL;

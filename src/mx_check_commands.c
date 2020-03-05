@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 static void outlst(t_ush *ush) {
     t_b_node *block = ush->blocks;
@@ -23,34 +23,53 @@ static void outlst(t_ush *ush) {
     }
     fprintf(stdout, "\n");
 }
+// do kv ONLY IN ELSE
+static bool is_builtin(t_ush *ush, char **command, char **env) {
+    char **kv = mx_key_value_creation(ush, command[0]);
 
-static bool is_builtin(t_ush *ush, char **comn, char **env) {
-        if (mx_strcmp("exit", comn[0]) == 0) {
-            ush->active = false;
-            return true;
+    if (mx_strcmp("exit", command[0]) == 0) {
+        ush->exit_code = mx_exit(command);
+        ush->active = false;
+        mx_del_strarr(&kv);
+        return true;
+    }
+    else if (mx_strcmp("env", command[0]) == 0) {
+        mx_env(command, env);
+        return true;
+    }
+    else if (mx_strcmp("export", command[0]) == 0) {
+        mx_export(ush, command, env);
+        mx_del_strarr(&kv);
+        return true;
+    }
+    else if (mx_strcmp("unset", command[0]) == 0) {
+        mx_unset(command, env, ush);
+        mx_del_strarr(&kv);
+        return true;
+    }
+    else if (kv != NULL || ush->equals) {
+        if (kv != NULL) {
+            mx_adding_variable(ush, command, kv);
+            mx_del_strarr(&kv);
         }
-        else if (mx_strcmp("export", comn[0]) == 0) {
-    //             t_export *export_list = NULL;
-    // char **env = NULL;
-    //         env = mx_read_environment(&export_list);
-    //             setenv("JJJ", "!!!!!!!!!", 1);
-    //             printf("env: \n");
-    //             int i = 0;
-    //             while (env[i]) {
-    //                 printf("%s\n", env[i]);
-    //                 i++;
-                // }
-            mx_export(&ush->export_list, comn, env);
-            return true;
-        }
-        else
-            outlst(ush);
+        ush->equals = false;
+        return true;
+    }
+    else
+        outlst(ush);
+    mx_del_strarr(&kv);
     return false;
 }
 
-void mx_check_commands(t_ush *ush, char **line, char **env) {
-    // for (int i = 0; list_line; list_line = list_line->next) {
-        is_builtin(ush, line, env) ? 0 : mx_process_creator(line);
-    // }
-    
+void mx_check_commands(t_ush *ush, char **env) {
+    t_b_node *block = ush->blocks;
+    char **command = NULL;
+
+    while (block) {
+        command = mx_command_matrix_creator(&block->t_node);
+        is_builtin(ush, command, env)
+        ? 0 : mx_process_creator(command);
+        mx_del_strarr(&command);
+        block = block->next;
+    }
 }

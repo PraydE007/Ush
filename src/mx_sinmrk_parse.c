@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 static void slash_handling(char **res, char *str, int *i, int *res_size) {
     if (str[1] == '\0')

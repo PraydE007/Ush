@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 t_data  *mx_create_datanode() {
     t_data *node = (t_data*)malloc(sizeof(t_data));

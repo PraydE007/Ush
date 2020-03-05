@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 char *mx_str_size_cpy(char *dst, const char *src, int start, int end) {
     int i = 0;

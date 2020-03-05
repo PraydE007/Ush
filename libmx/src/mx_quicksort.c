@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 static void quicksort_cycle(char **arr, int *left, int *right,
 t_lints **data) {

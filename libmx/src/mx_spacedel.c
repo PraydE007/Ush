@@ -1,4 +1,4 @@
-#include "libmx.h"
+#include "../inc/libmx.h"
 
 char *mx_spacedel(char *newstr, const char *str) {
     int j = 0;

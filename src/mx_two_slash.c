@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 int mx_two_slash(char **res, char *str, int *i, int *res_size) {
     (*i) += 2;

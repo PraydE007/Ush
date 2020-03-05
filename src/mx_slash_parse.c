@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 static int slash_handling(char **res, char *str, int *i, int *res_size) {
     int sl_num = mx_count_slashes(str);

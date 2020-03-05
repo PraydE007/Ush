@@ -1,6 +1,6 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
-void mx_process_creator(char **line) {
+void mx_pipe_process_creator(char **line) {
     pid_t pid = 0;
     pid_t wpid = 0;
     int status = 0;
@@ -17,7 +17,9 @@ void mx_process_creator(char **line) {
         pid = fork();
         if (pid == 0) {
             close(pipedes[0]);
-            dup2(pipedes[1], 1);
+            close(1);
+            dup(pipedes[1]);
+            close(pipedes[1]);
             if (execvp(line[0], line) == -1)
                 perror("ush");
             // close(pipedes[1]);
@@ -42,7 +44,7 @@ void mx_process_creator(char **line) {
             else if (pid > 0) {
                 wpid = waitpid(pid, &status, WUNTRACED);
                 while (!WIFEXITED(status) && !WIFSIGNALED(status)) {
-                wpid = waitpid(pid, &status, WUNTRACED);
+                    wpid = waitpid(pid, &status, WUNTRACED);
                 }
             }
             // close(pipedes[0]);

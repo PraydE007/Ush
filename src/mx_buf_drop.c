@@ -1,4 +1,4 @@
-#include "ush.h"
+#include "../inc/ush.h"
 
 int mx_buf_drop(char **buf, int *buf_size) {
     if ((*buf_size) > 1) {
