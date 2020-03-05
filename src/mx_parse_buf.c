@@ -12,7 +12,7 @@ int mx_parse_buf(t_ush *ush) {
         text = strtok(NULL, ";");
     }
     mx_strdel(&text);
-    ush->blocks = mx_parse_block(&t_node);
+    ush->blocks = mx_parse_block(&t_node, 0, 0);
     while (t_node) // DELETE SEMI COLON
         mx_pop_t_node_front(&t_node);
     if (ush->blocks)
