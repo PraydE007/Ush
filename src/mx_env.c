@@ -12,18 +12,18 @@ void mx_env(char **command, char **env) {
     bool i = 0;
     bool u = 0;
 
-    if (command[1]) {
-        for (int j = 1; command[1][j]; j++) {
-            if (command[1][0] == '-') {
-                if (command[j] == 'P')
-                    P = 1;
-                else if (command[j] == 'i')
-                    i = 1;
-                else if (command[j] == 'u')
-                    u = 1;
-            }
-        }
-    }
-    if
-    print_env(env);
+    // if (command[1]) {
+    //     for (int j = 1; command[1][j]; j++) {
+    //         if (command[1][0] == '-') {
+    //             if (command[j] == 'P')
+    //                 P = 1;
+    //             else if (command[j] == 'i')
+    //                 i = 1;
+    //             else if (command[j] == 'u')
+    //                 u = 1;
+    //         }
+    //     }
+    // }
+    // if
+    // print_env(env);
 }
