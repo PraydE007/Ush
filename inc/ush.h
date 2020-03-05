@@ -35,6 +35,7 @@ typedef struct s_termconf {
 
 typedef struct s_t_node {
     char *text;
+    int type;
     struct s_t_node *next;
 }              t_t_node;
 
@@ -93,9 +94,9 @@ short mx_get_buf_type(char ch);
 int mx_buf_drop(char **buf, int *buf_size);
 int mx_buf_push(char **buf, int *buf_size, char ch);
 
-t_t_node *mx_create_text_node(char *text);
+t_t_node *mx_create_text_node(char *text, int type);
 void mx_pop_t_node_front(t_t_node **head);
-void mx_push_t_node_back(t_t_node **head, char *text);
+void mx_push_t_node_back(t_t_node **head, char *text, int type);
 
 int mx_lstlen(t_b_node **head);
 t_b_node *mx_create_block_node(t_t_node *t_node);
@@ -104,12 +105,23 @@ t_b_node *mx_push_block_back(t_b_node **head, t_t_node *t_node);
 void mx_dealloc_blocks(t_b_node **head);
 
 // STRING OPERATIONS && PARSING
-void mx_parse_buf(t_ush *ush);
+int mx_parse_buf(t_ush *ush);
+void mx_parse_burnish(t_ush *ush);
+int mx_count_slashes(char *str);
+char *mx_break_on_error(char **str);
 t_b_node *mx_parse_block(t_t_node **head);
 char *mx_space_parse(char *str, int *piv);
 char *mx_text_parse(char *str, int *piv);
+char *mx_slash_parse(char *str, int *piv);
 char *mx_sinmrk_parse(char *str, int *piv);
 char *mx_doumrk_parse(char *str, int *piv);
+int mx_push_symbol(char **res, char ch, int *res_size);
+int mx_one_slash(char **res, char *str, int *i, int *res_size);
+int mx_one_slash_m(char **res, char *str, int *i, int *res_size);
+int mx_two_slash(char **res, char *str, int *i, int *res_size);
+int mx_two_slash_m(char **res, char *str, int *i, int *res_size);
+int mx_three_slash(char **res, char *str, int *i, int *res_size);
+bool mx_control_slash(char **res, char *str, int *res_size);
 
 void mx_restore_buffer(t_ush *ush);
 int mx_term_width_check(t_ush *ush, int *len, int *term);

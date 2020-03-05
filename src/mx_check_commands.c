@@ -12,6 +12,13 @@ static void outlst(t_ush *ush) {
             x = x->next;
         }
         mx_printstr("\n");
+        x = block->t_node;
+        while (x != NULL) {
+            fprintf(stdout, "\x1b[32m [\x1b[0m %i \x1b[32m]\x1b[0m ", x->type);
+            fflush(stdout);
+            x = x->next;
+        }
+        mx_printstr("\n");
         block = block->next;
     }
     fprintf(stdout, "\n");

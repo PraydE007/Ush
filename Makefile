@@ -43,6 +43,17 @@ FILES = main \
 	mx_dealloc_blocks \
 	mx_read_termconf \
 	mx_strarrlen \
+	mx_slash_parse \
+	mx_control_slash \
+	mx_push_symbol \
+	mx_break_on_error \
+	mx_count_slashes \
+	mx_one_slash \
+	mx_two_slash \
+	mx_three_slash \
+	mx_one_slash_m \
+	mx_two_slash_m \
+	mx_parse_burnish \
 
 INC_H = $(addprefix "inc/", $(HEADERS))
 
