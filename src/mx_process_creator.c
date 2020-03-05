@@ -24,10 +24,10 @@ void mx_process_creator(char **command) {
     int status = 0;
 
 // int i = 0;
-// mx_printstr("line:\n");
-// while (line[i]) {
-// mx_printstr(line[i]);
-// mx_printstr("\n");
+mx_printstr("command:\n");
+// while (command[i]) {
+mx_printstr(command[0]);
+mx_printstr("\n");
 // i++;
 // }
     pid = fork();

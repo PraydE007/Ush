@@ -76,10 +76,10 @@ typedef struct s_ush {
 
 bool mx_check_key_allow(char **kv);
 bool mx_have_equals(t_ush *ush, char *env);
+bool mx_isvariable (t_variable **list, char **k_v);
 char **mx_command_matrix_creator(t_t_node **comn);
 char *mx_doumrk_parse(char *str, int *piv);
 char **mx_export_matrix_creator(char **env);
-bool mx_isvariable (t_variable **list, char **k_v);
 char **mx_key_value_creation(t_ush *ush, char *env);
 char *mx_sinmrk_parse(char *str, int *piv);
 char *mx_space_parse(char *str, int *piv);
@@ -111,6 +111,7 @@ void mx_check_commands(t_ush *ush, char **env);
 void mx_dealloc_blocks(t_b_node **head);
 void mx_dealloc_termconf(t_termconf **termconf);
 void mx_dealloc_ush(t_ush **ush);
+void mx_env_variable_checking(t_variable **list, char *command);
 void mx_export(t_ush *ush, char **command, char **env);
 void mx_parse_buf(t_ush *ush);
 void mx_pop_back_variable(t_variable **head);
