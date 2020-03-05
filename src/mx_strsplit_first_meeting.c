@@ -3,6 +3,7 @@
 char **mx_strsplit_first_meeting(const char *s, char c) {
     char **news = NULL;
     int i = 0;
+    int start = 0;
 
     if (s == NULL)
         return NULL;
@@ -11,7 +12,7 @@ char **mx_strsplit_first_meeting(const char *s, char c) {
         news[i] = NULL;
     i = 0;
     for (; s[i] != c; i++);
-    int start = i + 1;
+    start = i + 1;
     news[0] = mx_str_size_dup(s, 0, i);
     for (; s[i] != '\0'; i++);
     if (start != i)

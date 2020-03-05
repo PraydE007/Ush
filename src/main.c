@@ -7,13 +7,9 @@ int main(int argc, char *argv[]) {
     extern char **environ;
 
     // mx_read_environment(&ush->export_list, environ);
-    // if (isatty(0) == 0) {
-    //    //ANOTHER FUCTION WHICH WILL WORK FROM ANOTHER FLOW AND MAKE exit(status)
-    // }
-    // else {
-        while (ush->active) {
-            if (!mx_read_input(ush)) {
-                mx_parse_buf(ush);
+    while (ush->active) {
+        if (!mx_read_input(ush)) {
+            if (mx_parse_buf(ush)) {
                 // line = mx_str_dbl_split(ush->buf, ' ', ';');
                 mx_check_commands(ush, environ);
                 // mx_del_strarr(&line);
@@ -23,12 +19,6 @@ int main(int argc, char *argv[]) {
             if (!isatty(0)) // INPUT STUCK FIX
                 ush->active = false;
         }
-    // }
-    t_variable *list = ush->variable_list;
-    while (list) {
-            printf("%s", list->key);
-            printf("   %s\n", list->value);
-            list = list->next;
     }
     exit_code = ush->exit_code;
     mx_dealloc_ush(&ush);

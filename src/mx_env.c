@@ -1,11 +1,11 @@
 #include "../inc/ush.h"
 
-static void print_env(char **env) {
-    for (int i = 0; env[i]; i++) {
-        mx_printstr(env[i]);
-        mx_printchar('\n');
-    }
-}
+// static void print_env(char **env) {
+//     for (int i = 0; env[i]; i++) {
+//         mx_printstr(env[i]);
+//         mx_printchar('\n');
+//     }
+// }
 
 //static void flags_trig(char **command, t_env_flags *flags) {
 //    if (command[1]) {

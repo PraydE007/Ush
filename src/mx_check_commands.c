@@ -12,6 +12,13 @@ static void outlst(t_ush *ush) {
             x = x->next;
         }
         mx_printstr("\n");
+        x = block->t_node;
+        while (x != NULL) {
+            fprintf(stdout, "\x1b[32m [\x1b[0m %i \x1b[32m]\x1b[0m ", x->type);
+            fflush(stdout);
+            x = x->next;
+        }
+        mx_printstr("\n");
         block = block->next;
     }
     fprintf(stdout, "\n");
@@ -37,11 +44,11 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
     }
     else if (mx_strcmp("unset", command[0]) == 0) {
         mx_unset(command, env, ush);
-//        mx_del_strarr(&kv);
+        mx_del_strarr(&kv);
         return true;
     }
     else if (kv != NULL || ush->equals) {
-        if (kv != NULL ) {
+        if (kv != NULL) {
             mx_adding_variable(ush, command, kv);
             mx_del_strarr(&kv);
         }
@@ -57,6 +64,7 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
 void mx_check_commands(t_ush *ush, char **env) {
     t_b_node *block = ush->blocks;
     char **command = NULL;
+
     while (block) {
         command = mx_command_matrix_creator(&block->t_node);
         is_builtin(ush, command, env)

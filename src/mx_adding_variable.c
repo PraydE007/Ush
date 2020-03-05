@@ -65,7 +65,7 @@ void mx_adding_variable(t_ush *ush, char **command, char **kv) {
     int count = 0;
     int lenth = 0;
 
-    if (mx_isvariable (&ush->variable_list, kv)) {
+    if (mx_isvariable(&ush->variable_list, kv)) {
         mx_push_back_variable(&ush->variable_list, kv);
         count++;
     }

@@ -9,7 +9,6 @@ char *mx_space_parse(char *str, int *piv) {
         if (str[i] != ' ' || str[i] == '\0') {
             res = mx_strnew_x(2);
             res[0] = ' ';
-            //strncpy(res, &str[0], i);
             break;
         }
         i++;
