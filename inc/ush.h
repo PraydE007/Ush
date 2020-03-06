@@ -13,6 +13,7 @@
 /* INClUDES */
 
 // FRONT-END
+#include <errno.h>
 #include <fcntl.h>
 #include <termios.h>
 #include <term.h>
@@ -80,16 +81,10 @@ bool mx_check_key_allow(char **kv);
 bool mx_have_equals(t_ush *ush, char *env);
 bool mx_isvariable (t_variable **list, char **k_v);
 char **mx_command_matrix_creator(t_t_node **comn);
-char *mx_doumrk_parse(char *str, int *piv);
 char **mx_export_matrix_creator(char **env);
 char **mx_key_value_creation(t_ush *ush, char *env);
-char *mx_sinmrk_parse(char *str, int *piv);
-char *mx_space_parse(char *str, int *piv);
 char **mx_strsplit_first_meeting(const char *s, char c);
-char *mx_text_parse(char *str, int *piv);
 int mx_blist_len(t_b_node **head);
-int mx_buf_drop(char **buf, int *buf_size);
-int mx_buf_push(char **buf, int *buf_size, char ch);
 int mx_exit(char **command);
 int mx_get_twidth();
 int mx_read_input(t_ush *ush);
@@ -97,29 +92,19 @@ int mx_strarrlen(char **arr);
 int mx_strcmp_export(const char *s1, const char *s2);
 int mx_term_width_check(t_ush *ush, int *len, int *term);
 int mx_variable_list_len(t_variable **head);
-short mx_get_buf_type(char ch);
 // t_env *mx_envnode_creation(void);
-t_export *mx_exportnode_creation(void);
-t_b_node *mx_create_block_node(t_t_node *t_node);
-t_b_node *mx_parse_block(t_t_node **head);
-t_b_node *mx_push_block_back(t_b_node **head, t_t_node *t_node);
-t_termconf *mx_create_termconf();
-t_ush *mx_create_ush();
 t_variable *mx_variablenode_creation(void);
 void mx_adding_variable(t_ush *ush, char **command, char **kv);
 void mx_check_commands(t_ush *ush, char **env);
-void mx_dealloc_blocks(t_b_node **head);
 void mx_dealloc_termconf(t_termconf **termconf);
 void mx_dealloc_ush(t_ush **ush);
 void mx_env(char **command, char **env);
 void mx_env_variable_checking(t_variable **list, char *command);
 void mx_export(t_ush *ush, char **command, char **env);
 void mx_pop_back_variable(t_variable **head);
-void mx_pop_block_front(t_b_node **head);
 void mx_pop_front_export(t_export **head);
 void mx_pop_front_variable(t_variable **head);
 void mx_pop_specific(t_variable **list, int index);
-void mx_pop_t_node_front(t_t_node **head);
 void mx_process_creator(char **commands);
 void mx_push_back_export(t_export **export, char **kv);
 void mx_push_back_variable(t_variable **list, char **kv);
@@ -127,6 +112,7 @@ void mx_read_environment(t_export **export_list, char **env);
 void mx_read_termconf(t_termconf *termconf);
 void mx_which(t_ush *ush, char **env, char **command);
 
+// TERM AND USH
 t_export *mx_exportnode_creation(void);
 // t_env *mx_envnode_creation(void);
 t_termconf *mx_create_termconf();
@@ -155,7 +141,7 @@ int mx_parse_buf(t_ush *ush);
 void mx_parse_burnish(t_ush *ush);
 int mx_count_slashes(char *str);
 char *mx_break_on_error(char **str);
-t_b_node *mx_parse_block(t_t_node **head);
+t_b_node *mx_parse_block(t_t_node **head, int err_ch, int type);
 char *mx_space_parse(char *str, int *piv);
 char *mx_text_parse(char *str, int *piv);
 char *mx_slash_parse(char *str, int *piv);
