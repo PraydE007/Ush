@@ -66,6 +66,7 @@ FILES = main \
 	mx_one_slash_m \
 	mx_two_slash_m \
 	mx_parse_burnish \
+	mx_which \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

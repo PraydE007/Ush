@@ -18,6 +18,7 @@
 #include <term.h>
 #include <stdio.h>
 #include <string.h>
+#include <dirent.h>
 #include "../libmx/inc/libmx.h"
 //#include "libmx.h"
 
@@ -60,12 +61,6 @@ typedef struct s_variable {
     char *value;
     struct s_variable *next;
 }              t_variable;
-
-typedef struct s_env_flags {
-    bool P;
-    bool i;
-    bool u;
-}              t_env_flags;
 
 typedef struct s_ush {
     bool active;
@@ -130,6 +125,7 @@ void mx_push_back_export(t_export **export, char **kv);
 void mx_push_back_variable(t_variable **list, char **kv);
 void mx_read_environment(t_export **export_list, char **env);
 void mx_read_termconf(t_termconf *termconf);
+void mx_which(t_ush *ush, char **env, char **command);
 
 t_export *mx_exportnode_creation(void);
 // t_env *mx_envnode_creation(void);
