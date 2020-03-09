@@ -1,56 +1,53 @@
 #include "../inc/ush.h"
 
-static void printer(char *way, char *command) {
-    mx_printstr(way);
-    mx_printchar('/');
-    mx_printstr(command);
-    mx_printchar('\n');
+static bool is_slash(char *path) {
+    bool res = 0;
+
+    for (int i = 0; path[i]; i++)
+        if (path[i] == '/')
+            res = 1;
+    return res;
 }
 
-static char *look_in_path(t_ush *ush, char **ways, char *command, bool flag_a) {
-    struct dirent *lupa = NULL;
-    bool trig = 0;
+static void print_not_found(char *command, t_ush *ush) {
+    mx_printerr(command);
+    mx_printerr(" not found\n");
+    ush->exit_code = 1;
+}
+
+static bool look_in_path(t_ush *ush, char **ways, char *command, bool *flag) {
     bool a = 0;
-    DIR *directory = NULL;
+    bool trig = 0;
 
     for (int i = 0; ways[i]; i++) {
-        directory = opendir(ways[i]);
-        while ((lupa = readdir(directory)) != NULL) {
-            if (mx_strcmp(lupa->d_name, ".") && mx_strcmp(lupa->d_name, "..")
-                && !mx_strcmp(lupa->d_name, command)) {
-                printer(ways[i], command);
-                trig = 1;
-                if (!flag_a) {
-                    a = 1;
-                    break;
-                }
-            }
+        if (is_slash(command))
+            a = mx_is_command(command, flag, 0);
+        else {
+            char *path = mx_strjoin(ways[i], "/");
+            a = mx_is_command(mx_strjoin_free(path, command), flag, 0);
         }
-        closedir(directory);
-        if (a)
-            break;
+        if (a == 1) {
+            if (!flag[0])
+                return a;
+            else
+                trig = 1;
+        }
     }
-    if (trig == 0) {
-        mx_printerr(command);
-        mx_printerr(" not found\n");
-        ush->exit_code = 1;
-    }
-    return NULL;
+    if (trig == 0)
+        print_not_found(command, ush);
+    return a;
 }
 
-void mx_which(t_ush *ush, char **env, char **command) {
-    char *path = getenv("PATH");
-    bool flag_a = 0;
-    bool flag_s = 0;
+static int flag_parser(char **command, t_ush *ush, bool *flag) {
     int i = 1;
 
     for (; command[i]; i++) {
         if (command[i][0] == '-') {
             for (int j = 1; command[i][j]; j++) {
                 if (command[i][j] == 'a')
-                    flag_a = 1;
+                    flag[0] = 1;
                 else if (command[i][j] == 's')
-                    flag_s = 1;
+                    flag[1] = 1;
                 else {
                     mx_printerr("which: bad option: -");
                     write(2, &command[i][j], 1);
@@ -62,16 +59,27 @@ void mx_which(t_ush *ush, char **env, char **command) {
         else
             break;
     }
-    if (command[i]) {
-        if (path) {
-            char **ways = mx_strsplit(path, ':');
-            look_in_path(ush, ways, command[i], flag_a);
-            mx_del_strarr(&ways);
-        }
+    return i;
+}
+
+void mx_which(t_ush *ush, char **command) {
+    char *path = getenv("PATH");
+    bool *flag = (bool *)malloc(sizeof(bool) * 2);
+    char **ways = mx_strsplit(path, ':');
+    int i = flag_parser(command, ush, flag);
+
+    for (; command[i];) {
+        if (mx_is_built_in(command[i]) && !flag[1])
+            printf("%s: shell built-in command\n", command[i]);
+        if (!mx_is_built_in(command[i]) || (mx_is_built_in(command[i])
+            && flag[0]))
+            look_in_path(ush, ways, command[i], flag);
+        i++;
     }
-    else if (i < 2) {
+    if (i < 2) {
         mx_printerr("usage: which [-as] program ...\n");
         ush->exit_code = 1;
     }
-//    free(path);
+    free(flag);
+    mx_del_strarr(&ways);
 }

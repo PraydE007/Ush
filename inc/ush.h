@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <dirent.h>
+#include <sys/stat.h>
 #include "../libmx/inc/libmx.h"
 //#include "libmx.h"
 
@@ -77,6 +78,8 @@ typedef struct s_ush {
     t_variable *variable_list;
 }              t_ush;
 
+bool mx_is_built_in(char *str);
+bool mx_is_command(char *path, bool *flag, int index);
 bool mx_check_key_allow(char **kv);
 bool mx_have_equals(t_ush *ush, char *env);
 bool mx_isvariable (t_variable **list, char **k_v);
@@ -110,7 +113,7 @@ void mx_push_back_export(t_export **export, char **kv);
 void mx_push_back_variable(t_variable **list, char **kv);
 void mx_read_environment(t_export **export_list, char **env);
 void mx_read_termconf(t_termconf *termconf);
-void mx_which(t_ush *ush, char **env, char **command);
+void mx_which(t_ush *ush, char **command);
 
 // TERM AND USH
 t_export *mx_exportnode_creation(void);

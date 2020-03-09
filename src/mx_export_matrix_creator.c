@@ -19,7 +19,8 @@ char **mx_export_matrix_creator(char **env) {
     char **copy = NULL;
 
     copy = (char **)malloc(sizeof(char *) * (size + 1));
-    copy[size] = NULL;
+    for (int i = 0; i <= size; i++)
+        copy[i] = NULL;
     for (int i = 0; env[i]; i++) {
         copy[i] = mx_strdup(env[i]);
     }

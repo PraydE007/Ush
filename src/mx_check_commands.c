@@ -48,7 +48,7 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
         return true;
     }
     else if (mx_strcmp("which", command[0]) == 0) {
-        mx_which(ush, env, command);
+        mx_which(ush, command);
         mx_del_strarr(&kv);
         return true;
     }
