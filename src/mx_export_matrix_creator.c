@@ -23,7 +23,12 @@ char **mx_export_matrix_creator(char **env) {
         copy[i] = NULL;
     for (int i = 0; env[i]; i++) {
         copy[i] = mx_strdup(env[i]);
+        // printf("copy:   ");
+        // printf("%s,\n", copy[i]);
+        // printf("env:   ");
+        // printf("%s,\n", env[i]);
     }
-    mx_sort_export(copy);
+    // if (copy)
+    //     mx_sort_export(copy);
     return copy;
 }

@@ -19,7 +19,7 @@ static void variable_error_printing(t_ush *ush, char *comn, int *count) {
 static void variable_adding_condition(t_ush *ush, char **command,
                                       char **k_v2, int *count) {
     if (k_v2 != NULL ) {
-        if (mx_check_key_allow(k_v2) && mx_isvariable (&ush->variable_list, k_v2)) {
+        if (mx_check_key_allow(NULL, k_v2[0]) && mx_isvariable (ush, k_v2)) {
             mx_push_back_variable(&ush->variable_list, k_v2);
             (*count)++;
         }
@@ -62,10 +62,10 @@ static void variable_adding_cycle(t_ush *ush, char **command,
 }
 void mx_adding_variable(t_ush *ush, char **command, char **kv) {
     char **k_v2 = NULL;
-    int count = 0;
+    int count = 1;
     int lenth = 0;
 
-    if (mx_isvariable(&ush->variable_list, kv)) {
+    if (mx_isvariable(ush, kv)) {
         mx_push_back_variable(&ush->variable_list, kv);
         count++;
     }
