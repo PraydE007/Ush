@@ -7,15 +7,61 @@ static void print_env(char **env) {
     }
 }
 
-static void env_process_creator(char **command, char **env, int i) {
+static bool is_builtin(t_ush *ush, char **command, char **env) {
+    char **kv = mx_key_value_creation(ush, command[0]);
+
+    if (mx_strcmp("exit", command[0]) == 0) {
+        ush->exit_code = mx_exit(command);
+        return true;
+    }
+    else if (mx_strcmp("env", command[0]) == 0) {
+        mx_env(ush, command, env);
+        return true;
+    }
+    else if (mx_strcmp("export", command[0]) == 0) {
+        mx_export(ush, command, env);
+        return true;
+    }
+    else if (mx_strcmp("unset", command[0]) == 0) {
+        mx_unset(command, env, ush);
+        return true;
+    }
+    else if (mx_strcmp("which", command[0]) == 0) {
+        mx_which(ush, command);
+        return true;
+    }
+    else if (kv != NULL || ush->equals) {
+        if (kv != NULL) {
+            mx_adding_variable(ush, command, kv);
+            mx_del_strarr(&kv);
+        }
+        ush->equals = false;
+        return true;
+    }
+    mx_del_strarr(&kv);
+    return false;
+}
+
+static void env_process_creator(t_ush *ush, char **command, char **env, int i) {
     pid_t pid = 0;
     pid_t wpid = 0;
     int status = 0;
 
     pid = fork();
     if (pid == 0) {
-        if (execve(command[i], &command[i], env) == -1)
-            perror("ush");
+        unsetenv("PATH");
+        if (mx_is_built_in(command[1]))
+            is_builtin(ush, &command[i], env);
+        else if (getenv("PATH") != 0) {
+            if (execvp(command[1], &command[i]) == -1)
+                perror("ush");
+            exit(1);
+        }
+        else {
+            if (execv(command[1], &command[i]) == -1)
+                perror("ush");
+            exit(1);
+        }
         exit(EXIT_FAILURE);
     }
     else if (pid < 0) {
@@ -29,34 +75,36 @@ static void env_process_creator(char **command, char **env, int i) {
     }
 }
 
-//static void flags_trig(char **command, t_env_flags *flags) {
-//    if (command[1]) {
-//        for (int j = 1; command[1][j]; j++) {
-//            if (command[1][0] == '-') {
-//                if (command[j] == 'P') {
-//                    flags->P = 1;
-//                    break;
-//                }
-//                else if (command[j] == 'i') {
-//                    flags->i = 1;
-//                    break;
-//                }
-//                else if (command[j] == 'u') {
-//                    flags->u = 1;
-//                    break;
-//                }
-//            }
-//        }
-//    }
-//}
+static int flags_trig(char **command, t_env_flags *flags) {
+    for (int i = 1; command[i][j]; i++) {
+        for (int j = 0; command[i][j]; j++) {
+            if (command[i][0] == '-') {
+                if (command[i][j] == 'P') {
+                    flags->P = 1;
+                    return i;
+                }
+                else if (command[i][j] == 'i')
+                    flags->i = 1;
+                else if (command[i][j] == 'u')
+                    flags->u = 1;
+            }
+        }
+    }
+}
 
-void mx_env(char **command, char **env) {
+void mx_env(t_ush *ush, char **command) {
+    extern char **environ;
+    bool *flags = (bool *)malloc(sizeof(bool) * 3);
+    flags[0] = 0;
+    flags[1] = 0;
+    flags[2] = 0;
+
     if (!command[1])
-        print_env(env);
-    for (int i = 1; command[i]; i++) {
-        if (command[i][0] != '-') {
-            env_process_creator(command, env, i);
-            break;
+        print_env(environ);
+    else {
+        int i = flags_trig(command, flags);
+        for (int i = 1; command[i]; i++) {
+            env_process_creator(ush, command, environ, i);
         }
     }
 }
