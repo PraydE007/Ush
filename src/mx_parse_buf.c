@@ -5,11 +5,12 @@ int mx_parse_buf(t_ush *ush) {
     char *text = NULL;
     char *part = NULL;
 
-    text = strtok(ush->buf, ";");
+    text = strtok(ush->termconf->h_node->buf, ";\n");
+    // text = strtok(ush->termconf->buf, ";\n");
     while (text != NULL) {
         part = mx_strdup(text);
         mx_push_t_node_back(&t_node, part, 0);
-        text = strtok(NULL, ";");
+        text = strtok(NULL, ";\n");
     }
     mx_strdel(&text);
     ush->blocks = mx_parse_block(&t_node, 0, 0);

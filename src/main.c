@@ -50,6 +50,6 @@ while (list) {
 }
     exit_code = ush->exit_code;
     mx_dealloc_ush(&ush);
-    system("leaks -q ush"); //
+    system("leaks -q ush");
     return exit_code;
 }

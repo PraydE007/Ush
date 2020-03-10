@@ -24,6 +24,8 @@ FILES = main \
 	mx_get_buf_type \
 	mx_get_twidth \
 	mx_have_equals \
+	mx_is_built_in \
+	mx_is_command \
 	mx_isvariable \
 	mx_key_value_creation \
 	mx_parse_buf \
@@ -67,6 +69,17 @@ FILES = main \
 	mx_one_slash_m \
 	mx_two_slash_m \
 	mx_parse_burnish \
+	mx_push_n_char \
+	mx_drop_n_char \
+	mx_change_color \
+	mx_read_from_thread \
+	mx_create_history_node \
+	mx_push_h_node_back \
+	mx_pop_h_node_front \
+	mx_clone_history \
+	mx_set_history_pos \
+	mx_get_history_last_str \
+	mx_which \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

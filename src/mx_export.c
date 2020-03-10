@@ -7,7 +7,7 @@ static void export_error(t_ush *ush, char *str) {
         mx_printerr(str);
         mx_printerr("\n");
     }
-    else {
+    else if (!ush->equals) {
         mx_printerr("ush: not valid in this context: ");
         mx_printerr(str);
         mx_printerr("\n");

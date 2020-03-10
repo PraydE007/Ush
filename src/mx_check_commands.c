@@ -47,6 +47,15 @@ static bool is_builtin(t_ush *ush, char **command) {
         mx_del_strarr(&kv);
         return true;
     }
+    else if (mx_strcmp("termcol", command[0]) == 0) {
+        mx_change_color(ush, command);
+        return true;
+    }
+    else if (mx_strcmp("which", command[0]) == 0) {
+        mx_which(ush, command);
+        mx_del_strarr(&kv);
+        return true;
+    }
     else if (kv != NULL || ush->equals) {
         if (kv != NULL) {
             mx_adding_variable(ush, command, kv);

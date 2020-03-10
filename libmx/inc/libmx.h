@@ -42,6 +42,7 @@ char *mx_spacedel(char *newstr, const char *str);
 char *mx_strcat(char *s1, const char *s2);
 char *mx_strcpy(char *dst, const char *src);
 char *mx_strdup(const char *str);
+char *mx_strdup_x(const char *str);
 char *mx_strjoin(const char *s1, const char *s2);
 char *mx_strjoin_free(char *s1, const char *s2);
 char *mx_strncpy(char *dst, const char *src, int len);
