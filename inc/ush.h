@@ -127,7 +127,7 @@ void mx_adding_variable(t_ush *ush, char **command, char **kv);
 void mx_check_commands(t_ush *ush, char **env);
 void mx_dealloc_termconf(t_termconf **termconf);
 void mx_dealloc_ush(t_ush **ush);
-void mx_env(t_ush *ush, char **command, char **env);
+void mx_env(t_ush *ush, char **command);
 void mx_env_variable_checking(t_variable **list, char *command);
 void mx_export(t_ush *ush, char **command, char **env);
 void mx_pop_back_variable(t_variable **head);

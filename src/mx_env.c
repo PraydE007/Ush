@@ -15,7 +15,7 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
         return true;
     }
     else if (mx_strcmp("env", command[0]) == 0) {
-        mx_env(ush, command, env);
+        mx_env(ush, command);
         return true;
     }
     else if (mx_strcmp("export", command[0]) == 0) {
@@ -64,9 +64,8 @@ static void env_process_creator(t_ush *ush, char **command, char **env, int i) {
         }
         exit(EXIT_FAILURE);
     }
-    else if (pid < 0) {
+    else if (pid < 0)
         perror("ush");
-    }
     else if (pid > 0) {
         wpid = waitpid(pid, &status, WUNTRACED);
         while (!WIFEXITED(status) && !WIFSIGNALED(status)) {
@@ -75,35 +74,44 @@ static void env_process_creator(t_ush *ush, char **command, char **env, int i) {
     }
 }
 
-static int flags_trig(char **command, t_env_flags *flags) {
-    for (int i = 1; command[i][j]; i++) {
-        for (int j = 0; command[i][j]; j++) {
-            if (command[i][0] == '-') {
-                if (command[i][j] == 'P') {
-                    flags->P = 1;
-                    return i;
-                }
-                else if (command[i][j] == 'i')
-                    flags->i = 1;
-                else if (command[i][j] == 'u')
-                    flags->u = 1;
-            }
-        }
+static char *check_args(char **command, char **unset) {
+    char *res = NULL;
+
+    if (command[0][2]) {
+        res = strdup(&command[0][2]);
     }
+    return res;
 }
+
+//static int flags_trig(char **command, char **unset) {
+//    for (int i = 1; command[i][j]; i++) {
+//        for (int j = 0; command[i][j]; j++) {
+//            if (command[i][0] == '-') {
+//                if (command[i][j] == 'P') {
+//
+//                    return i;
+//                }
+//                else if (command[i][j] == 'i')
+//
+//                else if (command[i][j] == 'u')
+//
+//            }
+//        }
+//    }
+//}
 
 void mx_env(t_ush *ush, char **command) {
     extern char **environ;
-    bool *flags = (bool *)malloc(sizeof(bool) * 3);
-    flags[0] = 0;
-    flags[1] = 0;
-    flags[2] = 0;
+    char **unset = NULL;
 
     if (!command[1])
         print_env(environ);
     else {
-        int i = flags_trig(command, flags);
-        for (int i = 1; command[i]; i++) {
+//        int i = flags_trig(command, unset);
+        int i = 1;
+        char *res = check_args(&command[1], unset);
+        printf("\n\n%s\n\n", res);
+        for (; command[i]; i++) {
             env_process_creator(ush, command, environ, i);
         }
     }
