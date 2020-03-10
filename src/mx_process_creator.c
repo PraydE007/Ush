@@ -40,6 +40,7 @@ mx_printstr("\n");
         else {
             if (execv(command[0], command) == -1)
                  perror("ush");
+            exit(1);
         }
         exit(EXIT_FAILURE);
     }

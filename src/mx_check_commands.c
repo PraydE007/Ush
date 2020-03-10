@@ -33,10 +33,10 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
         mx_del_strarr(&kv);
         return true;
     }
-    else if (mx_strcmp("env", command[0]) == 0) {
-        mx_env(command, env);
-        return true;
-    }
+    // else if (mx_strcmp("env", command[0]) == 0) {
+    //     mx_env(command, env);
+    //     return true;
+    // }
     else if (mx_strcmp("export", command[0]) == 0) {
         mx_export(ush, command, env);
         mx_del_strarr(&kv);
@@ -49,6 +49,10 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
     }
     else if (mx_strcmp("termcol", command[0]) == 0) {
         mx_change_color(ush, command);
+        return true;
+    }
+    else if (mx_strcmp("which", command[0]) == 0) {
+        mx_which(ush, command);
         mx_del_strarr(&kv);
         return true;
     }
