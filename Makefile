@@ -49,6 +49,7 @@ FILES = main \
 	mx_strsplit_first_meeting \
 	mx_term_width_check \
 	mx_text_parse \
+	mx_tildastr \
 	mx_tlist_len \
 	mx_unset \
 	mx_variablenode_creation \

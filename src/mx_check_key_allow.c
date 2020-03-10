@@ -1,12 +1,19 @@
 #include "../inc/ush.h"
 
-bool mx_check_key_allow(char **kv) {
+bool mx_check_key_allow(t_ush *ush, char *kay) {
     int i = 0;
 
-    while (kv[0][i]) {
-        if ((kv[0][i] < 48 || (kv[0][i] > 57 && kv[0][i] < 65)
-            || (kv[0][i] > 90 && kv[0][i] < 97) || kv[0][i] > 122)
-            && (kv[0][i] != 36 && kv[0][i] != 95)) {
+    if (ush != NULL) {
+        if (kay[0] < 65 || (kay[0] > 90 && kay[0] < 97 && kay[0] != 95)
+            || kay[0] > 122) {
+                ush->trigger = true;
+                return false;
+            }
+    }
+    while (kay[i]) {
+        if ((kay[i] < 48 || (kay[i] > 57 && kay[i] < 65)
+            || (kay[i] > 90 && kay[i] < 97) || kay[i] > 122)
+            && (kay[i] != 36 && kay[i] != 95)) {
             return false;
         }
         i++;

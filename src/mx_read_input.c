@@ -11,7 +11,8 @@ static int do_stuff(char **buf, int *buf_size, char ch, short type) {
 static void on_read_start(t_ush *ush) {
     mx_restore_buffer(ush);
     tcsetattr(0, TCSAFLUSH, &(ush->termconf->tty));
-    fprintf(stdout, "\x1B[38;05;155mu$h> ");
+    if (isatty(0) != 0)
+        fprintf(stdout, "\x1B[38;05;155mu$h> ");
     fflush(stdout);
 }
 
@@ -22,13 +23,16 @@ static int reading_cycle(t_ush *ush) {
 
     while (1) {
         read(0, &ch, 1);
+        if (ch == '\0')
+            exit(1);
         if (ch == '\n')
             break;
         if (do_stuff(&(ush->buf), &(ush->buf_size), ch, mx_get_buf_type(ch)))
             return 1;
         if (mx_term_width_check(ush, &len, &term))
             return 1;
-        fprintf(stdout, "\r\x1B[0J\x1B[38;05;155mu$h> \x1B[0m%s", ush->buf);
+        if (isatty(0) != 0)
+            fprintf(stdout, "\r\x1B[0J\x1B[38;05;155mu$h> \x1B[0m%s", ush->buf);
         fflush(stdout);
     }
     return 0;
@@ -36,7 +40,8 @@ static int reading_cycle(t_ush *ush) {
 
 static void on_read_ended(t_ush *ush) {
     tcsetattr(0, TCSAFLUSH, &(ush->termconf->savetty));
-    fprintf(stdout, "\r\x1B[0J\x1B[38;05;243mu$h> %s\x1B[0m\n", ush->buf);
+    if (isatty(0) != 0)
+        fprintf(stdout, "\r\x1B[0J\x1B[38;05;243mu$h> %s\x1B[0m\n", ush->buf);
 }
 
 int mx_read_input(t_ush *ush) {
