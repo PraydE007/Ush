@@ -39,6 +39,8 @@ int main(int argc, char *argv[]) {
                 // if (!isatty(0)) // INPUT STUCK FIX
                 //     ush->active = false;
             }
+            while (ush->termconf->clone)
+                mx_pop_h_node_front(&(ush->termconf->clone));
         }
     // }
 t_variable *list = ush->variable_list;
@@ -48,6 +50,8 @@ while (list) {
     printf ("%s\n", list->value);
     list = list->next;
 }
+            // if (!isatty(0)) // INPUT STUCK FIX
+            //     ush->active = false;
     exit_code = ush->exit_code;
     mx_dealloc_ush(&ush);
     system("leaks -q ush");
