@@ -8,6 +8,18 @@
 #define MX_EBFLOC "ush: Buffer cannot allocate enough memory.\n"
 #define MX_PIZDA "ush: Pizda! Character error -- '%c'\n"
 
+#define MX_ZER "\x1B[0m"
+#define MX_DEF_COL "\x1B[38;05;155m"
+
+#define MX_BLACK "\x1B[30m"
+#define MX_RED "\x1B[31m"
+#define MX_GREEN "\x1B[32m"
+#define MX_YELLOW "\x1B[33m"
+#define MX_BLUE "\x1B[34m"
+#define MX_MAGENTA "\x1B[35m"
+#define MX_CYAN "\x1B[36m"
+#define MX_WHITE "\x1B[37m"
+
 /* -------- */
 
 /* INClUDES */
@@ -19,7 +31,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../libmx/inc/libmx.h"
-//#include "libmx.h"
+// #include "libmx.h"
 
 /* -------- */
 
@@ -27,9 +39,24 @@
 
 typedef struct termios t_term;
 
+typedef struct s_h_node {
+    struct s_h_node *back;
+    char *buf;
+    int buf_size;
+    struct s_h_node *next;
+}              t_h_node;
+
 typedef struct s_termconf {
     t_term tty;
     t_term savetty;
+    t_h_node *h_node;
+    t_h_node *clone;
+    char *buf; // NEED TO DEL
+    int buf_size; // NEED TO DEL
+    int term_w;
+    int ful_len;
+    int c_pos;
+    char *color;
 }              t_termconf;
 
 typedef struct s_t_node {
@@ -65,8 +92,6 @@ typedef struct s_ush {
     bool active;
     bool equals;
     bool trigger;
-    char *buf;
-    int buf_size;
     int exit_code;
     int storage;
     t_b_node *blocks;
@@ -86,9 +111,9 @@ int mx_blist_len(t_b_node **head);
 int mx_exit(char **command);
 int mx_get_twidth();
 int mx_read_input(t_ush *ush);
+int mx_read_from_thread(t_ush *ush);
 int mx_strarrlen(char **arr);
 int mx_strcmp_export(const char *s1, const char *s2);
-int mx_term_width_check(t_ush *ush, int *len, int *term);
 int mx_variable_list_len(t_variable **head);
 // t_env *mx_envnode_creation(void);
 t_variable *mx_variablenode_creation(void);
@@ -112,22 +137,34 @@ void mx_read_termconf(t_termconf *termconf);
 // TERM AND USH
 t_export *mx_exportnode_creation(void);
 // t_env *mx_envnode_creation(void);
+int mx_term_width_check(t_termconf **cfg);
 t_termconf *mx_create_termconf();
+void mx_change_color(t_ush *ush, char **commands);
 t_ush *mx_create_ush();
 
 // BUF FUNCTIONS
 int mx_buf_drop(char **buf, int *buf_size);
 int mx_buf_push(char **buf, int *buf_size, char ch);
-short mx_get_buf_type(char ch);
-void mx_restore_buffer(t_ush *ush);
+int mx_push_n_char(t_termconf **cfg, char ch);
+int mx_drop_n_char(t_termconf **cfg);
+short mx_get_buf_type(unsigned char *ch);
+void mx_restore_buffer(t_termconf *cfg);
 
 // TEXT LIST
 t_t_node *mx_create_text_node(char *text, int type);
 void mx_pop_t_node_front(t_t_node **head);
 void mx_push_t_node_back(t_t_node **head, char *text, int type);
 
+// HISTORY DOUBLE LINKED LIST
+t_h_node *mx_create_history_node(t_h_node *back, char *buf, int buf_size);
+void mx_push_h_node_back(t_h_node **h_node, char *buf, int buf_size);
+void mx_pop_h_node_front(t_h_node **h_node);
+t_h_node *mx_clone_history(t_h_node **h_node);
+char *mx_get_history_last_str(t_h_node **h_node);
+
 // BLOCK LIST
 int mx_tlist_len(t_t_node **head);
+int mx_set_history_pos(t_h_node **h_node, int type);
 t_b_node *mx_create_block_node(t_t_node *t_node);
 void mx_pop_block_front(t_b_node **head);
 t_b_node *mx_push_block_back(t_b_node **head, t_t_node *t_node);
