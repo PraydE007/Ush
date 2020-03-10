@@ -24,7 +24,7 @@ static void outlst(t_ush *ush) {
     fprintf(stdout, "\n");
 }
 // do kv ONLY IN ELSE
-static bool is_builtin(t_ush *ush, char **command, char **env) {
+static bool is_builtin(t_ush *ush, char **command) {
     char **kv = mx_key_value_creation(ush, command[0]);
 
     if (mx_strcmp("exit", command[0]) == 0) {
@@ -38,12 +38,12 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
         return true;
     }
     else if (mx_strcmp("export", command[0]) == 0) {
-        mx_export(ush, command, env);
+        mx_export(ush, command);
         mx_del_strarr(&kv);
         return true;
     }
     else if (mx_strcmp("unset", command[0]) == 0) {
-        mx_unset(command, env, ush);
+        mx_unset(command, ush);
         mx_del_strarr(&kv);
         return true;
     }
@@ -80,13 +80,17 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
     return false;
 }
 
-void mx_check_commands(t_ush *ush, char **env) {
+void mx_check_commands(t_ush *ush) {
     t_b_node *block = ush->blocks;
     char **command = NULL;
 
     while (block) {
         command = mx_command_matrix_creator(&block->t_node);
-        is_builtin(ush, command, env)
+        // while (block->t_node) {
+        //     printf ("%s,\n", block->t_node->text);
+        //     block->t_node = block->t_node->next;
+        // }
+        is_builtin(ush, command)
         ? 0 : mx_process_creator(command);
         mx_del_strarr(&command);
         block = block->next;
