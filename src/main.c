@@ -16,9 +16,11 @@ int main(int argc, char *argv[]) {
                 mx_dealloc_blocks(&(ush->blocks)); // DELETE ALL LISTS
                 // PROCESSES
             }
-            if (!isatty(0)) // INPUT STUCK FIX
-                ush->active = false;
+            // if (!isatty(0)) // INPUT STUCK FIX
+            //     ush->active = false;
         }
+        while (ush->termconf->clone)
+            mx_pop_h_node_front(&(ush->termconf->clone));
     }
     exit_code = ush->exit_code;
     mx_dealloc_ush(&ush);

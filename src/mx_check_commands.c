@@ -51,6 +51,16 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
         mx_change_color(ush, command);
         return true;
     }
+    else if (mx_strcmp("termcol", command[0]) == 0) {
+        mx_change_color(ush, command);
+        mx_del_strarr(&kv);
+        return true;
+    }
+    else if (mx_strcmp("clear", command[0]) == 0) {
+        mx_printstr("\x1B[0;0H\x1B[0J");
+        mx_del_strarr(&kv);
+        return true;
+    }
     else if (mx_strcmp("which", command[0]) == 0) {
         mx_which(ush, command);
         mx_del_strarr(&kv);
