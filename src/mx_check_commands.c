@@ -27,6 +27,7 @@ static void outlst(t_ush *ush) {
 static bool is_builtin(t_ush *ush, char **command) {
     char **kv = mx_key_value_creation(ush, command[0]);
 
+    outlst(ush);
     if (mx_strcmp("exit", command[0]) == 0) {
         ush->exit_code = mx_exit(command);
         ush->active = false;
@@ -51,6 +52,16 @@ static bool is_builtin(t_ush *ush, char **command) {
         mx_change_color(ush, command);
         return true;
     }
+    else if (mx_strcmp("termcol", command[0]) == 0) {
+        mx_change_color(ush, command);
+        mx_del_strarr(&kv);
+        return true;
+    }
+    else if (mx_strcmp("clear", command[0]) == 0) {
+        mx_printstr("\x1B[0;0H\x1B[0J");
+        mx_del_strarr(&kv);
+        return true;
+    }
     else if (mx_strcmp("which", command[0]) == 0) {
         mx_which(ush, command);
         mx_del_strarr(&kv);
@@ -64,8 +75,6 @@ static bool is_builtin(t_ush *ush, char **command) {
         ush->equals = false;
         return true;
     }
-    else
-        outlst(ush);
     mx_del_strarr(&kv);
     return false;
 }

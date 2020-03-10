@@ -68,8 +68,6 @@ static int on_read_ended(t_termconf **cfg) {
         mx_strdel(&new_buf);
         exit_code = 1;
     }
-    while ((*cfg)->clone)
-        mx_pop_h_node_front(&((*cfg)->clone));
     return exit_code;
 }
 
