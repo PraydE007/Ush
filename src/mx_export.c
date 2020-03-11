@@ -29,10 +29,26 @@ static void export_condition(t_ush *ush, char **kv) {
         export_error(ush, kv[0]);
 }
 
-static void  export_making(t_ush *ush, char **command, char **env) {
+static void  variable_error_cleaningg(t_ush *ush, char **command, int *i) {
     char **kv = NULL;
-    
-    for (int i = 1; command[i]; i++) {
+
+    if (ush->equals) {
+        for (; (*i) > 0; (*i)--) {
+            kv = mx_key_value_creation(ush, command[(*i)]);
+            if (kv != NULL) {
+                unsetenv(kv[0]);
+                mx_del_strarr(&kv);
+            }
+        }
+        ush->equals = false;
+    }
+}
+
+static void  export_making(t_ush *ush, char **command) {
+    char **kv = NULL;
+    int i = 1;
+
+    for (; command[i]; i++) {
         kv = mx_key_value_creation(ush, command[i]);
         if (kv != NULL) {
             export_condition(ush, kv);
@@ -43,11 +59,12 @@ static void  export_making(t_ush *ush, char **command, char **env) {
         else
             export_error(ush, command[i]);
     }
+    i--;
+    variable_error_cleaningg(ush, command, &i);
 }
 
 void  mx_export(t_ush *ush, char **command) {
     char **export = NULL;
-    // char **kv = NULL;
     int lenth = mx_strarrlen(command);
     extern char **environ;
 
@@ -58,5 +75,5 @@ void  mx_export(t_ush *ush, char **command) {
         mx_del_strarr(&export);
     }
     else 
-        export_making(ush, command, environ);
+        export_making(ush, command);
 }

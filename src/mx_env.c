@@ -15,15 +15,15 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
         return true;
     }
     else if (mx_strcmp("env", command[0]) == 0) {
-        mx_env(ush, command, env);
+        mx_env(ush, command);
         return true;
     }
     else if (mx_strcmp("export", command[0]) == 0) {
-        mx_export(ush, command, env);
+        mx_export(ush, command);
         return true;
     }
     else if (mx_strcmp("unset", command[0]) == 0) {
-        mx_unset(command, env, ush);
+        mx_unset(command, ush);
         return true;
     }
     else if (mx_strcmp("which", command[0]) == 0) {

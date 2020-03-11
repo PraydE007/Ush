@@ -17,18 +17,12 @@ void mx_sort_export(char **env) {
 char **mx_export_matrix_creator(char **env) {
     int size = mx_strarrlen(env);
     char **copy = NULL;
-// printf("size: ");
-// printf("%i\n", size);
+
     copy = (char **)malloc(sizeof(char *) * (size + 1));
     for (int i = 0; i <= size; i++)
         copy[i] = NULL;
-    for (int i = 0; env[i]; i++) {
+    for (int i = 0; env[i]; i++)
         copy[i] = mx_strdup(env[i]);
-        // printf("copy:   ");
-        // printf("%s,\n", copy[i]);
-        // printf("env:   ");
-        // printf("%s,\n", env[i]);
-    }
     if (copy)
         mx_sort_export(copy);
     return copy;

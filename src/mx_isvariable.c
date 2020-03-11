@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+// A LOT OF LINES
 bool mx_isvariable (t_ush *ush, char **k_v) {
     t_variable *pl = ush->variable_list;
 

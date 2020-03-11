@@ -34,10 +34,10 @@ static bool is_builtin(t_ush *ush, char **command) {
         mx_del_strarr(&kv);
         return true;
     }
-    else if (mx_strcmp("env", command[0]) == 0) {
-        mx_env(ush, command, env);
-        return true;
-    }
+    // else if (mx_strcmp("env", command[0]) == 0) {
+    //     mx_env(ush, command);
+    //     return true;
+    // }
     else if (mx_strcmp("export", command[0]) == 0) {
         mx_export(ush, command);
         mx_del_strarr(&kv);

@@ -7,12 +7,14 @@ bool mx_have_equals(t_ush *ush, char *env) {
         if (env[0] == '='
             || (env[i] == '=' && env[i + 1] == '=' && env[i + 2])) {
             mx_printerr("ush: ");
-            if (env[0] == '=')
-                mx_printerr(&env[0]);
-            else
-                mx_printerr(&env[i + 2]);
-            mx_printerr(" not found\n");
-            ush->equals = true;
+            if (!ush->equals) {
+                if (env[0] == '=')
+                    mx_printerr(&env[0]);
+                else
+                    mx_printerr(&env[i + 2]);
+                mx_printerr(" not found\n");
+                ush->equals = true;
+            }
             return false;
         }
         if (i != 0 && env[i] == '=')

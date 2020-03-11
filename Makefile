@@ -58,7 +58,6 @@ FILES = main \
 	mx_variablenode_creation \
 	mx_variable_list_len \
 	mx_pop_specific \
-	mx_env \
 	mx_slash_parse \
 	mx_control_slash \
 	mx_push_symbol \
