@@ -45,7 +45,6 @@ int main(int argc, char *argv[]) {
     // }
 t_variable *list = ush->variable_list;
 while (list) {
-
     printf ("%s=", list->key);
     printf ("%s\n", list->value);
     list = list->next;

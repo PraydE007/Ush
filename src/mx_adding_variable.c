@@ -15,18 +15,34 @@ static void variable_error_printing(t_ush *ush, char *comn, int *count) {
     variable_cleaning(ush, count);
 }
 
+static void exyta_condition(t_ush *ush, char **command,
+                                      char **k_v2, int *count) {
+    if (mx_check_key_allow(NULL, k_v2[0])) {
+        if (mx_isvariable (ush, k_v2)) {
+            mx_push_back_variable(&ush->variable_list, k_v2);
+            (*count)++;
+        }
+    }
+    else {
+    variable_error_printing(ush, command[ush->storage], count);
+            ush->trigger = true;
+    }
+}
 
 static void variable_adding_condition(t_ush *ush, char **command,
                                       char **k_v2, int *count) {
     if (k_v2 != NULL ) {
-        if (mx_check_key_allow(NULL, k_v2[0]) && mx_isvariable (ush, k_v2)) {
-            mx_push_back_variable(&ush->variable_list, k_v2);
-            (*count)++;
-        }
-        else {
-            variable_error_printing(ush, command[ush->storage], count);
-            ush->trigger = true;
-        }
+        exyta_condition(ush, command, k_v2, count);
+        // if (mx_check_key_allow(NULL, k_v2[0])) {
+        //     if (mx_isvariable (ush, k_v2)) {
+        //         mx_push_back_variable(&ush->variable_list, k_v2);
+        //         (*count)++;
+        //     }
+        // }
+        // else {
+        //     variable_error_printing(ush, command[ush->storage], count);
+        //     ush->trigger = true;
+        // }
     }
     else {
         mx_del_strarr(&k_v2);
@@ -53,9 +69,11 @@ static void variable_adding_cycle(t_ush *ush, char **command,
                 mx_del_strarr(&k_v2);
                 break;
             }
+            ush->equals = false;
         }
-        else
+        else {
             variable_error_printing(ush, command[i], count);
+        }
         mx_del_strarr(&k_v2);
     }
     // ush->storage = 0;
@@ -71,4 +89,11 @@ void mx_adding_variable(t_ush *ush, char **command, char **kv) {
     }
     variable_adding_cycle(ush, command, k_v2, &count);
     ush->storage = 0;
+// t_variable *list = ush->variable_list;
+// printf ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!list->key: \n");
+// while (list) {
+//     printf ("%s=", list->key);
+//     printf ("%s\n", list->value);
+//     list = list->next;
+// }
 }

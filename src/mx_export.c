@@ -31,7 +31,7 @@ static void export_condition(t_ush *ush, char **kv) {
 
 static void  export_making(t_ush *ush, char **command, char **env) {
     char **kv = NULL;
-
+    
     for (int i = 1; command[i]; i++) {
         kv = mx_key_value_creation(ush, command[i]);
         if (kv != NULL) {
@@ -47,7 +47,7 @@ static void  export_making(t_ush *ush, char **command, char **env) {
 
 void  mx_export(t_ush *ush, char **command) {
     char **export = NULL;
-    char **kv = NULL;
+    // char **kv = NULL;
     int lenth = mx_strarrlen(command);
     extern char **environ;
 

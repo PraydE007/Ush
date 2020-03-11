@@ -27,6 +27,7 @@ static void outlst(t_ush *ush) {
 static bool is_builtin(t_ush *ush, char **command) {
     char **kv = mx_key_value_creation(ush, command[0]);
 
+    outlst(ush);
     if (mx_strcmp("exit", command[0]) == 0) {
         ush->exit_code = mx_exit(command);
         ush->active = false;
@@ -74,8 +75,6 @@ static bool is_builtin(t_ush *ush, char **command) {
         ush->equals = false;
         return true;
     }
-    else
-        outlst(ush);
     mx_del_strarr(&kv);
     return false;
 }

@@ -13,7 +13,7 @@ bool mx_check_key_allow(t_ush *ush, char *kay) {
     while (kay[i]) {
         if ((kay[i] < 48 || (kay[i] > 57 && kay[i] < 65)
             || (kay[i] > 90 && kay[i] < 97) || kay[i] > 122)
-            && (kay[i] != 36 && kay[i] != 95)) {
+            && kay[i] != 95) {
             return false;
         }
         i++;
