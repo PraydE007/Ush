@@ -21,8 +21,8 @@ static int c_cases(t_termconf **cfg, unsigned char ch, short type) {
 static void on_read_start(t_termconf **cfg) {
     // mx_restore_buffer(cfg); //
     tcsetattr(0, TCSAFLUSH, &((*cfg)->tty));
-    fprintf(stdout, "%su$h> ", (*cfg)->color);
-    fflush(stdout);
+    // fprintf(stdout, "%su$h> ", (*cfg)->color);
+    mx_rd_print_color(cfg);
 }
 
 static void restore_ch(unsigned char *ch) {
@@ -48,9 +48,7 @@ static int reading_cycle(t_termconf **cfg) {
         if (mx_term_width_check(cfg))
             return 1;
         buf = (*cfg)->clone->buf;
-        fprintf(stdout, "\r\x1B[0J%su$h> %s%s", (*cfg)->color, MX_ZER, buf);
-        fprintf(stdout, "\r\x1B[%iC", (*cfg)->c_pos);
-        fflush(stdout);
+        mx_rd_print_pbc(cfg, buf);
     }
     return 0;
 }
@@ -61,7 +59,7 @@ static int on_read_ended(t_termconf **cfg) {
     int exit_code = 0;
 
     tcsetattr(0, TCSAFLUSH, &((*cfg)->savetty));
-    fprintf(stdout, "\r\x1B[0J\x1B[38;05;243mu$h> %s%s\n", clone->buf, MX_ZER);
+    mx_rd_print_old(cfg);
     if (mx_strcmp(new_buf, "\0") != 0)
         mx_push_h_node_back(&((*cfg)->h_node), new_buf, clone->buf_size);
     else {
@@ -78,6 +76,8 @@ int mx_read_input(t_ush *ush) {
     mx_push_h_node_back(&((*cfg)->clone), mx_strnew_x(1), 1);
     if (!isatty(0))
         return mx_read_from_thread(ush);
+    if ((*cfg)->isInThread)
+        mx_open_tty(cfg);
     on_read_start(cfg);
     if (reading_cycle(cfg))
         return 1;

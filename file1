@@ -1,0 +1,15 @@
+[32m [[0m ls [32m][0m 
+[32m [[0m 0 [32m][0m 
+command:
+ls
+Makefile
+file1
+inc
+libmx
+src
+ush
+
+leaks Report Version: 4.0
+Process 32981: 174 nodes malloced for 25 KB
+Process 32981: 0 leaks for 0 total leaked bytes.
+

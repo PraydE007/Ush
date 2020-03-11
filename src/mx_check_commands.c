@@ -61,6 +61,11 @@ static bool is_builtin(t_ush *ush, char **command, char **env) {
         mx_del_strarr(&kv);
         return true;
     }
+    else if (mx_strcmp("history", command[0]) == 0) {
+        mx_print_history(ush);
+        mx_del_strarr(&kv);
+        return true;
+    }
     else if (mx_strcmp("which", command[0]) == 0) {
         mx_which(ush, command);
         mx_del_strarr(&kv);

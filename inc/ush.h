@@ -60,6 +60,8 @@ typedef struct s_termconf {
     int ful_len;
     int c_pos;
     char *color;
+    int isInThread;
+    int tty_fd;
 }              t_termconf;
 
 typedef struct s_t_node {
@@ -140,11 +142,17 @@ void mx_read_environment(t_export **export_list, char **env);
 void mx_read_termconf(t_termconf *termconf);
 void mx_which(t_ush *ush, char **command);
 
+// ALL TERM OUTPUTS
+void mx_rd_print_color(t_termconf **cfg);
+void mx_rd_print_pbc(t_termconf **cfg, char *buf);
+void mx_rd_print_old(t_termconf **cfg);
+
 // TERM AND USH
 t_export *mx_exportnode_creation(void);
 // t_env *mx_envnode_creation(void);
 int mx_term_width_check(t_termconf **cfg);
 t_termconf *mx_create_termconf();
+void mx_open_tty(t_termconf **cfg);
 void mx_change_color(t_ush *ush, char **commands);
 t_ush *mx_create_ush();
 
@@ -167,6 +175,7 @@ void mx_push_h_node_back(t_h_node **h_node, char *buf, int buf_size);
 void mx_pop_h_node_front(t_h_node **h_node);
 t_h_node *mx_clone_history(t_h_node **h_node);
 char *mx_get_history_last_str(t_h_node **h_node);
+void mx_print_history(t_ush *ush);
 
 // BLOCK LIST
 int mx_tlist_len(t_t_node **head);
