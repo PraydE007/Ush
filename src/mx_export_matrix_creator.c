@@ -16,6 +16,7 @@ void mx_sort_export(char **env) {
 
 char **mx_export_matrix_creator(char **env) {
     int size = mx_strarrlen(env);
+    printf("%d\n", size);
     char **copy = NULL;
 
     copy = (char **)malloc(sizeof(char *) * (size + 1));

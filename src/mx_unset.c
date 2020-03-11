@@ -1,12 +1,12 @@
 #include "../inc/ush.h"
 
-static void variable_out(char *command, t_variable *list) {
-    t_variable *buf = list;
+static void variable_out(char *command, t_variable **list) {
+    t_variable *buf = *list;
     int index = 0;
 
     while (buf) {
         if (!mx_strcmp(command, buf->key)) {
-            mx_pop_specific(&list, index);
+            mx_pop_specific(list, index);
             return;
         }
         buf = buf->next;
@@ -15,21 +15,14 @@ static void variable_out(char *command, t_variable *list) {
 }
 
 void mx_unset(char **command, t_ush *ush) {
-    extern char **environ;
-
     if (command[0] && !command[1])
         mx_printerr("unset: not enough arguments\n");
     else {
         for (int j = 1; command[j]; j++) {
-            variable_out(command[j], ush->variable_list);
-            for (int i = 0; environ[i]; i++) {
-                char **key = mx_key_value_creation(ush, environ[i]);
-                if (!mx_strcmp(key[0], command[j])) {
-                    unsetenv(key[0]);
-                    mx_del_strarr(&key);
-                    break;
-                }
-                mx_del_strarr(&key);
+            variable_out(command[j], &ush->variable_list);
+            for (int i = 0; command[i]; i++) {
+                if (getenv(command[i]))
+                    unsetenv(command[i]);
             }
         }
     }

@@ -79,6 +79,13 @@ typedef struct s_env {
     char *value;
     struct s_env *next;
 }              t_env;
+
+typedef struct s_env_flags {
+    bool u;
+    bool i;
+    bool P;
+}              t_env_flags;
+
 // check if needs this structure
 typedef struct s_export {
     char *key;
@@ -98,6 +105,7 @@ typedef struct s_ush {
     bool trigger;
     int exit_code;
     int storage;
+    t_env_flags *flags;
     t_b_node *blocks;
     t_termconf *termconf;
     // t_export *export_list;
@@ -108,7 +116,7 @@ bool mx_check_key_allow(t_ush *ush, char *kay);
 bool mx_is_built_in(char *str);
 bool mx_is_command(char *path, bool *flag, int index);
 bool mx_is_slash(char *path);
-bool mx_check_key_allow(char **kv);
+bool mx_check_key_allow(t_ush *ush, char *kay);
 bool mx_have_equals(t_ush *ush, char *env);
 bool mx_isvariable (t_ush *ush, char **k_v);
 char **mx_command_matrix_creator(t_t_node **comn);
@@ -126,6 +134,7 @@ int mx_strcmp_export(const char *s1, const char *s2);
 int mx_variable_list_len(t_variable **head);
 // t_env *mx_envnode_creation(void);
 t_variable *mx_variablenode_creation(void);
+t_env_flags *mx_create_env_flags(void);
 void mx_adding_variable(t_ush *ush, char **command, char **kv);
 void mx_check_commands(t_ush *ush);
 void mx_dealloc_termconf(t_termconf **termconf);
@@ -142,13 +151,14 @@ void mx_push_back_export(t_export **export, char **kv);
 void mx_push_back_variable(t_variable **list, char **kv);
 void mx_read_environment(t_export **export_list, char **env);
 void mx_read_termconf(t_termconf *termconf);
+void mx_unset(char **command, t_ush *ush);
 void mx_which(t_ush *ush, char **command);
 
 // TERM AND USH
 t_export *mx_exportnode_creation(void);
 // t_env *mx_envnode_creation(void);
 int mx_term_width_check(t_termconf **cfg);
-t_termconf *mx_create_termconf();
+t_termconf *mx_create_termconf(void);
 void mx_change_color(t_ush *ush, char **commands);
 t_ush *mx_create_ush();
 
@@ -157,7 +167,8 @@ int mx_buf_drop(char **buf, int *buf_size);
 int mx_buf_push(char **buf, int *buf_size, char ch);
 int mx_push_n_char(t_termconf **cfg, char ch);
 int mx_drop_n_char(t_termconf **cfg);
-short mx_get_buf_type(unsigned char *ch);
+// short mx_get_buf_type(unsigned char *ch);
+short mx_get_buf_type(unsigned char ch);
 void mx_restore_buffer(t_termconf *cfg);
 
 // TEXT LIST
@@ -199,7 +210,7 @@ int mx_two_slash_m(char **res, char *str, int *i, int *res_size);
 int mx_three_slash(char **res, char *str, int *i, int *res_size);
 bool mx_control_slash(char **res, char *str, int *res_size);
 
-void mx_unset(char **command, t_ush *ush);
+
 
 /* -------- */
 
