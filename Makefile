@@ -8,6 +8,7 @@ FILES = main \
 	mx_check_key_allow \
 	mx_command_matrix_creator\
 	mx_create_block_node \
+	mx_create_env_flags \
 	mx_create_termconf \
 	mx_create_text_node \
 	mx_create_ush \
