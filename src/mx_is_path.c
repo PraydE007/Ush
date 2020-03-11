@@ -53,17 +53,15 @@ static int flag_parser(char **command, t_ush *ush, bool *flag) {
     return i;
 }
 
-void mx_which(t_ush *ush, char **command) {
+char *mx_is_path(char **command) {
     char *path = getenv("PATH");
-    bool *flag = (bool *)malloc(sizeof(bool) * 2);
     char **ways = mx_strsplit(path, ':');
-    int i = flag_parser(command, ush, flag);
 
     for (; command[i];) {
         if (mx_is_built_in(command[i]) && !flag[1])
             printf("%s: shell built-in command\n", command[i]);
         if (!mx_is_built_in(command[i]) || (mx_is_built_in(command[i])
-            && flag[0]))
+                                            && flag[0]))
             look_in_path(ush, ways, command[i], flag);
         i++;
     }

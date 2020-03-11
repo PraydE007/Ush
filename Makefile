@@ -26,6 +26,7 @@ FILES = main \
 	mx_have_equals \
 	mx_is_built_in \
 	mx_is_command \
+	mx_is_slash \
 	mx_isvariable \
 	mx_key_value_creation \
 	mx_parse_buf \
