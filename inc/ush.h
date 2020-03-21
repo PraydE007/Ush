@@ -6,7 +6,7 @@
 #define MX_EBUF "ush: Buffer cannot be longer than terminal width.\n"
 #define MX_ETGTN "ush: Could not access the termcap data base.\n"
 #define MX_EBFLOC "ush: Buffer cannot allocate enough memory.\n"
-#define MX_PIZDA "ush: Pizda! Character error -- '%c'\n"
+#define MX_PIZDA "ush: Syntax error -- '%c'\n"
 #define PH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki"
 
 #define MX_ZER "\x1B[0m"
@@ -73,6 +73,7 @@ typedef struct s_b_node {
     t_t_node *t_node;
     struct s_b_node *next;
 }              t_b_node;
+
 // check if needs this structure
 typedef struct s_env {
     char *key;
@@ -168,8 +169,8 @@ int mx_buf_drop(char **buf, int *buf_size);
 int mx_buf_push(char **buf, int *buf_size, char ch);
 int mx_push_n_char(t_termconf **cfg, char ch);
 int mx_drop_n_char(t_termconf **cfg);
-// short mx_get_buf_type(unsigned char *ch);
-short mx_get_buf_type(unsigned char ch);
+short mx_get_buf_type(unsigned char *ch);
+// short mx_get_buf_type(unsigned char ch);
 void mx_restore_buffer(t_termconf *cfg);
 
 // TEXT LIST
@@ -183,6 +184,7 @@ void mx_push_h_node_back(t_h_node **h_node, char *buf, int buf_size);
 void mx_pop_h_node_front(t_h_node **h_node);
 t_h_node *mx_clone_history(t_h_node **h_node);
 char *mx_get_history_last_str(t_h_node **h_node);
+void mx_print_history(t_termconf *cfg);
 
 // BLOCK LIST
 int mx_tlist_len(t_t_node **head);
@@ -190,6 +192,7 @@ int mx_set_history_pos(t_h_node **h_node, int type);
 t_b_node *mx_create_block_node(t_t_node *t_node);
 void mx_pop_block_front(t_b_node **head);
 t_b_node *mx_push_block_back(t_b_node **head, t_t_node *t_node);
+t_b_node *mx_clone_blocks(t_b_node **head);
 void mx_dealloc_blocks(t_b_node **head);
 
 // STRING OPERATIONS && PARSING

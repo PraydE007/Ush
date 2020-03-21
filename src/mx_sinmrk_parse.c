@@ -3,13 +3,15 @@
 static void slash_handling(char **res, char *str, int *i, int *res_size) {
     if (str[1] == '\0')
         return;
-    else if (str[1] == '\'') {
+    else if (str[1] == '\'')
         mx_push_symbol(res, '\\', res_size);
-    }
-    else if (mx_control_slash(res, str, res_size)) {
+    else if (str[1] == '$') {
         (*i) += 1;
-        return;
+        mx_push_symbol(res, '\\', res_size);
+        mx_push_symbol(res, '$', res_size);
     }
+    else if (mx_control_slash(res, str, res_size))
+        (*i) += 1;
     else {
         mx_push_symbol(res, str[1], res_size);
         (*i) += 1;

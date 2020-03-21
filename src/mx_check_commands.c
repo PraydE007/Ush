@@ -34,10 +34,10 @@ static bool is_builtin(t_ush *ush, char **command) {
         mx_del_strarr(&kv);
         return true;
     }
-    else if (mx_strcmp("env", command[0]) == 0) {
-        mx_env(ush, command);
-        return true;
-    }
+    // else if (mx_strcmp("env", command[0]) == 0) {
+    //     mx_env(ush, command);
+    //     return true;
+    // }
     else if (mx_strcmp("export", command[0]) == 0) {
         mx_export(ush, command);
         mx_del_strarr(&kv);
@@ -52,8 +52,8 @@ static bool is_builtin(t_ush *ush, char **command) {
         mx_change_color(ush, command);
         return true;
     }
-    else if (mx_strcmp("termcol", command[0]) == 0) {
-        mx_change_color(ush, command);
+    else if (mx_strcmp("history", command[0]) == 0) {
+        mx_print_history(ush->termconf);
         mx_del_strarr(&kv);
         return true;
     }
@@ -83,14 +83,13 @@ void mx_check_commands(t_ush *ush) {
     t_b_node *block = ush->blocks;
     char **command = NULL;
 
-    while (block) {
+    while (block) { // MAYBE NOT NEEDED
         command = mx_command_matrix_creator(&block->t_node);
         // while (block->t_node) {
         //     printf ("%s,\n", block->t_node->text);
         //     block->t_node = block->t_node->next;
         // }
-        is_builtin(ush, command)
-        ? 0 : mx_process_creator(command);
+        is_builtin(ush, command) ? 0 : mx_process_creator(command);
         mx_del_strarr(&command);
         block = block->next;
     }

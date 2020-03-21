@@ -3,13 +3,13 @@
 static int c_cases(t_termconf **cfg, unsigned char ch, short type) {
     if (type == 0) {
         (*cfg)->c_pos += 1;
-        return mx_buf_push(&((*cfg)->clone->buf), &((*cfg)->clone->buf_size), (char)ch);
-        // return mx_push_n_char(cfg, ch);
+        // return mx_buf_push(&((*cfg)->clone->buf), &((*cfg)->clone->buf_size), (char)ch);
+        return mx_push_n_char(cfg, ch);
     }
     else if (type == 1) {
         (*cfg)->c_pos -= 1;
-        return mx_buf_drop(&((*cfg)->clone->buf), &((*cfg)->clone->buf_size));
-        // return mx_drop_n_char(cfg);
+        // return mx_buf_drop(&((*cfg)->clone->buf), &((*cfg)->clone->buf_size));
+        return mx_drop_n_char(cfg);
     }
     else if (type == 2)
         (*cfg)->c_pos -= 1;
@@ -35,19 +35,19 @@ static void restore_ch(unsigned char *ch) {
 }
 
 static int reading_cycle(t_termconf **cfg) {
-    // unsigned char ch[4] = {0, 0, 0, 0};
-    char ch = 0;
+    unsigned char ch[4] = {0, 0, 0, 0};
+    // char ch = 0;
     char *buf = NULL;
 
     while (1) {
-        // restore_ch(ch);
-//        read(0, ch, 4);
-        read(0, &ch, 1);
+        restore_ch(ch);
+        // read(0, &ch, 1);
+        read(0, ch, 4);
         if (mx_term_width_check(cfg))
             return 1;
-        if (ch == '\n')
+        if (ch[0] == '\n' && !ch[1] && !ch[2] && !ch[3])
             break;
-        if (c_cases(cfg, ch, mx_get_buf_type(ch)))
+        if (c_cases(cfg, ch[0], mx_get_buf_type(ch)))
             return 1;
         if (mx_term_width_check(cfg))
             return 1;

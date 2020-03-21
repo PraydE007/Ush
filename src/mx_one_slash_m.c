@@ -6,6 +6,9 @@ int mx_one_slash_m(char **res, char *str, int *i, int *res_size) {
         return mx_break_on_error(res) == NULL ? 0 : 0;
     else if (str[(*i)] == '\"')
         return mx_push_symbol(res, '\"', res_size);
+    else if (str[(*i)] == '$') {
+        return mx_push_symbol(res, '$', res_size);
+    }
     else if (mx_control_slash(res, &str[0], res_size))
         return 1;
     else {

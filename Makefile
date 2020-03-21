@@ -81,6 +81,8 @@ FILES = main \
 	mx_set_history_pos \
 	mx_get_history_last_str \
 	mx_which \
+	mx_clone_blocks \
+	mx_print_history \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 
