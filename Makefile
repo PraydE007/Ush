@@ -82,6 +82,10 @@ FILES = main \
 	mx_get_history_last_str \
 	mx_which \
 	mx_clone_blocks \
+	mx_open_tty \
+	mx_rd_print_color \
+	mx_rd_print_pbc \
+	mx_rd_print_old \
 	mx_print_history \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))

@@ -61,6 +61,8 @@ typedef struct s_termconf {
     int ful_len;
     int c_pos;
     char *color;
+    int isInThread;
+    int tty_fd;
 }              t_termconf;
 
 typedef struct s_t_node {
@@ -156,11 +158,17 @@ void mx_unset(char **command, t_ush *ush);
 void mx_which(t_ush *ush, char **command);
 void mx_unset(char **command, t_ush *ush);
 
+// ALL TERM OUTPUTS
+void mx_rd_print_color(t_termconf **cfg);
+void mx_rd_print_pbc(t_termconf **cfg, char *buf);
+void mx_rd_print_old(t_termconf **cfg);
+
 // TERM AND USH
 t_export *mx_exportnode_creation(void);
 // t_env *mx_envnode_creation(void);
 int mx_term_width_check(t_termconf **cfg);
 t_termconf *mx_create_termconf(void);
+void mx_open_tty(t_termconf **cfg);
 void mx_change_color(t_ush *ush, char **commands);
 t_ush *mx_create_ush();
 

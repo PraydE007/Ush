@@ -11,5 +11,7 @@ t_termconf *mx_create_termconf(void) {
     termconf->ful_len = 4;
     termconf->c_pos = 0;
     termconf->color = mx_strdup(MX_DEF_COL);
+    termconf->isInThread = !isatty(1) ? 1 : 0;
+    termconf->tty_fd = 0;
     return termconf;
 }
