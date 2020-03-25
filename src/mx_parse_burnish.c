@@ -15,6 +15,9 @@ static void burnish_cycle(t_b_node **blocks, t_b_node **p) {
         else if (p_tt->type == 0) {
             buf = mx_strjoin_free(buf, p_tt->text);
         }
+        else if (p_tt->type == 1) {
+            buf = mx_strjoin_free(buf, p_tt->text);
+        }
         p_tt = p_tt->next;
     }
     if (buf) {
@@ -28,10 +31,12 @@ void mx_parse_burnish(t_ush *ush) {
     t_b_node *clone = NULL;
     t_b_node *p = NULL;
 
+    mx_outlst(ush); //
     clone = mx_clone_blocks(&(ush->blocks));
     mx_dealloc_blocks(&(ush->blocks));
     p = clone;
     while (p) {
+        mx_replace_variables(ush, &p);
         burnish_cycle(&(ush->blocks), &p);
         mx_check_commands(ush);
         mx_dealloc_blocks(&(ush->blocks));

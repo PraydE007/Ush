@@ -157,6 +157,7 @@ void mx_read_termconf(t_termconf *termconf);
 void mx_unset(char **command, t_ush *ush);
 void mx_which(t_ush *ush, char **command);
 void mx_unset(char **command, t_ush *ush);
+void mx_outlst(t_ush *ush);
 
 // ALL TERM OUTPUTS
 void mx_rd_print_color(t_termconf **cfg);
@@ -221,6 +222,9 @@ int mx_two_slash(char **res, char *str, int *i, int *res_size);
 int mx_two_slash_m(char **res, char *str, int *i, int *res_size);
 int mx_three_slash(char **res, char *str, int *i, int *res_size);
 bool mx_control_slash(char **res, char *str, int *res_size);
+char *mx_dollar_parse(char *str, int *piv, int *type);
+void mx_replace_variables(t_ush *ush, t_b_node **node);
+char *mx_get_variable(t_ush *ush, char *var_name);
 
 
 

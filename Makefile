@@ -87,6 +87,10 @@ FILES = main \
 	mx_rd_print_pbc \
 	mx_rd_print_old \
 	mx_print_history \
+	mx_dollar_parse \
+	mx_outlst \
+	mx_replace_variables \
+	mx_get_variable \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 
