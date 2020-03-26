@@ -90,7 +90,7 @@ void mx_check_commands(t_ush *ush) {
         //     block->t_node = block->t_node->next;
         // }
         is_builtin(ush, command)
-        ? 0 : mx_process_creator(command);
+        ? 0 : mx_process_creator(ush, command);
         mx_del_strarr(&command);
         block = block->next;
     }

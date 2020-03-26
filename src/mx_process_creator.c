@@ -34,21 +34,37 @@ static void process_error(char *comn) {
     }
 }
 
-void mx_process_creator(char **command) {
+static bool is_path(t_variable **list) {
+    t_variable *pl = *list;
+
+    while (pl) {
+        if (mx_strcmp("PATH", pl->key) == 0)
+            return true;
+        pl = pl->next;
+    }
+    return false;
+}
+
+void mx_process_creator(t_ush *ush, char **command) {
     pid_t pid = 0;
     pid_t wpid = 0;
     int status = 0;
+    char *proga = NULL;
 
+    proga = mx_programm_finder(command[0]);
     pid = fork();
     if (pid == 0) {
         if (getenv("PATH") != 0) {
             if (execvp(command[0], command) == -1)
                 process_error(command[0]);
         }
-        // else if (pathfinder(PATH)) {
-        //     if (pathfinder(PATH), command) == -1)
-        //         process_error(command[0]);
-        // }
+        else if (is_path(&ush->variable_list) && proga) {
+            mx_strdel(&command[0]);
+            command[0] = mx_strdup(proga);
+            mx_strdel(&proga);
+            if (execv(command[0], command) == -1)
+                process_error(command[0]);
+        }
         else {
             if (execv(command[0], command) == -1)
                 process_error(command[0]);
@@ -64,4 +80,5 @@ void mx_process_creator(char **command) {
         //     wpid = waitpid(pid, &status, WUNTRACED);
         // }
     }
+    mx_strdel(&proga);
 }

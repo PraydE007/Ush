@@ -3,23 +3,25 @@
 int main(int argc, char *argv[]) {
     t_ush *ush = mx_create_ush();
     int exit_code = 0;
-// char *buf = NULL;
-// int store = 0;
-// buf = getenv("SHLVL");
-// store = mx_atoi(buf);
-// // mx_strdel(&buf);
-//     if (!isatty(0)) {
-//         store++;
-//         buf = mx_itoa(store);
-//         setenv("SHLVL", buf, 1);
-//         mx_strdel(&buf);
-//     }
+char *buf = NULL;
+int store = 0;
 
-    // if (getenv("PATH") == 0) {
-    //     char **kv = mx_key_value_creation(ush, PH);
-    //     mx_push_back_variable(&ush->variable_list, kv);
-    //     mx_del_strarr(&kv);
-    // }
+    if (getenv("PATH") == 0) {
+        char **kv = NULL;
+        kv = mx_key_value_creation(ush, PH);
+        mx_push_back_variable(&ush->variable_list, kv);
+        mx_del_strarr(&kv);
+    }
+    if (getenv("SHLVL") == 0)
+        setenv("SHLVL", "1", 1);
+    else {
+        buf = getenv("SHLVL");
+        store = mx_atoi(buf);
+        store++;
+        buf = mx_itoa(store);
+        setenv("SHLVL", buf, 1);
+        mx_strdel(&buf);
+    }
 
         // char *termtype = mx_tildastr("~-");
         // printf ("%s\n", termtype);

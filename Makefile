@@ -16,6 +16,7 @@ FILES = main \
 	mx_dealloc_termconf \
 	mx_dealloc_ush \
 	mx_doumrk_parse \
+	mx_env \
 	mx_envnode_creation \
 	mx_env_variable_checking \
 	mx_exit \
@@ -38,6 +39,7 @@ FILES = main \
 	mx_pop_front_variable \
 	mx_pop_t_node_front \
 	mx_process_creator \
+	mx_programm_finder \
 	mx_push_block_back \
 	mx_push_back_export \
 	mx_push_back_variable \
