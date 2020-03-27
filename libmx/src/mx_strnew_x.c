@@ -2,7 +2,7 @@
 
 char *mx_strnew_x(const int size) {
     char *p_arr = NULL;
-    int i;
+    int i = 0;
 
     if (size < 0) 
         return NULL;

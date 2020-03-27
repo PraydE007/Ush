@@ -1,8 +1,12 @@
 #include "../inc/ush.h"
 
 char *get_another(t_ush *ush, char *var_name) {
+    pid_t pid = getpid();
+
     if (mx_strcmp(var_name, "?") == 0)
         return mx_itoa(ush->exit_code);
+    else if (mx_strcmp(var_name, "$") == 0)
+        return mx_itoa(pid);
     return NULL;
 }
 

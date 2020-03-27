@@ -91,6 +91,8 @@ FILES = main \
 	mx_outlst \
 	mx_replace_variables \
 	mx_get_variable \
+	mx_buf_safe_realloc \
+	mx_sixteen_ez_fix \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

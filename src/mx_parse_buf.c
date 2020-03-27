@@ -5,6 +5,7 @@ int mx_parse_buf(t_ush *ush) {
     char *text = NULL;
     char *part = NULL;
     char *buf = mx_strdup(ush->termconf->h_node->buf);
+    // char *buf = mx_buf_safe_realloc(bff->buf, &(bff->buf_size));
 
     text = strtok(buf, ";\n");
     while (text != NULL) {

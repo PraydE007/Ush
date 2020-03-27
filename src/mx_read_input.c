@@ -59,7 +59,7 @@ static int reading_cycle(t_termconf **cfg) {
 
 static int on_read_ended(t_termconf **cfg) {
     t_h_node *clone = (*cfg)->clone;
-    char *new_buf = mx_strdup_x(clone->buf);
+    char *new_buf = mx_sixteen_ez_fix(&(clone->buf), &(clone->buf_size)); //
     int exit_code = 0;
 
     tcsetattr(0, TCSAFLUSH, &((*cfg)->savetty));

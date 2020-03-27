@@ -158,6 +158,7 @@ void mx_unset(char **command, t_ush *ush);
 void mx_which(t_ush *ush, char **command);
 void mx_unset(char **command, t_ush *ush);
 void mx_outlst(t_ush *ush);
+char *mx_buf_safe_realloc(char *src, int *size);
 
 // ALL TERM OUTPUTS
 void mx_rd_print_color(t_termconf **cfg);
@@ -181,6 +182,7 @@ int mx_drop_n_char(t_termconf **cfg);
 short mx_get_buf_type(unsigned char *ch);
 // short mx_get_buf_type(unsigned char ch);
 void mx_restore_buffer(t_termconf *cfg);
+char *mx_sixteen_ez_fix(char **str, int *size);
 
 // TEXT LIST
 t_t_node *mx_create_text_node(char *text, int type);
@@ -225,8 +227,6 @@ bool mx_control_slash(char **res, char *str, int *res_size);
 char *mx_dollar_parse(char *str, int *piv, int *type);
 void mx_replace_variables(t_ush *ush, t_b_node **node);
 char *mx_get_variable(t_ush *ush, char *var_name);
-
-
 
 /* -------- */
 
