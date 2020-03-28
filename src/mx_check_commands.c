@@ -25,13 +25,11 @@ static void outlst(t_ush *ush) {
 }
 // do kv ONLY IN ELSE
 static bool is_builtin(t_ush *ush, char **command) {
-    char **kv = mx_key_value_creation(ush, command[0]);
-
     outlst(ush);
     if (mx_strcmp("exit", command[0]) == 0) {
         ush->exit_code = mx_exit(command);
         ush->active = false;
-        mx_del_strarr(&kv);
+        // mx_del_strarr(&kv);
         return true;
     }
     else if (mx_strcmp("env", command[0]) == 0) {
@@ -40,12 +38,12 @@ static bool is_builtin(t_ush *ush, char **command) {
     }
     else if (mx_strcmp("export", command[0]) == 0) {
         mx_export(ush, command);
-        mx_del_strarr(&kv);
+        // mx_del_strarr(&kv);
         return true;
     }
     else if (mx_strcmp("unset", command[0]) == 0) {
         mx_unset(command, ush);
-        mx_del_strarr(&kv);
+        // mx_del_strarr(&kv);
         return true;
     }
     else if (mx_strcmp("termcol", command[0]) == 0) {
@@ -54,28 +52,38 @@ static bool is_builtin(t_ush *ush, char **command) {
     }
     else if (mx_strcmp("termcol", command[0]) == 0) {
         mx_change_color(ush, command);
-        mx_del_strarr(&kv);
+        // mx_del_strarr(&kv);
         return true;
     }
     else if (mx_strcmp("clear", command[0]) == 0) {
         mx_printstr("\x1B[0;0H\x1B[0J");
-        mx_del_strarr(&kv);
+        // mx_del_strarr(&kv);
         return true;
     }
     else if (mx_strcmp("which", command[0]) == 0) {
         mx_which(ush, command);
-        mx_del_strarr(&kv);
+        // mx_del_strarr(&kv);
         return true;
     }
-    else if (kv != NULL || ush->equals) {
-        if (kv != NULL) {
-            mx_adding_variable(ush, command, kv);
-            mx_del_strarr(&kv);
+    else if (mx_strcmp("~", command[0]) == 0 || mx_strcmp("~+", command[0]) == 0
+            || mx_strcmp("~-", command[0]) == 0) {
+        mx_tildastr(command[0]);
+        // mx_del_strarr(&kv);
+        return true;
+    }
+    else {
+        char **kv = mx_key_value_creation(ush, command[0]);
+
+        if (kv != NULL || ush->equals) {
+            if (kv != NULL) {
+                mx_adding_variable(ush, command, kv);
+                mx_del_strarr(&kv);
+            }
+            ush->equals = false;
+            return true;
         }
-        ush->equals = false;
-        return true;
     }
-    mx_del_strarr(&kv);
+    // mx_del_strarr(&kv);
     return false;
 }
 

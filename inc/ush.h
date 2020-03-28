@@ -139,6 +139,7 @@ t_variable *mx_variablenode_creation(void);
 t_env_flags *mx_create_env_flags(void);
 void mx_adding_variable(t_ush *ush, char **command, char **kv);
 void mx_check_commands(t_ush *ush);
+void mx_constant_variables(t_ush *ush);
 void mx_dealloc_termconf(t_termconf **termconf);
 void mx_dealloc_ush(t_ush **ush);
 void mx_env(t_ush *ush, char **command);

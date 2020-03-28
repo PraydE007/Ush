@@ -51,17 +51,17 @@ void mx_process_creator(t_ush *ush, char **command) {
     int status = 0;
     char *proga = NULL;
 
-    proga = mx_programm_finder(command[0]);
     pid = fork();
     if (pid == 0) {
+        proga = mx_programm_finder(command[0]);
         if (getenv("PATH") != 0) {
             if (execvp(command[0], command) == -1)
                 process_error(command[0]);
         }
         else if (is_path(&ush->variable_list) && proga) {
-            mx_strdel(&command[0]);
+            // mx_strdel(&command[0]);
             command[0] = mx_strdup(proga);
-            mx_strdel(&proga);
+            // mx_strdel(&proga);
             if (execv(command[0], command) == -1)
                 process_error(command[0]);
         }
@@ -80,5 +80,4 @@ void mx_process_creator(t_ush *ush, char **command) {
         //     wpid = waitpid(pid, &status, WUNTRACED);
         // }
     }
-    mx_strdel(&proga);
 }

@@ -6,7 +6,8 @@ FILES = main \
 	mx_buf_push \
 	mx_check_commands \
 	mx_check_key_allow \
-	mx_command_matrix_creator\
+	mx_command_matrix_creator \
+	mx_constant_variables \
 	mx_create_block_node \
 	mx_create_env_flags \
 	mx_create_termconf \
