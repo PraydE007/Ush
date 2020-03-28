@@ -1,6 +1,6 @@
 #include "../inc/ush.h"
 
-static char *home_log_creation(char *log, char *home, char *dir) {
+static void home_log_creation(char *log, char *home, char *dir) {
     char *buf = NULL;
     int i = 1;
 
