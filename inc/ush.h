@@ -107,6 +107,7 @@ typedef struct s_ush {
     bool equals;
     bool trigger;
     int exit_code;
+    int shlvl;
     int storage;
     t_env_flags *flags;
     t_b_node *blocks;
@@ -125,8 +126,8 @@ bool mx_isvariable (t_ush *ush, char **k_v);
 char **mx_command_matrix_creator(t_t_node **comn);
 char **mx_export_matrix_creator(char **env);
 char **mx_key_value_creation(t_ush *ush, char *env);
+char *mx_programm_finder(char *command);
 char **mx_strsplit_first_meeting(const char *s, char c);
-char *mx_tildastr(char *tilda);
 int mx_blist_len(t_b_node **head);
 int mx_exit(char **command);
 int mx_get_twidth();
@@ -140,6 +141,7 @@ t_variable *mx_variablenode_creation(void);
 t_env_flags *mx_create_env_flags(void);
 void mx_adding_variable(t_ush *ush, char **command, char **kv);
 void mx_check_commands(t_ush *ush);
+void mx_constant_variables(t_ush *ush);
 void mx_dealloc_termconf(t_termconf **termconf);
 void mx_dealloc_ush(t_ush **ush);
 void mx_env(t_ush *ush, char **command);
@@ -149,7 +151,7 @@ void mx_pop_back_variable(t_variable **head);
 void mx_pop_front_export(t_export **head);
 void mx_pop_front_variable(t_variable **head);
 void mx_pop_specific(t_variable **list, int index);
-void mx_process_creator(char **commands);
+void mx_process_creator(t_ush *ush, char **commands);
 void mx_push_back_export(t_export **export, char **kv);
 void mx_push_back_variable(t_variable **list, char **kv);
 void mx_read_environment(t_export **export_list, char **env);
@@ -227,6 +229,9 @@ bool mx_control_slash(char **res, char *str, int *res_size);
 char *mx_dollar_parse(char *str, int *piv, int *type);
 void mx_replace_variables(t_ush *ush, t_b_node **node);
 char *mx_get_variable(t_ush *ush, char *var_name);
+void mx_replace_tild(t_b_node **node);
+char *mx_tildastr(char *tilda);
+char *mx_tild_parse(char *str, int *piv, int *type);
 
 /* -------- */
 

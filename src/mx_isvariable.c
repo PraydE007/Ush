@@ -20,7 +20,7 @@ bool mx_isvariable (t_ush *ush, char **k_v) {
                 mx_strdel(&pl->value);
             return false;
         }
-        pl = pl->next;;
+        pl = pl->next;
     }
     return true;
 }

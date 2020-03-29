@@ -1,6 +1,6 @@
 #include "../inc/ush.h"
 
-void mx_sort_export(char **env) {
+static void sort_export(char **env) {
     for (int i = 0; env[i + 1]; i++) {
         if (mx_strcmp_export(env[i], env[i + 1]) > 0) {
             mx_swap_str(&env[i], &env[i + 1]);
@@ -16,7 +16,6 @@ void mx_sort_export(char **env) {
 
 char **mx_export_matrix_creator(char **env) {
     int size = mx_strarrlen(env);
-    printf("%d\n", size);
     char **copy = NULL;
 
     copy = (char **)malloc(sizeof(char *) * (size + 1));
@@ -25,6 +24,6 @@ char **mx_export_matrix_creator(char **env) {
     for (int i = 0; env[i]; i++)
         copy[i] = mx_strdup(env[i]);
     if (copy)
-        mx_sort_export(copy);
+        sort_export(copy);
     return copy;
 }

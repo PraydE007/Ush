@@ -1,17 +1,13 @@
 #include "../inc/ush.h"
 
 char *mx_tildastr(char *tilda) {
-    char dir[256];
-    char *adress;
+    char *adress = NULL;
 
-    if (mx_strcmp(tilda, "~") == 0) 
-        return adress = getenv("HOME");
-    else if (mx_strcmp(tilda, "~+") == 0) {
-        getcwd(dir, 256);
-        char *s = mx_strdup(dir);
-        return s;
-    }
-    else if (mx_strcmp(tilda, "~-") == 0)
-        return 0;
-    return 0;
+    if (mx_strcmp(tilda, "\0") == 0)
+        adress = getenv("HOME");
+    else if (mx_strcmp(tilda, "+") == 0)
+        adress = getenv("PWD");
+    else if (mx_strcmp(tilda, "-") == 0)
+        adress = getenv("OLDPWD");
+    return mx_strdup_x(adress);
 }

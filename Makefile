@@ -6,7 +6,8 @@ FILES = main \
 	mx_buf_push \
 	mx_check_commands \
 	mx_check_key_allow \
-	mx_command_matrix_creator\
+	mx_command_matrix_creator \
+	mx_constant_variables \
 	mx_create_block_node \
 	mx_create_env_flags \
 	mx_create_termconf \
@@ -16,6 +17,7 @@ FILES = main \
 	mx_dealloc_termconf \
 	mx_dealloc_ush \
 	mx_doumrk_parse \
+	mx_env \
 	mx_envnode_creation \
 	mx_env_variable_checking \
 	mx_exit \
@@ -38,6 +40,7 @@ FILES = main \
 	mx_pop_front_variable \
 	mx_pop_t_node_front \
 	mx_process_creator \
+	mx_programm_finder \
 	mx_push_block_back \
 	mx_push_back_export \
 	mx_push_back_variable \
@@ -93,6 +96,8 @@ FILES = main \
 	mx_get_variable \
 	mx_buf_safe_realloc \
 	mx_sixteen_ez_fix \
+	mx_tild_parse \
+	mx_replace_tild \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

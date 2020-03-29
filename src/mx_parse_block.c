@@ -15,6 +15,8 @@ static void check_for_parse(t_t_node *p, char **buf, int *i, int *type) {
             (*buf) = mx_doumrk_parse(&(p->text[(*i) + 1]), i);
         else if (p->text[(*i)] == '$')
             (*buf) = mx_dollar_parse(&(p->text[(*i) + 1]), i, type);
+        else if (p->text[(*i)] == '~')
+            (*buf) = mx_tild_parse(&(p->text[(*i) + 1]), i, type);
         else
             (*buf) = mx_text_parse(&(p->text[(*i)]), i);
     }
