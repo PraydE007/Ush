@@ -29,7 +29,6 @@ char *mx_programm_finder(char *command) {
     path = path_creator();
     for (int i = 0; path[i]; i++) {
         programm = strdbljoin(path[i], "/", command);
-        // struct stat lt;
         if (stat(programm, &lt) != -1) {
             if ((lt.st_mode & S_IXUSR) == S_IXUSR) {
                 break;

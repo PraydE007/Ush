@@ -1,15 +1,7 @@
 #include "../inc/ush.h"
 
-static bool slash_checking(char *comn) {
-    for (int i = 0; comn[i]; i++) {
-        if (comn[i] == '/')
-            return true;
-    }
-    return false;
-}
-
 static void error_printing(char *comn) {
-    if (!slash_checking(comn)) {
+    if (!mx_is_slash(comn)) {
         mx_printerr("ush: command not found: ");
         mx_printerr(comn);
         mx_printerr("\n");
@@ -45,39 +37,36 @@ static bool is_path(t_variable **list) {
     return false;
 }
 
+static void child_process(t_ush *ush, char **command) {
+    char *proga = NULL;
+
+    proga = mx_programm_finder(command[0]);
+    if (getenv("PATH") != 0) {
+        if (execvp(command[0], command) == -1)
+            process_error(command[0]);
+    }
+    else {
+        if (is_path(&ush->variable_list) && proga) {
+            mx_strdel(&command[0]);
+            command[0] = mx_strdup(proga);
+            mx_strdel(&proga);
+        }
+        if (execv(command[0], command) == -1)
+            process_error(command[0]);
+    }
+    exit(EXIT_FAILURE);
+}
+
 void mx_process_creator(t_ush *ush, char **command) {
     pid_t pid = 0;
     pid_t wpid = 0;
     int status = 0;
-    char *proga = NULL;
 
     pid = fork();
-    if (pid == 0) {
-        proga = mx_programm_finder(command[0]);
-        if (getenv("PATH") != 0) {
-            if (execvp(command[0], command) == -1)
-                process_error(command[0]);
-        }
-        else if (is_path(&ush->variable_list) && proga) {
-            // mx_strdel(&command[0]);
-            command[0] = mx_strdup(proga);
-            // mx_strdel(&proga);
-            if (execv(command[0], command) == -1)
-                process_error(command[0]);
-        }
-        else {
-            if (execv(command[0], command) == -1)
-                process_error(command[0]);
-        }
-        exit(EXIT_FAILURE);
-    }
-    else if (pid < 0) {
+    if (pid == 0)
+        child_process(ush, command);
+    else if (pid < 0)
         perror("ush");
-    }
-    else if (pid > 0) {
+    else if (pid > 0)
         wpid = waitpid(pid, &status, WUNTRACED);
-        // while (!WIFEXITED(status) && !WIFSIGNALED(status)) {
-        //     wpid = waitpid(pid, &status, WUNTRACED);
-        // }
-    }
 }
