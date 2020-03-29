@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+// A LOT OF LINES
 bool mx_have_equals(t_ush *ush, char *env) {
     int i = 0;
 

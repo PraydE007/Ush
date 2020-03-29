@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//CHECK IF WE NEED THIS FUNCTION
 void mx_push_back_export(t_export **list, char **kv) {
     t_export *node = mx_exportnode_creation();
     t_export *pl = *list;

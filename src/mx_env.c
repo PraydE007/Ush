@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+// A LOT OF LINES
 static void print_env(char **env) {
     for (int i = 0; env[i]; i++) {
         mx_printstr(env[i]);

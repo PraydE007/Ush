@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+// A LOT OF LINES
 void mx_outlst(t_ush *ush) {
     t_b_node *block = ush->blocks;
     t_t_node *x = NULL;

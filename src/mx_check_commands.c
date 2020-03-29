@@ -1,14 +1,9 @@
 #include "../inc/ush.h"
 
-// do kv ONLY IN ELSE
-static bool is_builtin(t_ush *ush, char **command) {
-    // char **kv = mx_key_value_creation(ush, command[0]);
-
-    mx_outlst(ush);
+static bool first_part_of_biltin(t_ush *ush, char **command) {
     if (mx_strcmp("exit", command[0]) == 0) {
         ush->exit_code = mx_exit(command);
         ush->active = false;
-        // mx_del_strarr(&kv);
         return true;
     }
     // else if (mx_strcmp("env", command[0]) == 0) {
@@ -17,34 +12,41 @@ static bool is_builtin(t_ush *ush, char **command) {
     // }
     else if (mx_strcmp("export", command[0]) == 0) {
         mx_export(ush, command);
-        // mx_del_strarr(&kv);
         return true;
     }
     else if (mx_strcmp("unset", command[0]) == 0) {
         mx_unset(command, ush);
-        // mx_del_strarr(&kv);
         return true;
     }
-    else if (mx_strcmp("history", command[0]) == 0) {
+    return false;
+}
+
+static bool second_part_of_biltin(t_ush *ush, char **command) {
+    if (mx_strcmp("history", command[0]) == 0) {
         mx_print_history(ush->termconf);
-        // mx_del_strarr(&kv);
         return true;
     }
     else if (mx_strcmp("termcol", command[0]) == 0) {
         mx_change_color(ush, command);
-        // mx_del_strarr(&kv);
         return true;
     }
     else if (mx_strcmp("clear", command[0]) == 0) {
         mx_printstr("\x1B[0;0H\x1B[0J");
-        // mx_del_strarr(&kv);
         return true;
     }
     else if (mx_strcmp("which", command[0]) == 0) {
         mx_which(ush, command);
-        // mx_del_strarr(&kv);
         return true;
     }
+    return false;
+}
+
+static bool is_builtin(t_ush *ush, char **command) {
+    mx_outlst(ush);
+    if (first_part_of_biltin(ush, command))
+        return true;
+    else if (second_part_of_biltin(ush, command))
+        return true;
     else {
         char **kv = mx_key_value_creation(ush, command[0]);
 
@@ -57,7 +59,6 @@ static bool is_builtin(t_ush *ush, char **command) {
             return true;
         }
     }
-    // mx_del_strarr(&kv);
     return false;
 }
 
