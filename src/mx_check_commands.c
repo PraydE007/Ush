@@ -63,11 +63,20 @@ static bool is_builtin(t_ush *ush, char **command) {
 }
 
 void mx_check_commands(t_ush *ush) {
+    struct stat statbuf;
     t_b_node *block = ush->blocks;
     char **command = NULL;
 
     while (block) { // MAYBE NOT NEEDED
         command = mx_command_matrix_creator(&block->t_node);
+        if (stat(command[0], &statbuf) != -1) {
+            if (S_ISDIR(statbuf.st_mode )) {
+                mx_printerr("ush: permission denied: ");
+                mx_printerr(command[0]);
+                mx_printerr("\n");
+                break;
+            }
+        }
         is_builtin(ush, command) ? 0 : mx_process_creator(ush, command);
         mx_del_strarr(&command);
         block = block->next;

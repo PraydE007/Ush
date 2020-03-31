@@ -21,7 +21,7 @@ static char *strdbljoin(char *s1, char *s2, char *s3) {
 }
 
 char *mx_programm_finder(char *command) {
-    struct stat lt;
+    struct stat statbuf;
     char **path = NULL;
     char *programm = NULL;
 
@@ -29,8 +29,8 @@ char *mx_programm_finder(char *command) {
     path = path_creator();
     for (int i = 0; path[i]; i++) {
         programm = strdbljoin(path[i], "/", command);
-        if (stat(programm, &lt) != -1) {
-            if ((lt.st_mode & S_IXUSR) == S_IXUSR) {
+        if (stat(programm, &statbuf) != -1) {
+            if ((statbuf.st_mode & S_IXUSR) == S_IXUSR) {
                 break;
             }
         }
