@@ -1,6 +1,6 @@
 #include "../inc/ush.h"
 
-void mx_pipe_process_creator(t_ush *ush, char ***line) {
+void mx_pipe_process_creator_secondaddition(t_ush *ush, char ***line) {
     pid_t pid = 0;
     pid_t wpid = 0;
     int status = 0;
@@ -11,8 +11,8 @@ void mx_pipe_process_creator(t_ush *ush, char ***line) {
     // mx_printstr("\n");
     // i++;
     // }
-    int pipedes2[2];
-       int pipedes[2];
+    
+        int pipedes[2];
         pipe(pipedes);
         pid = fork();
         if (pid == 0) {
@@ -33,7 +33,7 @@ void mx_pipe_process_creator(t_ush *ush, char ***line) {
             dup2(pipedes[0], 0);
             while (line[i]) {
                 if (line[i + 1]) {
-                    
+                    int pipedes2[2];
                     pipe(pipedes2);
                     pid = fork();
                     if (pid == 0) {
@@ -49,18 +49,16 @@ void mx_pipe_process_creator(t_ush *ush, char ***line) {
                     else if (pid < 0) {
                         perror("ush");
                     }
-                    // else if (pid > 0 ) {
-                    //     close(pipedes2[1]);
-                    //     dup2(pipedes2[0], 0);
-                    //     if (execvp(line[i+1][0], line[i+1]) == -1)
-                    //         perror("ush");
-                        
-                    // }
+                    else if (pid > 0 ) {
+                        close(pipedes2[1]);
+                        dup2(pipedes2[0], 0);
+                        if (execvp(line[i+1][0], line[i+1]) == -1)
+                            perror("ush");wpid = waitpid(pid, &status, WUNTRACED);
+                    }
                 }
                 else {
                     // close(1);
-                close(pipedes2[1]);
-                    dup2(pipedes2[0], 0);
+                
                     pid = fork();
                     if (pid == 0) {
                  // close(pipedes[1]);

@@ -16,6 +16,7 @@ FILES = main \
 	mx_dealloc_blocks \
 	mx_dealloc_termconf \
 	mx_dealloc_ush \
+	mx_del_strararr \
 	mx_doumrk_parse \
 	mx_env \
 	mx_envnode_creation \
@@ -73,6 +74,7 @@ FILES = main \
 	mx_one_slash_m \
 	mx_two_slash_m \
 	mx_parse_burnish \
+	mx_pipe_process_creator \
 	mx_push_n_char \
 	mx_drop_n_char \
 	mx_change_color \
@@ -96,6 +98,7 @@ FILES = main \
 	mx_get_variable \
 	mx_buf_safe_realloc \
 	mx_sixteen_ez_fix \
+	mx_substitution_making \
 	mx_tild_parse \
 	mx_replace_tild \
 

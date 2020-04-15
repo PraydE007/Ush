@@ -74,6 +74,7 @@ void mx_check_commands(t_ush *ush) {
                 mx_printerr("ush: permission denied: ");
                 mx_printerr(command[0]);
                 mx_printerr("\n");
+                mx_del_strarr(&command);
                 break;
             }
         }
