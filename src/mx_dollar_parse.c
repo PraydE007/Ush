@@ -62,5 +62,7 @@ static char *def_dol_parse(char *str, int *piv, int *type) {
 char *mx_dollar_parse(char *str, int *piv, int *type) {
     if (str[0] == '{')
         return quote_dol_parse(&str[1], piv, type);
+    else if (str[0] == '(')
+        return mx_subst_dol_parse(&str[1], piv, type);
     return def_dol_parse(str, piv, type);
 }

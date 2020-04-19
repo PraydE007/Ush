@@ -1,10 +1,8 @@
 #include "../inc/ush.h"
 
 static void check_for_parse(t_t_node *p, char **buf, int *i, int *type) {
-    if (p->text[(*i)] == ' ') {
-        (*type) = -1;
+    if (p->text[(*i)] == ' ')
         (*buf) = mx_space_parse(&(p->text[(*i)]), i);
-    }
     else {
         (*type) = 0;
         if (p->text[(*i)] == '\\')
@@ -15,6 +13,8 @@ static void check_for_parse(t_t_node *p, char **buf, int *i, int *type) {
             (*buf) = mx_doumrk_parse(&(p->text[(*i) + 1]), i);
         else if (p->text[(*i)] == '$')
             (*buf) = mx_dollar_parse(&(p->text[(*i) + 1]), i, type);
+        else if (p->text[(*i)] == '`')
+            (*buf) = mx_subst_parse(&(p->text[(*i) + 1]), i, type);
         else if (p->text[(*i)] == '~')
             (*buf) = mx_tild_parse(&(p->text[(*i) + 1]), i, type);
         else
@@ -42,6 +42,7 @@ t_b_node *mx_parse_block(t_t_node **head, int err_ch, int type) {
         p_b = mx_push_block_back(&blocks, NULL);
         for (int i = 0; p->text[i] != '\0'; i++) {
             err_ch = i;
+            type = -1;
             check_for_parse(p, &buf, &i, &type);
             if (!check_error(blocks, p_b, buf, type)) {
                 fprintf(stderr, MX_PIZDA, p->text[err_ch]);

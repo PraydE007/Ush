@@ -12,9 +12,9 @@ static void burnish_cycle(t_b_node **blocks, t_b_node **p) {
             mx_push_t_node_back(&(p_b->t_node), buf, 0);
             buf = NULL;
         }
-        else if (p_tt->type == 0 || p_tt->type == 1 || p_tt->type == 2) {
+        else if (p_tt->type == 0 || p_tt->type == 1
+            || p_tt->type == 2 || p_tt->type == 3)
             buf = mx_strjoin_free(buf, p_tt->text);
-        }
         p_tt = p_tt->next;
     }
     if (buf) {
@@ -35,6 +35,7 @@ void mx_parse_burnish(t_ush *ush) {
     while (p) {
         mx_replace_tild(&p);
         mx_replace_variables(ush, &p);
+        mx_replace_subst(&p);
         burnish_cycle(&(ush->blocks), &p);
         mx_check_commands(ush);
         mx_dealloc_blocks(&(ush->blocks));

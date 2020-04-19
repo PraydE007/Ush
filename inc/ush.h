@@ -235,6 +235,9 @@ char *mx_get_variable(t_ush *ush, char *var_name);
 void mx_replace_tild(t_b_node **node);
 char *mx_tildastr(char *tilda);
 char *mx_tild_parse(char *str, int *piv, int *type);
+char *mx_subst_parse(char *str, int *piv, int *type);
+void mx_replace_subst(t_b_node **node);
+char *mx_subst_dol_parse(char *str, int *piv, int *type);
 
 /* -------- */
 

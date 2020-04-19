@@ -101,6 +101,9 @@ FILES = main \
 	mx_substitution_making \
 	mx_tild_parse \
 	mx_replace_tild \
+	mx_subst_parse \
+	mx_replace_subst \
+	mx_subst_dol_parse \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 
