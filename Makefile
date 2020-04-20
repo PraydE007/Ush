@@ -6,13 +6,16 @@ FILES = main \
 	mx_buf_push \
 	mx_check_commands \
 	mx_check_key_allow \
+	mx_child_exvprocess \
 	mx_command_matrix_creator \
 	mx_constant_variables \
 	mx_create_block_node \
 	mx_create_env_flags \
+	mx_creat_pwdilda_node \
 	mx_create_termconf \
 	mx_create_text_node \
 	mx_create_ush \
+	mx_creat_variable_node \
 	mx_dealloc_blocks \
 	mx_dealloc_termconf \
 	mx_dealloc_ush \
@@ -33,17 +36,20 @@ FILES = main \
 	mx_is_slash \
 	mx_isvariable \
 	mx_key_value_creation \
+	mx_path_is \
 	mx_parse_buf \
 	mx_parse_block \
 	mx_pop_back_variable \
 	mx_pop_block_front \
 	mx_pop_front_export \
+	mx_pop_front_pwdilda \
 	mx_pop_front_variable \
 	mx_pop_t_node_front \
 	mx_process_creator \
 	mx_programm_finder \
 	mx_push_block_back \
 	mx_push_back_export \
+	mx_push_back_pwdilda \
 	mx_push_back_variable \
 	mx_push_t_node_back \
 	mx_read_environment \
@@ -60,7 +66,6 @@ FILES = main \
 	mx_tildastr \
 	mx_tlist_len \
 	mx_unset \
-	mx_variablenode_creation \
 	mx_variable_list_len \
 	mx_pop_specific \
 	mx_slash_parse \
@@ -88,16 +93,17 @@ FILES = main \
 	mx_which \
 	mx_clone_blocks \
 	mx_open_tty \
+	mx_outlst \
 	mx_rd_print_color \
 	mx_rd_print_pbc \
 	mx_rd_print_old \
 	mx_print_history \
 	mx_dollar_parse \
-	mx_outlst \
 	mx_replace_variables \
 	mx_get_variable \
 	mx_buf_safe_realloc \
 	mx_sixteen_ez_fix \
+	mx_sub_error_printing \
 	mx_substitution_making \
 	mx_tild_parse \
 	mx_replace_tild \

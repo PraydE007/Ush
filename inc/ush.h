@@ -96,6 +96,12 @@ typedef struct s_export {
     struct s_export *next;
 }              t_export;
 
+typedef struct s_pwdilda {
+    char *key;
+    char *value;
+    struct s_pwdilda *next;
+}              t_pwdilda;
+
 typedef struct s_variable {
     char *key;
     char *value;
@@ -113,22 +119,24 @@ typedef struct s_ush {
     t_b_node *blocks;
     t_termconf *termconf;
     // t_export *export_list;
+    t_pwdilda *pwdilda_list;
     t_variable *variable_list;
 }              t_ush;
 
 bool mx_check_key_allow(t_ush *ush, char *kay);
+bool mx_have_equals(t_ush *ush, char *env);
 bool mx_is_built_in(char *str);
 bool mx_is_command(char *path, bool *flag, int index);
 bool mx_is_slash(char *path);
-bool mx_check_key_allow(t_ush *ush, char *kay);
-bool mx_have_equals(t_ush *ush, char *env);
 bool mx_isvariable (t_ush *ush, char **k_v);
+bool mx_path_is (t_ush *ush);
+char *mx_buf_safe_realloc(char *src, int *size);
 char **mx_command_matrix_creator(t_t_node **comn);
 char **mx_export_matrix_creator(char **env);
 char **mx_key_value_creation(t_ush *ush, char *env);
 char *mx_programm_finder(char *command);
 char **mx_strsplit_first_meeting(const char *s, char c);
-char *mx_substitution_making(char *substion);
+char *mx_substitution_making(t_ush *ush, char *substion);
 int mx_blist_len(t_b_node **head);
 int mx_exit(char **command);
 int mx_get_twidth();
@@ -138,10 +146,12 @@ int mx_strarrlen(char **arr);
 int mx_strcmp_export(const char *s1, const char *s2);
 int mx_variable_list_len(t_variable **head);
 // t_env *mx_envnode_creation(void);
-t_variable *mx_variablenode_creation(void);
 t_env_flags *mx_create_env_flags(void);
+t_variable *mx_creat_variable_node(void);
+t_pwdilda *mx_creat_pwdilda_node(void);
 void mx_adding_variable(t_ush *ush, char **command, char **kv);
 void mx_check_commands(t_ush *ush);
+void mx_child_exvprocess(int *pipedes, int *pipedes2, int inout, char **command);
 void mx_constant_variables(t_ush *ush);
 void mx_dealloc_termconf(t_termconf **termconf);
 void mx_dealloc_ush(t_ush **ush);
@@ -149,21 +159,23 @@ void mx_del_strararr(char ****arr);
 void mx_env(t_ush *ush, char **command);
 void mx_env_variable_checking(t_variable **list, char *command);
 void mx_export(t_ush *ush, char **command);
+void mx_outlst(t_ush *ush);
+void mx_pipe_process_creator(t_ush *ush, char ***line);
 void mx_pop_back_variable(t_variable **head);
 void mx_pop_front_export(t_export **head);
+void mx_pop_front_pwdilda(t_pwdilda **head);
 void mx_pop_front_variable(t_variable **head);
 void mx_pop_specific(t_variable **list, int index);
 void mx_process_creator(t_ush *ush, char **commands);
-void mx_pipe_process_creator(t_ush *ush, char ***line);
 void mx_push_back_export(t_export **export, char **kv);
+void mx_push_back_pwdilda(t_pwdilda **list, char *kay, char *value);
 void mx_push_back_variable(t_variable **list, char **kv);
 void mx_read_environment(t_export **export_list, char **env);
 void mx_read_termconf(t_termconf *termconf);
+void mx_sub_error_printing(int *pipedes);
 void mx_unset(char **command, t_ush *ush);
 void mx_which(t_ush *ush, char **command);
 void mx_unset(char **command, t_ush *ush);
-void mx_outlst(t_ush *ush);
-char *mx_buf_safe_realloc(char *src, int *size);
 
 // ALL TERM OUTPUTS
 void mx_rd_print_color(t_termconf **cfg);
@@ -171,23 +183,25 @@ void mx_rd_print_pbc(t_termconf **cfg, char *buf);
 void mx_rd_print_old(t_termconf **cfg);
 
 // TERM AND USH
-t_export *mx_exportnode_creation(void);
-// t_env *mx_envnode_creation(void);
 int mx_term_width_check(t_termconf **cfg);
+// t_env *mx_envnode_creation(void);
+t_export *mx_exportnode_creation(void);
 t_termconf *mx_create_termconf(void);
+t_ush *mx_create_ush();
 void mx_open_tty(t_termconf **cfg);
 void mx_change_color(t_ush *ush, char **commands);
-t_ush *mx_create_ush();
+
 
 // BUF FUNCTIONS
 int mx_buf_drop(char **buf, int *buf_size);
+int mx_drop_n_char(t_termconf **cfg);
 int mx_buf_push(char **buf, int *buf_size, char ch);
 int mx_push_n_char(t_termconf **cfg, char ch);
-int mx_drop_n_char(t_termconf **cfg);
+char *mx_sixteen_ez_fix(char **str, int *size);
 short mx_get_buf_type(unsigned char *ch);
 // short mx_get_buf_type(unsigned char ch);
 void mx_restore_buffer(t_termconf *cfg);
-char *mx_sixteen_ez_fix(char **str, int *size);
+
 
 // TEXT LIST
 t_t_node *mx_create_text_node(char *text, int type);
@@ -195,46 +209,46 @@ void mx_pop_t_node_front(t_t_node **head);
 void mx_push_t_node_back(t_t_node **head, char *text, int type);
 
 // HISTORY DOUBLE LINKED LIST
-t_h_node *mx_create_history_node(t_h_node *back, char *buf, int buf_size);
-void mx_push_h_node_back(t_h_node **h_node, char *buf, int buf_size);
-void mx_pop_h_node_front(t_h_node **h_node);
-t_h_node *mx_clone_history(t_h_node **h_node);
 char *mx_get_history_last_str(t_h_node **h_node);
+t_h_node *mx_create_history_node(t_h_node *back, char *buf, int buf_size);
+t_h_node *mx_clone_history(t_h_node **h_node);
 void mx_print_history(t_termconf *cfg);
+void mx_pop_h_node_front(t_h_node **h_node);
+void mx_push_h_node_back(t_h_node **h_node, char *buf, int buf_size);
 
 // BLOCK LIST
-int mx_tlist_len(t_t_node **head);
 int mx_set_history_pos(t_h_node **h_node, int type);
+int mx_tlist_len(t_t_node **head);
 t_b_node *mx_create_block_node(t_t_node *t_node);
-void mx_pop_block_front(t_b_node **head);
-t_b_node *mx_push_block_back(t_b_node **head, t_t_node *t_node);
 t_b_node *mx_clone_blocks(t_b_node **head);
+t_b_node *mx_push_block_back(t_b_node **head, t_t_node *t_node);
 void mx_dealloc_blocks(t_b_node **head);
+void mx_pop_block_front(t_b_node **head);
 
 // STRING OPERATIONS && PARSING
-int mx_parse_buf(t_ush *ush);
-void mx_parse_burnish(t_ush *ush);
-int mx_count_slashes(char *str);
+bool mx_control_slash(char **res, char *str, int *res_size);
 char *mx_break_on_error(char **str);
-t_b_node *mx_parse_block(t_t_node **head, int err_ch, int type);
-char *mx_space_parse(char *str, int *piv);
-char *mx_text_parse(char *str, int *piv);
-char *mx_slash_parse(char *str, int *piv);
-char *mx_sinmrk_parse(char *str, int *piv);
+char *mx_dollar_parse(char *str, int *piv, int *type);
 char *mx_doumrk_parse(char *str, int *piv);
-int mx_push_symbol(char **res, char ch, int *res_size);
+char *mx_get_variable(t_ush *ush, char *var_name);
+char *mx_space_parse(char *str, int *piv);
+char *mx_sinmrk_parse(char *str, int *piv);
+char *mx_slash_parse(char *str, int *piv);
+char *mx_text_parse(char *str, int *piv);
+char *mx_tildastr(t_pwdilda **list, char *tilda);
+char *mx_tild_parse(char *str, int *piv, int *type);
 int mx_one_slash(char **res, char *str, int *i, int *res_size);
 int mx_one_slash_m(char **res, char *str, int *i, int *res_size);
+int mx_parse_buf(t_ush *ush);
+int mx_push_symbol(char **res, char ch, int *res_size);
+int mx_count_slashes(char *str);
+int mx_three_slash(char **res, char *str, int *i, int *res_size);
 int mx_two_slash(char **res, char *str, int *i, int *res_size);
 int mx_two_slash_m(char **res, char *str, int *i, int *res_size);
-int mx_three_slash(char **res, char *str, int *i, int *res_size);
-bool mx_control_slash(char **res, char *str, int *res_size);
-char *mx_dollar_parse(char *str, int *piv, int *type);
+t_b_node *mx_parse_block(t_t_node **head, int err_ch, int type);
+void mx_parse_burnish(t_ush *ush);
+void mx_replace_tild(t_pwdilda **list, t_b_node **node);
 void mx_replace_variables(t_ush *ush, t_b_node **node);
-char *mx_get_variable(t_ush *ush, char *var_name);
-void mx_replace_tild(t_b_node **node);
-char *mx_tildastr(char *tilda);
-char *mx_tild_parse(char *str, int *piv, int *type);
 
 /* -------- */
 

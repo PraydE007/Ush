@@ -9,7 +9,8 @@ void mx_dealloc_ush(t_ush **ush) {
     mx_dealloc_termconf(&((*ush)->termconf));
     while ((*ush)->variable_list)
         mx_pop_front_variable(&((*ush)->variable_list));
-
+    while ((*ush)->pwdilda_list)
+        mx_pop_front_pwdilda(&((*ush)->pwdilda_list));
     free(*ush);
     (*ush) = NULL;
 }

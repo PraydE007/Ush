@@ -42,7 +42,7 @@ static bool second_part_of_biltin(t_ush *ush, char **command) {
 }
 
 static bool is_builtin(t_ush *ush, char **command) {
-    mx_outlst(ush);
+    // mx_outlst(ush);
     if (first_part_of_biltin(ush, command))
         return true;
     else if (second_part_of_biltin(ush, command))

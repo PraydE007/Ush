@@ -12,6 +12,7 @@ t_ush *mx_create_ush() {
     ush->termconf = mx_create_termconf();
     ush->blocks = NULL;
     // ush->export_list = NULL;
+    ush->pwdilda_list = NULL;
     ush->variable_list = NULL;
     return ush;
 }
