@@ -28,12 +28,12 @@ void mx_parse_burnish(t_ush *ush) {
     t_b_node *clone = NULL;
     t_b_node *p = NULL;
 
-    mx_outlst(ush); //
+    // mx_outlst(ush); //
     clone = mx_clone_blocks(&(ush->blocks));
     mx_dealloc_blocks(&(ush->blocks));
     p = clone;
     while (p) {
-        mx_replace_tild(&p);
+        mx_replace_tild(&(ush->pwdilda_list), &p);
         mx_replace_variables(ush, &p);
         mx_replace_subst(&p);
         burnish_cycle(&(ush->blocks), &p);

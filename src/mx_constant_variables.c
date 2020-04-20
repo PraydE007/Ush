@@ -27,6 +27,8 @@ static void constant_envariable(t_ush *ush) {
 
     getcwd(dir, 256);
     setenv("OLDPWD", dir, 1);
+    mx_push_back_pwdilda(&ush->pwdilda_list, "PWD", dir);
+    mx_push_back_pwdilda(&ush->pwdilda_list, "OLDPWD", dir);
     if (getenv("PATH") == 0) {
         kv = mx_key_value_creation(ush, PH);
         mx_push_back_variable(&ush->variable_list, kv);
