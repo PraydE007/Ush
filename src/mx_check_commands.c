@@ -80,7 +80,7 @@ void mx_check_commands(t_ush *ush) {
         command = mx_command_matrix_creator(&block->t_node);
         if (stat(command[0], &statbuf) != -1) {
             if (S_ISDIR(statbuf.st_mode )) {
-                dir_error_printing(command[0]);exit
+                dir_error_printing(command[0]);
                 mx_del_strarr(&command);
                 break;
             }

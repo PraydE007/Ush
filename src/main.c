@@ -11,6 +11,20 @@ int main(int argc, char *argv[]) {
         while (ush->termconf->clone)
             mx_pop_h_node_front(&(ush->termconf->clone));
     }
+
+t_variable *list = ush->variable_list;
+while (list) {
+     printf ("%s=", list->key);
+     printf ("%s\n", list->value);
+     list = list->next;
+}
+t_pwdilda *list2 = ush->pwdilda_list;
+while (list2) {
+     printf ("%s=", list2->key);
+     printf ("%s\n", list2->value);
+     list2 = list2->next;
+}
+
     exit_code = ush->exit_code;
     mx_dealloc_ush(&ush);
     system("leaks -q ush");
