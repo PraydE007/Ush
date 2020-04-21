@@ -1,6 +1,6 @@
 #include "../inc/ush.h"
 
-void mx_replace_subst(t_b_node **node) {
+void mx_replace_subst(t_ush *ush, t_b_node **node) {
     t_t_node *p = (*node)->t_node;
     char *var_name = NULL;
 
@@ -8,7 +8,7 @@ void mx_replace_subst(t_b_node **node) {
         if (p->type == 3) {
             var_name = mx_strdup_x(p->text);
             mx_strdel(&(p->text));
-            p->text = mx_substitution_making(var_name);
+            p->text = mx_substitution_making(ush, var_name);
             mx_strdel(&(var_name));
         }
         p = p->next;

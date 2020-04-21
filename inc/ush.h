@@ -249,7 +249,7 @@ int mx_two_slash(char **res, char *str, int *i, int *res_size);
 int mx_two_slash_m(char **res, char *str, int *i, int *res_size);
 t_b_node *mx_parse_block(t_t_node **head, int err_ch, int type);
 void mx_parse_burnish(t_ush *ush);
-void mx_replace_subst(t_b_node **node);
+void mx_replace_subst(t_ush *ush, t_b_node **node);
 void mx_replace_tild(t_pwdilda **list, t_b_node **node);
 void mx_replace_variables(t_ush *ush, t_b_node **node);
 
