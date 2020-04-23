@@ -37,7 +37,8 @@ void mx_parse_burnish(t_ush *ush) {
         mx_replace_variables(ush, &p);
         mx_replace_subst(ush, &p);
         burnish_cycle(&(ush->blocks), &p);
-        mx_check_commands(ush);
+        if (ush->blocks->t_node)
+            mx_check_commands(ush);
         mx_dealloc_blocks(&(ush->blocks));
         p = p->next;
     }
