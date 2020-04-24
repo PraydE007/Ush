@@ -252,6 +252,7 @@ void mx_parse_burnish(t_ush *ush);
 void mx_replace_subst(t_ush *ush, t_b_node **node);
 void mx_replace_tild(t_pwdilda **list, t_b_node **node);
 void mx_replace_variables(t_ush *ush, t_b_node **node);
+void mx_text_node_split(t_t_node **node);
 
 /* -------- */
 

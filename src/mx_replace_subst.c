@@ -10,9 +10,8 @@ void mx_replace_subst(t_ush *ush, t_b_node **node) {
             mx_strdel(&(p->text));
             p->text = mx_substitution_making(ush, var_name);
             mx_strdel(&(var_name));
-            if (p->text) {
-                // DO A SPACE SEPARATE
-            }
+            if (p->text)
+                mx_text_node_split(&p);
             else
                 p->text = mx_strnew_x(1);
         }
