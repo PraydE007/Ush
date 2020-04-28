@@ -24,6 +24,7 @@ FILES = main \
 	mx_env \
 	mx_envnode_creation \
 	mx_env_variable_checking \
+	mx_error_making \
 	mx_exit \
 	mx_export \
 	mx_export_matrix_creator \

@@ -63,12 +63,16 @@ static bool is_builtin(t_ush *ush, char **command) {
 }
 
 static void dir_error_printing(char *command) {
-    mx_printerr("ush: permission denied: ");
-    if (mx_strcmp(command, "/") == 0)
-        mx_printerr("");
-    else
-        mx_printerr(command);
-    mx_printerr("\n");
+    if (mx_strcmp(command, ".") == 0)
+        mx_printerr(".: not enough arguments\n");
+    else {
+        mx_printerr("ush: permission denied: ");
+        if (mx_strcmp(command, " ") == 0)
+            mx_printerr("");
+        else
+            mx_printerr(command);
+        mx_printerr("\n");
+    }
 }
 
 void mx_check_commands(t_ush *ush) {
@@ -78,8 +82,8 @@ void mx_check_commands(t_ush *ush) {
 
     while (block) { // MAYBE NOT NEEDED
         command = mx_command_matrix_creator(&block->t_node);
-        if (stat(command[0], &statbuf) != -1) {
-            if (S_ISDIR(statbuf.st_mode )) {
+        if (stat(command[0], &statbuf) != -1 || mx_strcmp(command[0], " ") == 0) {
+            if (S_ISDIR(statbuf.st_mode ) || mx_strcmp(command[0], " ") == 0) {
                 dir_error_printing(command[0]);
                 mx_del_strarr(&command);
                 break;

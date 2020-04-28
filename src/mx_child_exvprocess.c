@@ -6,7 +6,7 @@ void mx_child_exvprocess(int *pipedes, int *pipedes2, int inout, char **command)
         dup2(pipedes[1], 1);
         close(pipedes[1]);
     }
-    else if (inout == 1) {
+    else {
         close(pipedes[1]);
         dup2(pipedes[0], 0);
         close(pipedes[0]);
@@ -15,6 +15,6 @@ void mx_child_exvprocess(int *pipedes, int *pipedes2, int inout, char **command)
     dup2(pipedes2[1], 2);
     close(pipedes2[1]);
     if (execvp(command[0], command) == -1)
-        perror("ush");
+        mx_error_making(command[0]);
     exit(EXIT_FAILURE);
 }
