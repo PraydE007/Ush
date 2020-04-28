@@ -19,7 +19,7 @@ char *mx_tildastr(t_pwdilda **list, char *tilda) {
         if (getenv("HOME") != 0)
             adress = getenv("HOME");
         else
-            return adress = mx_strdup("/");
+            return adress = mx_strdup(" ");
     }
     else if (mx_strcmp(tilda, "+") == 0) {
         if (getenv("PWD") != 0)

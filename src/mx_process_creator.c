@@ -1,31 +1,5 @@
 #include "../inc/ush.h"
 
-static void error_printing(char *comn) {
-    if (!mx_is_slash(comn)) {
-        mx_printerr("ush: command not found: ");
-        mx_printerr(comn);
-        mx_printerr("\n");
-    }
-    else {
-        mx_printerr("ush: no such file or directory: ");
-        mx_printerr(comn);
-        mx_printerr("\n");
-    }
-}
-
-static void process_error(char *comn) {
-    if (errno == 2) {
-        errno = 0;
-        error_printing(comn);
-        exit(127);
-    }
-    else {
-        errno = 0;
-        perror("ush");
-        exit(126);
-    }
-}
-
 static bool is_path(t_variable **list) {
     t_variable *pl = *list;
 
@@ -43,7 +17,7 @@ static void child_process(t_ush *ush, char **command) {
     proga = mx_programm_finder(command[0]);
     if (getenv("PATH") != 0) {
         if (execvp(command[0], command) == -1)
-            process_error(command[0]);
+            mx_error_making(command[0]);
     }
     else {
         if (is_path(&ush->variable_list) && proga) {
@@ -52,7 +26,7 @@ static void child_process(t_ush *ush, char **command) {
             mx_strdel(&proga);
         }
         if (execv(command[0], command) == -1)
-            process_error(command[0]);
+            mx_error_making(command[0]);
     }
     exit(EXIT_FAILURE);
 }
