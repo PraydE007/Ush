@@ -91,6 +91,7 @@ FILES = main \
 	mx_set_history_pos \
 	mx_get_history_last_str \
 	mx_which \
+	mx_which_str \
 	mx_clone_blocks \
 	mx_open_tty \
 	mx_outlst \

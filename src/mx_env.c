@@ -46,25 +46,39 @@ static void env_process_creator(t_ush *ush, char **command, t_list *unset, int i
     pid_t pid = 0;
     pid_t wpid = 0;
     int status = 0;
-    extern char **environ;
+    
 
     pid = fork();
     if (pid == 0) {
-        if (ush->flags->i)
-            free(environ);
+        extern char **environ;
+        printf("\nI = %d", i);
+        //for (int i = 0; command[i]; i++)
+         //if (ush->flags->i)
+         //   for (int i = 0; environ[i]; i++) {
+         //       printf("environ[%d]\n", i);
+         //       unsetenv(strdup(environ[i]));
+         //   }
         while (unset) {
-            mx_unset(unset->data, ush);
+            unsetenv(strdup(unset->data));
             unset = unset->next;
         }
-        if (is_builtin(ush, &command[i]))
+        if (is_builtin(ush, &command[i])) {
+            printf("ZALUPA");
             exit(1);
+        }
+        else if (ush->flags->i) {
+            printf("WHICH_STR = %s\n", mx_which_str(command[i]));
+            if (execve(mx_which_str(command[i]), &command[i], NULL) == -1)
+                perror("ush");
+            exit(1);
+        }
         else if (getenv("PATH")) {
-            if (execvp(command[0], command) == -1)
+            if (execvp(command[i], &command[i]) == -1)
                 perror("ush");
             exit(1);
         }
         else {
-            if (execv(command[0], command) == -1)
+            if (execv(command[i], &command[i]) == -1)
                 perror("ush");
             exit(1);
         }
@@ -126,7 +140,7 @@ static int flags_trig(t_ush *ush, char **command, t_list *unset) {
             }
         }
     }
-    printf("\n\n%s\n\n", unset->data);
+    //printf("\n\n%s\n\n", unset->data);
     return i;
 }
 
@@ -140,9 +154,9 @@ void mx_env(t_ush *ush, char **command) {
     else {
         int i = flags_trig(ush, command, unset);
         if (i != 0) {
-            for (; command[i]; i++) {
-                env_process_creator(ush, command, unset, i);
-            }
+            //for (; command[i]; i++) {
+                env_process_creator(ush, command, unset, i - 1);
+            //}
         }
     }
     free(ush->flags);
