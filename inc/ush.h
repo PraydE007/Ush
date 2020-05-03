@@ -123,6 +123,8 @@ typedef struct s_ush {
     int shlvl;
     int storage;
     int i;
+    int k;
+    int triger;
     t_env_flags *flags;
     t_b_node *blocks;
     t_termconf *termconf;
@@ -133,6 +135,7 @@ typedef struct s_ush {
 
 bool mx_check_key_allow(t_ush *ush, char *kay);
 bool mx_have_equals(t_ush *ush, char *env);
+bool mx_is_builtin(t_ush *ush, char **command);
 bool mx_is_built_in(char *str);
 bool mx_is_command(char *path, bool *flag, int index);
 bool mx_is_pipe (char **command, char *comstr);
@@ -150,10 +153,12 @@ char **mx_strsplit_first_meeting(const char *s, char c);
 char *mx_substitution_making(t_ush *ush, char *substion);
 char *mx_which_str(char *command);
 int mx_blist_len(t_b_node **head);
+int mx_count_pipes(char **comn);
 int mx_exit(char **command);
 int mx_get_twidth();
 int mx_read_input(t_ush *ush);
 int mx_read_from_thread(t_ush *ush);
+int mx_size_of_matstr(char **comn, int *i, int *j);
 int mx_strarrlen(char **arr);
 int mx_strcmp_export(const char *s1, const char *s2);
 int mx_variable_list_len(t_variable **head);

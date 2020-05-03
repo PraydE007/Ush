@@ -10,6 +10,7 @@ FILES = main \
 	mx_child_process \
 	mx_command_matrix_creator \
 	mx_constant_variables \
+	mx_count_pipes \
 	mx_create_block_node \
 	mx_create_env_flags \
 	mx_creat_pwdilda_node \
@@ -33,6 +34,7 @@ FILES = main \
 	mx_get_buf_type \
 	mx_get_twidth \
 	mx_have_equals \
+	mx_is_builtin \
 	mx_is_built_in \
 	mx_is_command \
 	mx_is_pipe \
@@ -62,6 +64,7 @@ FILES = main \
 	mx_read_termconf \
 	mx_restore_buffer \
 	mx_sinmrk_parse \
+	mx_size_of_matstr \
 	mx_space_parse \
 	mx_strarrlen \
 	mx_strcmp_export \

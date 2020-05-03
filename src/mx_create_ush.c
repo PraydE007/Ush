@@ -9,6 +9,8 @@ t_ush *mx_create_ush() {
     ush->exit_code = 0;
     ush->storage = 0;
     ush->i = 0;
+    ush->k = 0;
+    ush->triger = 0;
     // ush->shlvl = 0;
     ush->termconf = mx_create_termconf();
     ush->blocks = NULL;
