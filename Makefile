@@ -7,6 +7,7 @@ FILES = main \
 	mx_check_commands \
 	mx_check_key_allow \
 	mx_child_exvprocess \
+	mx_child_process \
 	mx_command_matrix_creator \
 	mx_constant_variables \
 	mx_create_block_node \
@@ -34,12 +35,15 @@ FILES = main \
 	mx_have_equals \
 	mx_is_built_in \
 	mx_is_command \
+	mx_is_pipe \
 	mx_is_slash \
 	mx_isvariable \
 	mx_key_value_creation \
 	mx_path_is \
 	mx_parse_buf \
 	mx_parse_block \
+	mx_pipe_matrix_creation \
+	mx_pipe_parsing \
 	mx_pop_back_variable \
 	mx_pop_block_front \
 	mx_pop_front_export \
