@@ -89,6 +89,13 @@ typedef struct s_env_flags {
     bool P;
 }              t_env_flags;
 
+typedef struct s_echo{
+    bool E;
+    bool e;
+    bool n;
+    bool end;
+}              t_echo;
+
 // check if needs this structure
 typedef struct s_export {
     char *key;
@@ -141,6 +148,7 @@ char ***mx_pipe_parsing(t_ush *ush, char **command);
 char *mx_programm_finder(char *command);
 char **mx_strsplit_first_meeting(const char *s, char c);
 char *mx_substitution_making(t_ush *ush, char *substion);
+char *mx_which_str(char *command);
 int mx_blist_len(t_b_node **head);
 int mx_exit(char **command);
 int mx_get_twidth();
