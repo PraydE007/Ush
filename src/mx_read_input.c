@@ -17,6 +17,8 @@ static int c_cases(t_termconf **cfg, unsigned char ch, short type) {
         (*cfg)->c_pos += 1;
     else if (type == 4 || type == 5)
         return mx_set_history_pos(&((*cfg)->clone), type);
+    else if (type == 101 && (*cfg)->clone->buf_size == 1)
+        return 101;
     return 0;
 }
 
@@ -38,6 +40,7 @@ static int reading_cycle(t_termconf **cfg) {
     unsigned char ch[4] = {0, 0, 0, 0};
     // char ch = 0;
     char *buf = NULL;
+    int func_exit = 0;
 
     while (1) {
         restore_ch(ch);
@@ -47,8 +50,8 @@ static int reading_cycle(t_termconf **cfg) {
             return 1;
         if (ch[0] == '\n' && !ch[1] && !ch[2] && !ch[3])
             break;
-        if (c_cases(cfg, ch[0], mx_get_buf_type(ch)))
-            return 1;
+        if ((func_exit = c_cases(cfg, ch[0], mx_get_buf_type(ch))))
+            return func_exit;
         if (mx_term_width_check(cfg))
             return 1;
         buf = (*cfg)->clone->buf;
@@ -75,16 +78,17 @@ static int on_read_ended(t_termconf **cfg) {
 
 int mx_read_input(t_ush *ush) {
     t_termconf **cfg = &(ush->termconf);
-    (*cfg)->clone = mx_clone_history(&((*cfg)->h_node));
+    int func_exit = 1;
 
+    (*cfg)->clone = mx_clone_history(&((*cfg)->h_node));
     mx_push_h_node_back(&((*cfg)->clone), mx_strnew_x(1), 1);
     if (!isatty(0))
         return mx_read_from_thread(ush);
     if ((*cfg)->isInThread)
         mx_open_tty(cfg);
     on_read_start(cfg);
-    if (reading_cycle(cfg))
-        return 1;
+    if ((func_exit = reading_cycle(cfg)))
+        return func_exit;
     if (on_read_ended(cfg))
         return 1;
     return 0;

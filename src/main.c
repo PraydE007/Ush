@@ -50,10 +50,16 @@ line[7][2] = NULL;
 // printf("%s\n", test);
 // mx_strdel(&test);
 
+    mx_sig_init();
     mx_constant_variables(ush);
+    int func_exit = 0;
     while (ush->active) {
-        if (!mx_read_input(ush))
+        if (!(func_exit = mx_read_input(ush)))
             mx_parse_buf(ush);
+        else if (func_exit == 101) {
+            ush->active = false;
+            ush->exit_code = 1;
+        }
             // pipe(pipedes);
             mx_pipe_process_creator(line);
             // i = -1;

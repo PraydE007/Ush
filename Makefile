@@ -113,6 +113,8 @@ FILES = main \
 	mx_replace_subst \
 	mx_subst_dol_parse \
 	mx_text_node_split \
+	mx_sig_init \
+	mx_set_signal \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

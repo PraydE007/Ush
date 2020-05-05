@@ -34,6 +34,7 @@
 #include <string.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <signal.h>
 #include "../libmx/inc/libmx.h"
 // #include "libmx.h"
 
@@ -150,6 +151,8 @@ int mx_exit(char **command);
 int mx_get_twidth();
 int mx_read_input(t_ush *ush);
 int mx_read_from_thread(t_ush *ush);
+void mx_set_signal(void);
+void mx_sig_init(void);
 int mx_strarrlen(char **arr);
 int mx_strcmp_export(const char *s1, const char *s2);
 int mx_variable_list_len(t_variable **head);
