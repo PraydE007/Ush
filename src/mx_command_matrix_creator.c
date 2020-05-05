@@ -11,6 +11,7 @@ char **mx_command_matrix_creator(t_t_node **comn) {
     while (pc) {
         com_mat[i] = mx_strdup(pc->text);
         i++;
+       
         pc = pc->next;
     }
     return com_mat;

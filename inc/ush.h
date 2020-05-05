@@ -148,7 +148,7 @@ char *mx_buf_safe_realloc(char *src, int *size);
 char **mx_command_matrix_creator(t_t_node **comn);
 char **mx_export_matrix_creator(char **env);
 char **mx_key_value_creation(t_ush *ush, char *env);
-char ***mx_pipe_matrix_creation(t_ush *ush, char **command);
+char ***mx_pipe_matrix_creator(t_ush *ush, char **command);
 char *mx_programm_finder(char *command);
 char **mx_strsplit_first_meeting(const char *s, char c);
 char *mx_substitution_making(t_ush *ush, char *substion);

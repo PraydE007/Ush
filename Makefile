@@ -61,7 +61,7 @@ FILES = main \
 	mx_parse_block \
 	mx_parse_buf \
 	mx_parse_burnish \
-	mx_pipe_matrix_creation \
+	mx_pipe_matrix_creator \
 	mx_pipe_process_creator \
 	mx_pop_back_variable \
 	mx_pop_block_front \
