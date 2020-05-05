@@ -33,7 +33,7 @@ void mx_check_commands(t_ush *ush) {
         if (is_dir(&comn))
                 break;
         else if (mx_is_pipe(comn, NULL)) {
-            pipemat = mx_pipe_matrix_creation(ush, comn);
+            pipemat = mx_pipe_matrix_creator(ush, comn);
             pipemat ? mx_pipe_process_creator(ush, pipemat) : 0;
         }
         else

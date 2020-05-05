@@ -65,7 +65,7 @@ static void pipe_matrix_filling(t_ush *ush, char ***pipemat, char **command,
     printf("k: %d\n", ush->k);
 }
 
-char ***mx_pipe_matrix_creation(t_ush *ush, char **command) {
+char ***mx_pipe_matrix_creator(t_ush *ush, char **command) {
     int pipemat_size = mx_count_pipes(command);
     char ***pipemat = NULL;
 

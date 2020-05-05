@@ -147,7 +147,7 @@ char *mx_buf_safe_realloc(char *src, int *size);
 char **mx_command_matrix_creator(t_t_node **comn);
 char **mx_export_matrix_creator(char **env);
 char **mx_key_value_creation(t_ush *ush, char *env);
-char ***mx_pipe_matrix_creation(t_ush *ush, char **command);
+char ***mx_pipe_matrix_creator(t_ush *ush, char **command);
 char *mx_programm_finder(char *command);
 char **mx_strsplit_first_meeting(const char *s, char c);
 char *mx_substitution_making(t_ush *ush, char *substion);
@@ -210,7 +210,6 @@ t_ush *mx_create_ush();
 void mx_open_tty(t_termconf **cfg);
 void mx_change_color(t_ush *ush, char **commands);
 
-
 // BUF FUNCTIONS
 int mx_buf_drop(char **buf, int *buf_size);
 int mx_drop_n_char(t_termconf **cfg);
@@ -220,7 +219,6 @@ char *mx_sixteen_ez_fix(char **str, int *size);
 short mx_get_buf_type(unsigned char *ch);
 // short mx_get_buf_type(unsigned char ch);
 void mx_restore_buffer(t_termconf *cfg);
-
 
 // TEXT LIST
 t_t_node *mx_create_text_node(char *text, int type);
