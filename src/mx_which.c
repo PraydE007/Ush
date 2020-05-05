@@ -28,7 +28,7 @@ static bool look_in_path(t_ush *ush, char **ways, char *command, bool *flag) {
         print_not_found(command, ush);
     return a;
 }
-
+// A LOT OF LINES
 static int flag_parser(char **command, t_ush *ush, bool *flag) {
     int i = 1;
 

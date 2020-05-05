@@ -50,7 +50,7 @@ static void condition_for_matstr(char **comn, int *i, int *j, int *size) {
     }
 }
 
-int mx_size_of_matstr(char **comn, int *i, int *j) {
+int mx_size_of_pipe_matstr(char **comn, int *i, int *j) {
     int size = 0;
 
     for (; comn[(*i)]; (*i)++) {

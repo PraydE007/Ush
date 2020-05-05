@@ -1,22 +1,23 @@
 #include "../inc/ush.h"
 
-static char *pipe_parsing(char *command, int *k, int *triger) {
-    int size = 0;
+static char *pipe_parsing(t_ush *ush, char *command) {
+    int lenth = 0;
     int i = 0;
     char *pipemat = NULL;
 
-    for (; command[i]; i++, (*triger)++) {
+    for (; command[i]; i++, ush->triger++) {
         if (command[i] == '|')
             break;
-        size++;
+        lenth++;
     }
-    if (size > 0) 
-        pipemat = mx_strndup(command, size);
+    if (lenth > 0) 
+        pipemat = mx_strndup(command, lenth);
     if (command[i + 1]) 
-        (*triger)++;
+        ush->triger++;
     else {
-        (*triger) = 0;
-        (*k)++;
+        ush->triger = 0;
+        if (ush->k < ush->size - 1)
+            ush->k++;
     }
     return pipemat;
 }
@@ -24,23 +25,23 @@ static char *pipe_parsing(char *command, int *k, int *triger) {
 static void filling_cycle(t_ush *ush, char ***pipemat, char **command,
                                                             int commat_size) {
     char *copy = NULL;
-
+    
     for (int j = 0; j < commat_size; j++) {
         if (!mx_is_pipe(NULL, &command[ush->k][ush->triger])) {
-            pipemat[ush->i][j] = mx_strdup(&command[ush->k][ush->triger]);
-            ush->k++;
+            pipemat[ush->i][j] = strdup(&command[ush->k][ush->triger]);
+            if (ush->k < ush->size - 1)
+                ush->k++;
             ush->triger = 0;
         }
         else {
-            copy = pipe_parsing(&command[ush->k][ush->triger], &ush->k,
-                                                                &ush->triger);
+            copy = pipe_parsing(ush, &command[ush->k][ush->triger]);
             if (copy) {
                 pipemat[ush->i][j] = mx_strdup(copy);
                 mx_strdel(&copy);
             }
             else
-                pipemat[ush->i][j] = pipe_parsing
-                (&command[ush->k][ush->triger], &ush->k, &ush->triger);
+                pipemat[ush->i][j] = pipe_parsing(ush,
+                                                &command[ush->k][ush->triger]);
         }
     }
 }
@@ -51,16 +52,17 @@ static void pipe_matrix_filling(t_ush *ush, char ***pipemat, char **command,
     int j_count = 0;
     int commat_size = 0;
 
+    ush->size = mx_strarrlen(command);
+    printf("SIZE: %d\n", ush->size);
     for (ush->i = 0; ush->i <  pipemat_size; ush->i++) {
-        commat_size = mx_size_of_matstr(command, &i_count, &j_count);
+        commat_size = mx_size_of_pipe_matstr(command, &i_count, &j_count);
         pipemat[ush->i] = (char **)malloc(sizeof(char *) * (commat_size + 1));
         if (mx_strcmp(command[ush->k], "|") == 0 || command[ush->k] == NULL)
             ush->k++;
         filling_cycle(ush, pipemat, command, commat_size);
         pipemat[ush->i][commat_size] = NULL;
     }
-    ush->k = 0;
-    ush->triger = 0;
+    printf("k: %d\n", ush->k);
 }
 
 char ***mx_pipe_matrix_creation(t_ush *ush, char **command) {
@@ -75,5 +77,8 @@ char ***mx_pipe_matrix_creation(t_ush *ush, char **command) {
     pipemat[pipemat_size] = NULL;
     pipe_matrix_filling(ush, pipemat, command, pipemat_size);
     ush->i = 0;
+    ush->k = 0;
+    ush->size = 0;
+    ush->triger = 0;
     return pipemat;
 }

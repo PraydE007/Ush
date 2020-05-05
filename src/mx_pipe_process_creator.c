@@ -1,14 +1,15 @@
 #include "../inc/ush.h"
 
-static void child_recursion(t_ush *ush, char ***commatrix, int *pipedes, int *pipedes2) {
-        dup2(pipedes[0], 0);
-        close(pipedes[0]);
-        if (commatrix[ush->i + 1]) {
-            close(pipedes2[0]);
-            dup2(pipedes2[1], 1);
-            close(pipedes2[1]);
-        }
-        mx_child_process(ush, commatrix[ush->i]);
+static void child_recursion(t_ush *ush, char ***commatrix, int *pipedes,
+                                                            int *pipedes2) {
+    dup2(pipedes[0], 0);
+    close(pipedes[0]);
+    if (commatrix[ush->i + 1]) {
+        close(pipedes2[0]);
+        dup2(pipedes2[1], 1);
+        close(pipedes2[1]);
+    }
+    mx_child_process(ush, commatrix[ush->i]);
 }
 
 static void pipe_creator(t_ush *ush, char ***commatrix, int *pipedes) {
@@ -33,7 +34,12 @@ static void pipe_creator(t_ush *ush, char ***commatrix, int *pipedes) {
     }
 }
 
-// A LOT OF LINES
+static void close_out(int *pipedes) {
+    close(pipedes[0]);
+    dup2(pipedes[1], 1);
+    close(pipedes[1]);
+}
+
 void mx_pipe_process_creator(t_ush *ush, char ***commat) {
     pid_t pid = 0;
     pid_t wpid = 0;
@@ -41,18 +47,16 @@ void mx_pipe_process_creator(t_ush *ush, char ***commat) {
     int pipedes[2];
 
     if (commat[1]) {
-    pipe(pipedes);
-    pid = fork();
-    if (pid == 0) {
-        close(pipedes[0]);
-        dup2(pipedes[1], 1);
-        close(pipedes[1]);
-        mx_child_process(ush, commat[ush->i]);
-    }
-    else if (pid < 0)
-        perror("ush");
-    else if (pid > 0 )
-        pipe_creator(ush, commat, pipedes);
+        pipe(pipedes);
+        pid = fork();
+        if (pid == 0) {
+            close_out(pipedes);
+            mx_child_process(ush, commat[ush->i]);
+        }
+        else if (pid < 0)
+            perror("ush");
+        else if (pid > 0 )
+            pipe_creator(ush, commat, pipedes);
     }
     else
         mx_is_builtin(ush, commat[0]) ? 0 : mx_process_creator(ush, commat[0]);
