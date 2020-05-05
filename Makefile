@@ -2,13 +2,23 @@ NAME = ush
 
 FILES = main \
 	mx_adding_variable \
+	mx_break_on_error \
 	mx_buf_drop \
 	mx_buf_push \
+	mx_buf_safe_realloc \
+	mx_change_color \
 	mx_check_commands \
 	mx_check_key_allow \
 	mx_child_exvprocess \
+	mx_child_process \
+	mx_clone_blocks \
+	mx_clone_history \
 	mx_command_matrix_creator \
 	mx_constant_variables \
+	mx_control_slash \
+	mx_count_pipes \
+	mx_count_slashes \
+	mx_create_history_node \
 	mx_create_block_node \
 	mx_create_env_flags \
 	mx_creat_pwdilda_node \
@@ -20,7 +30,9 @@ FILES = main \
 	mx_dealloc_termconf \
 	mx_dealloc_ush \
 	mx_del_strararr \
+	mx_dollar_parse \
 	mx_doumrk_parse \
+	mx_drop_n_char \
 	mx_env \
 	mx_envnode_creation \
 	mx_env_variable_checking \
@@ -30,91 +42,85 @@ FILES = main \
 	mx_export_matrix_creator \
 	mx_exportnode_creation \
 	mx_get_buf_type \
+	mx_get_history_last_str \
 	mx_get_twidth \
+	mx_get_variable \
 	mx_have_equals \
+	mx_is_builtin \
 	mx_is_built_in \
 	mx_is_command \
+	mx_is_pipe \
 	mx_is_slash \
 	mx_isvariable \
 	mx_key_value_creation \
+	mx_one_slash \
+	mx_one_slash_m \
+	mx_open_tty \
+	mx_outlst \
 	mx_path_is \
-	mx_parse_buf \
 	mx_parse_block \
+	mx_parse_buf \
+	mx_parse_burnish \
+	mx_pipe_matrix_creation \
+	mx_pipe_process_creator \
 	mx_pop_back_variable \
 	mx_pop_block_front \
 	mx_pop_front_export \
 	mx_pop_front_pwdilda \
 	mx_pop_front_variable \
+	mx_pop_h_node_front \
+	mx_pop_specific \
 	mx_pop_t_node_front \
+	mx_print_history \
 	mx_process_creator \
 	mx_programm_finder \
 	mx_push_block_back \
 	mx_push_back_export \
 	mx_push_back_pwdilda \
 	mx_push_back_variable \
+	mx_push_h_node_back \
+	mx_push_n_char \
+	mx_push_symbol \
 	mx_push_t_node_back \
+	mx_rd_print_color \
+	mx_rd_print_pbc \
+	mx_rd_print_old \
 	mx_read_environment \
+	mx_read_from_thread \
 	mx_read_input \
 	mx_read_termconf \
+	mx_replace_subst \
+	mx_replace_tild \
+	mx_replace_variables \
 	mx_restore_buffer \
+	mx_set_signal \
+	mx_set_history_pos \
 	mx_sinmrk_parse \
+	mx_sig_init \
+	mx_sixteen_ez_fix \
+	mx_slash_parse \
+	mx_size_of_pipe_matstr \
 	mx_space_parse \
 	mx_strarrlen \
 	mx_strcmp_export \
 	mx_strsplit_first_meeting \
+	mx_sub_error_printing \
+	mx_subst_dol_parse \
+	mx_substitution_making \
+	mx_subst_parse \
 	mx_term_width_check \
+	mx_text_node_split \
 	mx_text_parse \
+	mx_three_slash \
 	mx_tildastr \
+	mx_tild_parse \
 	mx_tlist_len \
+	mx_two_slash \
+	mx_two_slash_m \
 	mx_unset \
 	mx_variable_list_len \
-	mx_pop_specific \
-	mx_slash_parse \
-	mx_control_slash \
-	mx_push_symbol \
-	mx_break_on_error \
-	mx_count_slashes \
-	mx_one_slash \
-	mx_two_slash \
-	mx_three_slash \
-	mx_one_slash_m \
-	mx_two_slash_m \
-	mx_parse_burnish \
-	mx_pipe_process_creator \
-	mx_push_n_char \
-	mx_drop_n_char \
-	mx_change_color \
-	mx_read_from_thread \
-	mx_create_history_node \
-	mx_push_h_node_back \
-	mx_pop_h_node_front \
-	mx_clone_history \
-	mx_set_history_pos \
-	mx_get_history_last_str \
 	mx_which \
 	mx_which_str \
-	mx_clone_blocks \
-	mx_open_tty \
-	mx_outlst \
-	mx_rd_print_color \
-	mx_rd_print_pbc \
-	mx_rd_print_old \
-	mx_print_history \
-	mx_dollar_parse \
-	mx_replace_variables \
-	mx_get_variable \
-	mx_buf_safe_realloc \
-	mx_sixteen_ez_fix \
-	mx_sub_error_printing \
-	mx_substitution_making \
-	mx_tild_parse \
-	mx_replace_tild \
-	mx_subst_parse \
-	mx_replace_subst \
-	mx_subst_dol_parse \
-	mx_text_node_split \
-	mx_sig_init \
-	mx_set_signal \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

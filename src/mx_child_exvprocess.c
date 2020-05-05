@@ -1,6 +1,7 @@
 #include "../inc/ush.h"
 
-void mx_child_exvprocess(int *pipedes, int *pipedes2, int inout, char **command) {
+void mx_child_exvprocess(int *pipedes, int *pipedes2, int inout,
+                        char **command) {
     if (inout == 0) {
         close(pipedes[0]);
         dup2(pipedes[1], 1);

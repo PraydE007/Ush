@@ -123,6 +123,10 @@ typedef struct s_ush {
     int exit_code;
     int shlvl;
     int storage;
+    int i;
+    int k;
+    int size;
+    int triger;
     t_env_flags *flags;
     t_b_node *blocks;
     t_termconf *termconf;
@@ -133,8 +137,10 @@ typedef struct s_ush {
 
 bool mx_check_key_allow(t_ush *ush, char *kay);
 bool mx_have_equals(t_ush *ush, char *env);
+bool mx_is_builtin(t_ush *ush, char **command);
 bool mx_is_built_in(char *str);
 bool mx_is_command(char *path, bool *flag, int index);
+bool mx_is_pipe (char **command, char *comstr);
 bool mx_is_slash(char *path);
 bool mx_isvariable (t_ush *ush, char **k_v);
 bool mx_path_is (t_ush *ush);
@@ -142,17 +148,20 @@ char *mx_buf_safe_realloc(char *src, int *size);
 char **mx_command_matrix_creator(t_t_node **comn);
 char **mx_export_matrix_creator(char **env);
 char **mx_key_value_creation(t_ush *ush, char *env);
+char ***mx_pipe_matrix_creation(t_ush *ush, char **command);
 char *mx_programm_finder(char *command);
 char **mx_strsplit_first_meeting(const char *s, char c);
 char *mx_substitution_making(t_ush *ush, char *substion);
 char *mx_which_str(char *command);
 int mx_blist_len(t_b_node **head);
+int mx_count_pipes(char **comn);
 int mx_exit(char **command);
 int mx_get_twidth();
 int mx_read_input(t_ush *ush);
 int mx_read_from_thread(t_ush *ush);
 void mx_set_signal(void);
 void mx_sig_init(void);
+int mx_size_of_pipe_matstr(char **comn, int *i, int *j);
 int mx_strarrlen(char **arr);
 int mx_strcmp_export(const char *s1, const char *s2);
 int mx_variable_list_len(t_variable **head);
@@ -163,6 +172,7 @@ t_pwdilda *mx_creat_pwdilda_node(void);
 void mx_adding_variable(t_ush *ush, char **command, char **kv);
 void mx_check_commands(t_ush *ush);
 void mx_child_exvprocess(int *pipedes, int *pipedes2, int inout, char **command);
+void mx_child_process(t_ush *ush, char **command);
 void mx_constant_variables(t_ush *ush);
 void mx_dealloc_termconf(t_termconf **termconf);
 void mx_dealloc_ush(t_ush **ush);
@@ -172,7 +182,7 @@ void mx_env_variable_checking(t_variable **list, char *command);
 void mx_error_making(char *comn);
 void mx_export(t_ush *ush, char **command);
 void mx_outlst(t_ush *ush);
-void mx_pipe_process_creator(char ***commatrix);
+void mx_pipe_process_creator(t_ush *ush, char ***commat);
 void mx_pop_back_variable(t_variable **head);
 void mx_pop_front_export(t_export **head);
 void mx_pop_front_pwdilda(t_pwdilda **head);
@@ -203,7 +213,6 @@ t_ush *mx_create_ush();
 void mx_open_tty(t_termconf **cfg);
 void mx_change_color(t_ush *ush, char **commands);
 
-
 // BUF FUNCTIONS
 int mx_buf_drop(char **buf, int *buf_size);
 int mx_drop_n_char(t_termconf **cfg);
@@ -213,7 +222,6 @@ char *mx_sixteen_ez_fix(char **str, int *size);
 short mx_get_buf_type(unsigned char *ch);
 // short mx_get_buf_type(unsigned char ch);
 void mx_restore_buffer(t_termconf *cfg);
-
 
 // TEXT LIST
 t_t_node *mx_create_text_node(char *text, int type);

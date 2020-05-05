@@ -11,7 +11,7 @@ static char *pwdstr(t_pwdilda **list, char *key) {
     }
     return adress;
 }
-
+//A LOT OF LINES
 char *mx_tildastr(t_pwdilda **list, char *tilda) {
     char *adress = NULL;
 
