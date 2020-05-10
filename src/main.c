@@ -5,6 +5,7 @@ int main(int argc, char *argv[]) {
     int exit_code = 0;
     int func_exit = 0;
 
+    mx_sig_init();
     mx_constant_variables(ush);
     while (ush->active) {
         if (!(func_exit = mx_read_input(ush)))
