@@ -8,6 +8,7 @@ FILES = main \
 	mx_buf_safe_realloc \
 	mx_change_color \
 	mx_check_commands \
+	mx_creat_jobs_node \
 	mx_check_key_allow \
 	mx_child_exvprocess \
 	mx_child_process \
@@ -62,6 +63,7 @@ FILES = main \
 	mx_parse_buf \
 	mx_parse_burnish \
 	mx_pipe_matrix_creator \
+	mx_pipe_parent_process \
 	mx_pipe_process_creator \
 	mx_pop_back_variable \
 	mx_pop_block_front \
@@ -93,13 +95,14 @@ FILES = main \
 	mx_replace_tild \
 	mx_replace_variables \
 	mx_restore_buffer \
-	mx_set_signal \
 	mx_set_history_pos \
-	mx_sinmrk_parse \
+	mx_set_signal \
+	mx_signal_end \
 	mx_sig_init \
+	mx_sinmrk_parse \
+	mx_size_of_pipe_matstr \
 	mx_sixteen_ez_fix \
 	mx_slash_parse \
-	mx_size_of_pipe_matstr \
 	mx_space_parse \
 	mx_strarrlen \
 	mx_strcmp_export \

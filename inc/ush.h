@@ -104,6 +104,14 @@ typedef struct s_export {
     struct s_export *next;
 }              t_export;
 
+typedef struct s_jobs{
+    pid_t pid;
+    int number;
+    char sign;
+    char *name;
+    struct s_jobs *next;
+}              t_jobs;
+
 typedef struct s_pwdilda {
     char *key;
     char *value;
@@ -127,8 +135,11 @@ typedef struct s_ush {
     int k;
     int size;
     int triger;
-    t_env_flags *flags;
+    int pid1;
+    int pid2;
     t_b_node *blocks;
+    t_env_flags *flags;
+    t_jobs *jobs;
     t_termconf *termconf;
     // t_export *export_list;
     t_pwdilda *pwdilda_list;
@@ -159,16 +170,15 @@ int mx_exit(char **command);
 int mx_get_twidth();
 int mx_read_input(t_ush *ush);
 int mx_read_from_thread(t_ush *ush);
-void mx_set_signal(void);
-void mx_sig_init(void);
 int mx_size_of_pipe_matstr(char **comn, int *i, int *j);
 int mx_strarrlen(char **arr);
 int mx_strcmp_export(const char *s1, const char *s2);
 int mx_variable_list_len(t_variable **head);
 // t_env *mx_envnode_creation(void);
 t_env_flags *mx_create_env_flags(void);
-t_variable *mx_creat_variable_node(void);
+t_jobs *mx_creat_jobs_node(void);
 t_pwdilda *mx_creat_pwdilda_node(void);
+t_variable *mx_creat_variable_node(void);
 void mx_adding_variable(t_ush *ush, char **command, char **kv);
 void mx_check_commands(t_ush *ush);
 void mx_child_exvprocess(int *pipedes, int *pipedes2, int inout, char **command);
@@ -182,6 +192,7 @@ void mx_env_variable_checking(t_variable **list, char *command);
 void mx_error_making(char *comn);
 void mx_export(t_ush *ush, char **command);
 void mx_outlst(t_ush *ush);
+void mx_pipe_parent_process(t_ush *ush, char ***commat, int *pipedes);
 void mx_pipe_process_creator(t_ush *ush, char ***commat);
 void mx_pop_back_variable(t_variable **head);
 void mx_pop_front_export(t_export **head);
@@ -194,6 +205,9 @@ void mx_push_back_pwdilda(t_pwdilda **list, char *kay, char *value);
 void mx_push_back_variable(t_variable **list, char **kv);
 void mx_read_environment(t_export **export_list, char **env);
 void mx_read_termconf(t_termconf *termconf);
+void mx_set_signal(void);
+void mx_signal_end(char ***commat, int status);
+void mx_sig_init(void);
 void mx_sub_error_printing(int *pipedes);
 void mx_unset(char **command, t_ush *ush);
 void mx_which(t_ush *ush, char **command);

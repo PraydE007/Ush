@@ -16,7 +16,7 @@ void mx_child_process(t_ush *ush, char **command) {
 
     proga = mx_programm_finder(command[0]);
     if (getenv("PATH") != 0) {
-        mx_set_signal(); // signals
+        // mx_set_signal(); // signals
         if (execvp(command[0], command) == -1)
             mx_error_making(command[0]);
     }
