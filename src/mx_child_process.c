@@ -18,7 +18,7 @@ void mx_child_process(t_ush *ush, char **command) {
     if (getenv("PATH") != 0) {
         // mx_set_signal(); // signals
         if (execvp(command[0], command) == -1)
-            mx_error_making(command[0]);
+            mx_error_making(ush, command[0]);
     }
     else {
         if (is_path(&ush->variable_list) && proga) {
@@ -27,7 +27,7 @@ void mx_child_process(t_ush *ush, char **command) {
             mx_strdel(&proga);
         }
         if (execv(command[0], command) == -1)
-            mx_error_making(command[0]);
+            mx_error_making(ush, command[0]);
     }
     exit(EXIT_FAILURE);
 }

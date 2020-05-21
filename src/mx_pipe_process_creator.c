@@ -8,6 +8,7 @@ static void close_out(int *pipedes) {
 
 void mx_pipe_process_creator(t_ush *ush, char ***commat) {
     int pipedes[2];
+    int buf_exit = 0;
 
     if (commat[1]) {
         pipe(pipedes);
@@ -17,14 +18,13 @@ void mx_pipe_process_creator(t_ush *ush, char ***commat) {
             close_out(pipedes);
             mx_child_process(ush, commat[ush->i]);
         }
-        else if (ush->pid1 < 0)
-            perror("ush");
         else if (ush->pid1 > 0 )
-            mx_pipe_parent_process(ush, commat, pipedes);
+            mx_pipe_parent_process(ush, commat, pipedes, &buf_exit);
     }
     else
         mx_is_builtin(ush, commat[0]) ? 0 : mx_process_creator(ush, commat[0]);
     ush->i = 0;
     ush->pid1 = 0;
     ush->pid2 = 0;
+    ush->triger = 0;
 }

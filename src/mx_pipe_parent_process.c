@@ -27,7 +27,8 @@ static bool recursion_checking(char ***commatrix) {
     return false;
 }
 
-static void pipe_creator(t_ush *ush, char ***commatrix, int *pipedes) {
+static void pipe_creator(t_ush *ush, char ***commatrix, int *pipedes,
+                                                            int *buf_exit) {
     int pipedes2[2];
 
     ush->pid1 = 0;
@@ -40,10 +41,11 @@ static void pipe_creator(t_ush *ush, char ***commatrix, int *pipedes) {
     else if (ush->pid1 < 0)
         perror("ush");
     else if (ush->pid1 > 0)
-        mx_pipe_parent_process(ush, commatrix, pipedes2);
+        mx_pipe_parent_process(ush, commatrix, pipedes2, buf_exit);
 }
 
-void mx_pipe_parent_process(t_ush *ush, char ***commat, int *pipedes) {
+void mx_pipe_parent_process(t_ush *ush, char ***commat, int *pipedes,
+                                                            int *buf_exit) {
     int status = 0;
     pid_t wpid = 0;
 
@@ -51,7 +53,7 @@ void mx_pipe_parent_process(t_ush *ush, char ***commat, int *pipedes) {
     tcsetpgrp(1, ush->pid2);
     if (recursion_checking(commat)) {
         if (commat[ush->i + 1])
-            pipe_creator(ush, commat, pipedes);
+            pipe_creator(ush, commat, pipedes, buf_exit);
         else if (mx_strcmp(commat[0][0], "cat") == 0)
             wpid = waitpid(ush->pid2, &status, WUNTRACED);
         else
@@ -60,8 +62,8 @@ void mx_pipe_parent_process(t_ush *ush, char ***commat, int *pipedes) {
     else {
         wpid = waitpid(ush->pid1, &status, WUNTRACED);
         if (commat[ush->i + 1])
-            pipe_creator(ush, commat, pipedes);
+            pipe_creator(ush, commat, pipedes, buf_exit);
     }
-    mx_signal_end(commat, status);
+    mx_signal_end(ush, commat, status, buf_exit);
     tcsetpgrp(1, getpid());
 }

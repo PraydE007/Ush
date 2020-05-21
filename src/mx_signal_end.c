@@ -14,19 +14,30 @@ static void cntrl_z_printing(char ***commat) {
     mx_printstr("\n");
 }
 
-void mx_signal_end(char ***commat, int status) {
-    // if (WIFEXITED(status))
-    //     error_number = 0;
-    // else 
-    if (WIFSTOPPED(status)) {
-        // error_number = 146;
+static void error_status(t_ush *ush, int status) {
+    if (status == 256)
+        ush->exit_code = 1;
+    else if (WEXITSTATUS(status))
+        ush->exit_code = 127;
+    else
+        ush->exit_code = 0;
+}
+
+void mx_signal_end(t_ush *ush, char ***commat, int status, int *buf_exit) {
+    if (WIFEXITED(status))
+        error_status(ush, status);
+    else if (WIFSTOPPED(status)) {
+        ush->exit_code = 146;
         cntrl_z_printing(commat);
     }
     else if (WTERMSIG(status)) {
-        // error_number = 130;
+        ush->exit_code = 130;
         mx_printstr("\n");
     }
-    // else if (status != 0)
-        // error_number = 1;
-
+    else if (status != 0)
+        ush->exit_code = 1;
+    if (ush->triger == 0)
+        (*buf_exit) = ush->exit_code;
+    ush->exit_code = (*buf_exit);
+    ush->triger++;
 }

@@ -28,7 +28,7 @@ static void error_printing(char *comn) {
     }
 }
 
-void mx_error_making(char *comn) {
+void mx_error_making(t_ush *ush, char *comn) {
     if (errno == 2) {
         errno = 0;
         error_printing(comn);
