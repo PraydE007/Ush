@@ -12,10 +12,12 @@ t_ush *mx_create_ush() {
     ush->k = 0;
     ush->size = 0;
     ush->triger = 0;
+    ush->pid1 = 0;
+    ush->pid2 = 0;
     // ush->shlvl = 0;
     ush->termconf = mx_create_termconf();
     ush->blocks = NULL;
-    // ush->export_list = NULL;
+    // ush->jobs_list = NULL;
     ush->pwdilda_list = NULL;
     ush->variable_list = NULL;
     return ush;
