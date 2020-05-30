@@ -15,6 +15,6 @@ int mx_read_from_thread(t_ush *ush) {
         }
         mx_push_symbol(&buf, ch, &buf_size);
     }
-    mx_push_h_node_back(&(ush->termconf->h_node), buf, buf_size);
+    mx_push_h_node_back(&(ush->termconf->h_node), buf);
     return 0;
 }

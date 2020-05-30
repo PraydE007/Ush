@@ -87,7 +87,6 @@ FILES = main \
 	mx_rd_print_old \
 	mx_read_environment \
 	mx_read_from_thread \
-	mx_read_input \
 	mx_read_termconf \
 	mx_replace_subst \
 	mx_replace_tild \
@@ -121,6 +120,25 @@ FILES = main \
 	mx_variable_list_len \
 	mx_which \
 	mx_which_str \
+	mx_get_h_node_index \
+	mx_get_last_h_node \
+	mx_init_clone \
+	mx_read_input_pro \
+	mx_del_clone_history \
+	mx_history_handler \
+	mx_subst_slash_parse \
+	mx_three_slash_m \
+	mx_is_control_slash \
+	mx_four_slash \
+	mx_one_slash_sinmrk \
+	mx_two_slash_sinmrk \
+	mx_three_slash_sinmrk \
+	mx_four_slash_sinmrk \
+	mx_one_slash_s \
+	mx_two_slash_s \
+	mx_three_slash_s \
+	mx_four_slash_s \
+	mx_four_slash_m \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

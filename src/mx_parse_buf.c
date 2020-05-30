@@ -1,10 +1,18 @@
 #include "../inc/ush.h"
 
+char *get_buf(t_ush *ush) {
+    t_termconf *cfg = ush->termconf;
+    char *str = mx_get_history_last_str(&(cfg->h_node));
+    char *res = mx_strdup(str);
+
+    return res;
+}
+
 int mx_parse_buf(t_ush *ush) {
     t_t_node *t_node = NULL;
     char *text = NULL;
     char *part = NULL;
-    char *buf = mx_strdup(ush->termconf->h_node->buf);
+    char *buf = get_buf(ush);
     // char *buf = mx_buf_safe_realloc(bff->buf, &(bff->buf_size));
 
     text = strtok(buf, ";\n");

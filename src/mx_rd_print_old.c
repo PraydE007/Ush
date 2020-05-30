@@ -1,7 +1,7 @@
 #include "../inc/ush.h"
 
 void mx_rd_print_old(t_termconf **cfg) {
-    t_h_node *c = (*cfg)->clone;
+    t_h_node *c = (*cfg)->chsn;
 
     if (!((*cfg)->isInThread)) {
         fprintf(stdout, "\r\x1B[0J\x1B[38;05;243mu$h> %s%s\n", c->buf, MX_ZER);

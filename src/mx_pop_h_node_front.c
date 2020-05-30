@@ -1,22 +1,13 @@
 #include "../inc/ush.h"
 
 void mx_pop_h_node_front(t_h_node **h_node) {
-    t_h_node *p = (*h_node);
+    t_h_node *p = NULL;
 
-    if (*h_node && h_node) {
-        while (p->back != NULL)
-            p = p->back;
-        if (p->next) {
-            p = p->next;
-            mx_strdel(&(p->back->buf));
-            free(p->back);
-            p->back = NULL;
-            (*h_node) = p;
-        }
-        else {
+    if ((*h_node != NULL) && (h_node != NULL)) {
+        p = (*h_node)->next;
+        if ((*h_node)->buf)
             mx_strdel(&((*h_node)->buf));
-            free(*h_node);
-            (*h_node) = NULL;
-        }
+        free(*h_node);
+        (*h_node) = p;
     }
 }

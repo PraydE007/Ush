@@ -12,12 +12,12 @@ static int slash_handling(char **res, char *str, int *i, int *res_size) {
             return mx_break_on_error(res) == NULL ? 0 : 0;
     }
     else if (sl_num == 3) {
-        if (!mx_three_slash(res, str, i, res_size))
+        if (!mx_three_slash_m(res, str, i, res_size))
             return mx_break_on_error(res) == NULL ? 0 : 0;
     }
     else if (sl_num == 4) {
-        (*i) += 3;
-        mx_push_symbol(res, '\\', res_size);
+        if (!mx_four_slash_m(res, str, i, res_size))
+            return mx_break_on_error(res) == NULL ? 0 : 0;
     }
     return 1;
 }

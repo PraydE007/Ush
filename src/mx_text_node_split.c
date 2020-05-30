@@ -1,11 +1,12 @@
 #include "../inc/ush.h"
 
+// Can be troubles
 static void insert_last_part(t_t_node **node, t_t_node **last) {
     t_t_node *p = (*node);
 
-    while (p->next)
+    while (p)
         p = p->next;
-    p->next = (*last);
+    p = (*last);
 }
 
 static void clear_subst_node(t_t_node **node) {
@@ -19,15 +20,15 @@ void mx_text_node_split(t_t_node **node) {
     t_t_node *split = NULL;
     char *buf = mx_strdup((*node)->text);
     char *text = NULL;
-    bool isSpaced = false;
+    bool is_spaced = false;
 
     text = strtok(buf, " \n\0");
     while (text != NULL) {
-        if (isSpaced)
+        if (is_spaced)
             mx_push_t_node_back(&split, mx_strdup_x(" "), -1);
         mx_push_t_node_back(&split, mx_strdup(text), 0);
         text = strtok(NULL, " \n\0");
-        isSpaced = true;
+        is_spaced = true;
     }
     mx_strdel(&text);
     mx_strdel(&buf);

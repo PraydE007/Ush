@@ -21,6 +21,8 @@
 #define MX_CYAN "\x1B[36m"
 #define MX_WHITE "\x1B[37m"
 
+#define MX_RIP_BAD_EXIT 0x0
+
 /* -------- */
 
 /* INClUDES */
@@ -44,10 +46,15 @@
 
 typedef struct termios t_term;
 
+// typedef struct s_h_node {
+//     struct s_h_node *back;
+//     char *buf;
+//     int buf_size;
+//     struct s_h_node *next;
+// }              t_h_node;
+
 typedef struct s_h_node {
-    struct s_h_node *back;
     char *buf;
-    int buf_size;
     struct s_h_node *next;
 }              t_h_node;
 
@@ -56,15 +63,29 @@ typedef struct s_termconf {
     t_term savetty;
     t_h_node *h_node;
     t_h_node *clone;
-    char *buf; // NEED TO DEL
-    int buf_size; // NEED TO DEL
+    t_h_node *chsn;
     int term_w;
     int ful_len;
+    int h_len;
+    int h_pos;
     int c_pos;
     char *color;
     int isInThread;
     int tty_fd;
 }              t_termconf;
+
+// typedef struct s_termconf {
+//     t_term tty;
+//     t_term savetty;
+//     t_h_node *h_node;
+//     t_h_node *clone;
+//     int term_w;
+//     int ful_len;
+//     int c_pos;
+//     char *color;
+//     int isInThread;
+//     int tty_fd;
+// }              t_termconf;
 
 typedef struct s_t_node {
     char *text;
@@ -157,7 +178,8 @@ int mx_blist_len(t_b_node **head);
 int mx_count_pipes(char **comn);
 int mx_exit(char **command);
 int mx_get_twidth();
-int mx_read_input(t_ush *ush);
+// int mx_read_input(t_ush *ush);
+int mx_read_input_pro(t_ush *ush);
 int mx_read_from_thread(t_ush *ush);
 void mx_set_signal(void);
 void mx_sig_init(void);
@@ -228,16 +250,21 @@ t_t_node *mx_create_text_node(char *text, int type);
 void mx_pop_t_node_front(t_t_node **head);
 void mx_push_t_node_back(t_t_node **head, char *text, int type);
 
-// HISTORY DOUBLE LINKED LIST
-char *mx_get_history_last_str(t_h_node **h_node);
-t_h_node *mx_create_history_node(t_h_node *back, char *buf, int buf_size);
-t_h_node *mx_clone_history(t_h_node **h_node);
-void mx_print_history(t_termconf *cfg);
+// HISTORY --D--O--U--B--L--E-- LINKED LIST
+t_h_node *mx_create_history_node(char *buf);
+void mx_push_h_node_back(t_h_node **h_node, char *buf);
 void mx_pop_h_node_front(t_h_node **h_node);
-void mx_push_h_node_back(t_h_node **h_node, char *buf, int buf_size);
+void mx_print_history(t_termconf *cfg);
+t_h_node *mx_clone_history(t_h_node **h_node);
+char *mx_get_history_last_str(t_h_node **h_node);
+void mx_init_clone(t_termconf **cfg);
+t_h_node *mx_get_last_h_node(t_h_node **h_node);
+t_h_node *mx_get_h_node_index(t_h_node **h_node, int id);
+int mx_history_handler(t_termconf **cfg, char *str);
+void mx_del_clone_history(t_termconf **cfg);
 
 // BLOCK LIST
-int mx_set_history_pos(t_h_node **h_node, int type);
+int mx_set_history_pos(t_termconf **cfg, int type);
 int mx_tlist_len(t_t_node **head);
 t_b_node *mx_create_block_node(t_t_node *t_node);
 t_b_node *mx_clone_blocks(t_b_node **head);
@@ -260,12 +287,12 @@ char *mx_text_parse(char *str, int *piv);
 char *mx_tildastr(t_pwdilda **list, char *tilda);
 char *mx_tild_parse(char *str, int *piv, int *type);
 int mx_count_slashes(char *str);
-int mx_one_slash(char **res, char *str, int *i, int *res_size);
+int mx_one_slash(char **res, char *str, int *i);
 int mx_one_slash_m(char **res, char *str, int *i, int *res_size);
 int mx_parse_buf(t_ush *ush);
 int mx_push_symbol(char **res, char ch, int *res_size);
-int mx_three_slash(char **res, char *str, int *i, int *res_size);
-int mx_two_slash(char **res, char *str, int *i, int *res_size);
+int mx_three_slash(char **res, char *str, int *i);
+int mx_two_slash(char **res, char *str, int *i);
 int mx_two_slash_m(char **res, char *str, int *i, int *res_size);
 t_b_node *mx_parse_block(t_t_node **head, int err_ch, int type);
 void mx_parse_burnish(t_ush *ush);
@@ -273,6 +300,20 @@ void mx_replace_subst(t_ush *ush, t_b_node **node);
 void mx_replace_tild(t_pwdilda **list, t_b_node **node);
 void mx_replace_variables(t_ush *ush, t_b_node **node);
 void mx_text_node_split(t_t_node **node);
+void mx_subst_slash_parse(char **res, char *str, int *piv);
+int mx_three_slash_m(char **res, char *str, int *i, int *res_size);
+bool mx_is_control_slash(char ch);
+int mx_three_slash_s(char **res, char *str, int *i);
+int mx_four_slash(char **res, char *str, int *i);
+int mx_one_slash_sinmrk(char **res, char *str, int *i);
+int mx_two_slash_sinmrk(char **res, char *str, int *i);
+int mx_three_slash_sinmrk(char **res, char *str, int *i);
+int mx_four_slash_sinmrk(char **res, char *str, int *i);
+int mx_one_slash_s(char **res, char *str, int *i);
+int mx_two_slash_s(char **res, char *str, int *i);
+int mx_three_slash_s(char **res, char *str, int *i);
+int mx_four_slash_s(char **res, char *str, int *i);
+int mx_four_slash_m(char **res, char *str, int *i, int *res_size);
 
 /* -------- */
 

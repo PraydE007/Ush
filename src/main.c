@@ -8,14 +8,14 @@ int main(int argc, char *argv[]) {
     mx_sig_init();
     mx_constant_variables(ush);
     while (ush->active) {
-        if (!(func_exit = mx_read_input(ush)))
+        if (!(func_exit = mx_read_input_pro(ush))) {
             mx_parse_buf(ush);
+        }
         else if (func_exit == 101) {
             ush->active = false;
             ush->exit_code = 1;
         }
-        while (ush->termconf->clone)
-            mx_pop_h_node_front(&(ush->termconf->clone));
+        mx_del_clone_history(&(ush->termconf));
     }
     exit_code = ush->exit_code;
     mx_dealloc_ush(&ush);

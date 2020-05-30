@@ -3,7 +3,7 @@
 void mx_dealloc_termconf(t_termconf **termconf) {
     if ((*termconf)->isInThread)
         close((*termconf)->tty_fd);
-    mx_strdel(&((*termconf)->buf));
+    (*termconf)->chsn = NULL;
     mx_strdel(&((*termconf)->color));
     free(*termconf);
     (*termconf) = NULL;
