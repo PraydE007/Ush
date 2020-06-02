@@ -143,6 +143,7 @@ FILES = main \
 	mx_three_slash_s \
 	mx_four_slash_s \
 	mx_four_slash_m \
+	mx_create_workaround \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

@@ -60,6 +60,8 @@ static char *def_dol_parse(char *str, int *piv, int *type) {
 }
 
 char *mx_doumrk_dol_parse(char *str, int *piv, int *type) {
+    char *res = NULL;
+
     if (str[0] == '{')
         return quote_dol_parse(&str[1], piv, type);
     else if (str[0] == '(')

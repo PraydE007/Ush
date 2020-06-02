@@ -167,6 +167,12 @@ typedef struct s_ush {
     t_variable *variable_list;
 }              t_ush;
 
+typedef struct s_wa {
+    t_b_node *p_b;
+    char *buf;
+    t_ush *ush;
+}              t_wa;
+
 bool mx_check_key_allow(t_ush *ush, char *kay);
 bool mx_have_equals(t_ush *ush, char *env);
 bool mx_is_builtin(t_ush *ush, char **command);
@@ -309,7 +315,7 @@ int mx_push_symbol_l(char **res, char ch);
 int mx_three_slash(char **res, char *str, int *i);
 int mx_two_slash(char **res, char *str, int *i);
 int mx_two_slash_m(char **res, char *str, int *i);
-t_b_node *mx_parse_block(t_t_node **head, int err_ch, int type);
+t_b_node *mx_parse_block(t_ush *ush, t_t_node **head, int err_ch, int type);
 void mx_parse_burnish(t_ush *ush);
 void mx_replace_subst(t_ush *ush, t_b_node **node);
 void mx_replace_tild(t_pwdilda **list, t_b_node **node);
@@ -329,6 +335,9 @@ int mx_two_slash_s(char **res, char *str, int *i);
 int mx_three_slash_s(char **res, char *str, int *i);
 int mx_four_slash_s(char **res, char *str, int *i);
 int mx_four_slash_m(char **res, char *str, int *i);
+
+// Workarounds
+t_wa *mx_create_workaround(t_ush *ush);
 
 /* -------- */
 
