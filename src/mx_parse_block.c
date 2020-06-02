@@ -10,7 +10,7 @@ static void check_for_parse(t_t_node *p, char **buf, int *i, int *type) {
         else if (p->text[(*i)] == '\'')
             (*buf) = mx_sinmrk_parse(&(p->text[(*i) + 1]), i);
         else if (p->text[(*i)] == '\"')
-            (*buf) = mx_doumrk_parse(&(p->text[(*i) + 1]), i);
+            (*buf) = mx_doumrk_parse(NULL, &(p->text[(*i) + 1]), i);
         else if (p->text[(*i)] == '$')
             (*buf) = mx_dollar_parse(&(p->text[(*i) + 1]), i, type);
         else if (p->text[(*i)] == '`')

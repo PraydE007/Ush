@@ -1,7 +1,7 @@
 #include "../inc/ush.h"
 
-int mx_four_slash_m(char **res, char *str, int *i, int *res_size) {
+int mx_four_slash_m(char **res, char *str, int *i) {
     (*i) += 3;
-    mx_push_symbol(res, '\\', res_size);
-    return mx_push_symbol(res, '\\', res_size);
+    mx_push_symbol_l(res, '\\');
+    return mx_push_symbol_l(res, '\\');
 }

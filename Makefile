@@ -83,6 +83,7 @@ FILES = main \
 	mx_push_h_node_back \
 	mx_push_n_char \
 	mx_push_symbol \
+	mx_push_symbol_l \
 	mx_push_t_node_back \
 	mx_rd_print_color \
 	mx_rd_print_pbc \

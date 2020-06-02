@@ -43,7 +43,6 @@ static int slash_handling(char **res, char *str, int *i) {
 char *mx_sinmrk_parse(char *str, int *piv) {
     char *res = mx_strnew_x(1);
     int len = mx_strlen(str);
-    int res_size = 1;
     int i = 0;
 
     while (i <= len) {
@@ -53,10 +52,8 @@ char *mx_sinmrk_parse(char *str, int *piv) {
             slash_handling(&res, &str[i], &i);
         else if (str[i] == '\'')
             break;
-        else {
-            res_size = mx_strlen(res) + 1;
-            mx_push_symbol(&res, str[i], &res_size);
-        }
+        else
+            mx_push_symbol_l(&res, str[i]);
         i++;
     }
     (*piv) += i + 1;

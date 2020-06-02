@@ -3,7 +3,6 @@
 char *mx_subst_dol_parse(char *str, int *piv, int *type) {
     char *res = mx_strnew_x(1);
     int len = mx_strlen(str);
-    int res_size = 1;
     int i = 0;
 
     while (i <= len) {
@@ -12,7 +11,7 @@ char *mx_subst_dol_parse(char *str, int *piv, int *type) {
         else if (str[i] == ')')
             break;
         else
-            mx_push_symbol(&res, str[i], &res_size);
+            mx_push_symbol_l(&res, str[i]);
         i++;
     }
     (*type) = 3;

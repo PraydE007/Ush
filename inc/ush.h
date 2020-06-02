@@ -287,10 +287,10 @@ void mx_dealloc_blocks(t_b_node **head);
 void mx_pop_block_front(t_b_node **head);
 
 // STRING OPERATIONS && PARSING
-bool mx_control_slash(char **res, char *str, int *res_size);
+bool mx_control_slash(char **res, char *str);
 char *mx_break_on_error(char **str);
 char *mx_dollar_parse(char *str, int *piv, int *type);
-char *mx_doumrk_parse(char *str, int *piv);
+char *mx_doumrk_parse(t_ush *ush, char *str, int *piv);
 char *mx_get_variable(t_ush *ush, char *var_name);
 char *mx_space_parse(char *str, int *piv);
 char *mx_sinmrk_parse(char *str, int *piv);
@@ -302,12 +302,13 @@ char *mx_tildastr(t_pwdilda **list, char *tilda);
 char *mx_tild_parse(char *str, int *piv, int *type);
 int mx_count_slashes(char *str);
 int mx_one_slash(char **res, char *str, int *i);
-int mx_one_slash_m(char **res, char *str, int *i, int *res_size);
+int mx_one_slash_m(char **res, char *str, int *i);
 int mx_parse_buf(t_ush *ush);
 int mx_push_symbol(char **res, char ch, int *res_size);
+int mx_push_symbol_l(char **res, char ch);
 int mx_three_slash(char **res, char *str, int *i);
 int mx_two_slash(char **res, char *str, int *i);
-int mx_two_slash_m(char **res, char *str, int *i, int *res_size);
+int mx_two_slash_m(char **res, char *str, int *i);
 t_b_node *mx_parse_block(t_t_node **head, int err_ch, int type);
 void mx_parse_burnish(t_ush *ush);
 void mx_replace_subst(t_ush *ush, t_b_node **node);
@@ -315,7 +316,7 @@ void mx_replace_tild(t_pwdilda **list, t_b_node **node);
 void mx_replace_variables(t_ush *ush, t_b_node **node);
 void mx_text_node_split(t_t_node **node);
 void mx_subst_slash_parse(char **res, char *str, int *piv);
-int mx_three_slash_m(char **res, char *str, int *i, int *res_size);
+int mx_three_slash_m(char **res, char *str, int *i);
 bool mx_is_control_slash(char ch);
 int mx_three_slash_s(char **res, char *str, int *i);
 int mx_four_slash(char **res, char *str, int *i);
@@ -327,7 +328,7 @@ int mx_one_slash_s(char **res, char *str, int *i);
 int mx_two_slash_s(char **res, char *str, int *i);
 int mx_three_slash_s(char **res, char *str, int *i);
 int mx_four_slash_s(char **res, char *str, int *i);
-int mx_four_slash_m(char **res, char *str, int *i, int *res_size);
+int mx_four_slash_m(char **res, char *str, int *i);
 
 /* -------- */
 
