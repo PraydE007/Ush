@@ -1,4 +1,5 @@
 #include "../inc/libmx.h"
+
 int mx_binary_search(char **arr, int size, const char *s, int *count) {
     int start = 0;
     int end = size - 1;

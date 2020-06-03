@@ -8,5 +8,5 @@ t_pwdilda *mx_creat_pwdilda_node(void) {
         node->value = NULL;
         node->next = NULL;
     }
-    return node;	
+    return node;
 }

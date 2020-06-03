@@ -8,7 +8,6 @@ FILES = main \
 	mx_buf_safe_realloc \
 	mx_change_color \
 	mx_check_commands \
-	mx_creat_jobs_node \
 	mx_check_key_allow \
 	mx_child_exvprocess \
 	mx_child_process \
@@ -17,11 +16,14 @@ FILES = main \
 	mx_command_matrix_creator \
 	mx_constant_variables \
 	mx_control_slash \
+	mx_cntrl_z_printing \
 	mx_count_pipes \
 	mx_count_slashes \
 	mx_create_history_node \
 	mx_create_block_node \
 	mx_create_env_flags \
+	mx_creat_jobs_node \
+	mx_creat_pid_node \
 	mx_creat_pwdilda_node \
 	mx_create_termconf \
 	mx_create_text_node \
@@ -42,17 +44,21 @@ FILES = main \
 	mx_export \
 	mx_export_matrix_creator \
 	mx_exportnode_creation \
+	mx_fg \
 	mx_get_buf_type \
 	mx_get_history_last_str \
 	mx_get_twidth \
 	mx_get_variable \
 	mx_have_equals \
+	mx_jobs \
 	mx_is_builtin \
 	mx_is_built_in \
 	mx_is_command \
 	mx_is_pipe \
 	mx_is_slash \
 	mx_isvariable \
+	mx_jobs_list_len \
+	mx_jobs_sign_change \
 	mx_key_value_creation \
 	mx_one_slash \
 	mx_one_slash_m \
@@ -68,19 +74,23 @@ FILES = main \
 	mx_pop_back_variable \
 	mx_pop_block_front \
 	mx_pop_front_export \
+	mx_pop_front_pid \
 	mx_pop_front_pwdilda \
 	mx_pop_front_variable \
 	mx_pop_h_node_front \
+	mx_pop_jobs_node \
 	mx_pop_specific \
 	mx_pop_t_node_front \
 	mx_print_history \
 	mx_process_creator \
 	mx_programm_finder \
-	mx_push_block_back \
 	mx_push_back_export \
+	mx_push_back_pid \
 	mx_push_back_pwdilda \
 	mx_push_back_variable \
+	mx_push_block_back \
 	mx_push_h_node_back \
+	mx_push_jobs_node \
 	mx_push_n_char \
 	mx_push_symbol \
 	mx_push_t_node_back \
@@ -104,6 +114,7 @@ FILES = main \
 	mx_sixteen_ez_fix \
 	mx_slash_parse \
 	mx_space_parse \
+	mx_strararrdup \
 	mx_strarrlen \
 	mx_strcmp_export \
 	mx_strsplit_first_meeting \

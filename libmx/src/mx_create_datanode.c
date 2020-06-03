@@ -10,5 +10,5 @@ t_data  *mx_create_datanode() {
     node->buf_size = 0;
     node->delim = '\0';
     node->buf = NULL;
-    return node;    
+    return node;
 }

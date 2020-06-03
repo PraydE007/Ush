@@ -11,6 +11,8 @@ void mx_dealloc_ush(t_ush **ush) {
         mx_pop_front_variable(&((*ush)->variable_list));
     while ((*ush)->pwdilda_list)
         mx_pop_front_pwdilda(&((*ush)->pwdilda_list));
+    while ((*ush)->jobs_list)
+        mx_pop_jobs_node(&((*ush)->jobs_list), 1);
     free(*ush);
     (*ush) = NULL;
 }

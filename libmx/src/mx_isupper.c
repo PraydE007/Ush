@@ -11,4 +11,3 @@ bool mx_isupper(int c) {
     }
     return y;
 }
-

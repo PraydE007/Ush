@@ -28,6 +28,7 @@ void mx_signal_end(t_ush *ush, char ***commat, int status, int *buf_exit) {
         error_status(ush, status);
     else if (WIFSTOPPED(status)) {
         ush->exit_code = 146;
+        mx_push_jobs_node(&ush->jobs_list, &ush->pid_list, NULL, commat);
         cntrl_z_printing(commat);
     }
     else if (WTERMSIG(status)) {

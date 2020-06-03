@@ -11,4 +11,3 @@ bool mx_islower(int c) {
     }
     return y;
 }
-
