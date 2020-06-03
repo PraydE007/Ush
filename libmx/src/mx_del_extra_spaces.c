@@ -19,5 +19,5 @@ char *mx_del_extra_spaces(const char *str) {
     news = mx_strnew(size - count);
     mx_spacedel(news, trims);
     mx_strdel(&trims);
-    return news;    
+    return news;
 }

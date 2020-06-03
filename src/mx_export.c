@@ -12,6 +12,7 @@ static void export_error(t_ush *ush, char *str) {
         mx_printerr(str);
         mx_printerr("\n");
     }
+    ush->exit_code = 1;
 }
 
 static void export_condition(t_ush *ush, char **kv) {

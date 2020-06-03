@@ -1,5 +1,13 @@
 #include "../inc/libmx.h"
 
+static void last_unicode_condition(wchar_t c, char *byte) {
+    byte[0] = (c >> 18 & 0x07) | 0xF0;
+    byte[1] = (c >> 12 & 0x3F) | 0x80;
+    byte[2] = (c >> 6 & 0x3F) | 0x80;
+    byte[3] = (c >> 0 & 0x3F) | 0x80;
+    write(1, &byte, 4);
+}
+
 void mx_print_unicode(wchar_t c) {
     char byte[4];
  
@@ -18,11 +26,11 @@ void mx_print_unicode(wchar_t c) {
         byte[2] = (c >> 0 & 0x3F) | 0x80;
         write(1, &byte, 3);
     }
-    else {
-        byte[0] = (c >> 18 & 0x07) | 0xF0;
-        byte[1] = (c >> 12 & 0x3F) | 0x80;
-        byte[2] = (c >> 6 & 0x3F) | 0x80;
-        byte[3] = (c >> 0 & 0x3F) | 0x80;
-        write(1, &byte, 4);
-    }
+    else
+        last_unicode_condition(c, byte);
+        // byte[0] = (c >> 18 & 0x07) | 0xF0;
+        // byte[1] = (c >> 12 & 0x3F) | 0x80;
+        // byte[2] = (c >> 6 & 0x3F) | 0x80;
+        // byte[3] = (c >> 0 & 0x3F) | 0x80;
+        // write(1, &byte, 4);
 }

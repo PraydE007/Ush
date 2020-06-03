@@ -111,7 +111,7 @@ typedef struct s_env_flags {
     bool P;
 }              t_env_flags;
 
-typedef struct s_echo{
+typedef struct s_echo {
     bool E;
     bool e;
     bool n;
@@ -125,11 +125,17 @@ typedef struct s_export {
     struct s_export *next;
 }              t_export;
 
-typedef struct s_jobs{
+typedef struct s_pid {
     pid_t pid;
+    struct s_pid *next;
+}               t_pid;
+
+typedef struct s_jobs {
     int number;
+    int serial_number;
     char sign;
-    char *name;
+    char **name;
+    t_pid *pid_list;
     struct s_jobs *next;
 }              t_jobs;
 
@@ -150,7 +156,6 @@ typedef struct s_ush {
     bool equals;
     bool trigger;
     int exit_code;
-    int shlvl;
     int storage;
     int i;
     int k;
@@ -160,12 +165,13 @@ typedef struct s_ush {
     int pid2;
     t_b_node *blocks;
     t_env_flags *flags;
-    t_jobs *jobs;
+    t_pid *pid_list;
+    t_jobs *jobs_list;
     t_termconf *termconf;
     // t_export *export_list;
     t_pwdilda *pwdilda_list;
     t_variable *variable_list;
-}              t_ush;
+}                t_ush;
 
 typedef struct s_wa {
     t_b_node *p_b;
@@ -188,6 +194,7 @@ char **mx_export_matrix_creator(char **env);
 char **mx_key_value_creation(t_ush *ush, char *env);
 char ***mx_pipe_matrix_creator(t_ush *ush, char **command);
 char *mx_programm_finder(char *command);
+char **mx_strararrdup(char ***strararr);
 char **mx_strsplit_first_meeting(const char *s, char c);
 char *mx_substitution_making(t_ush *ush, char *substion);
 char *mx_which_str(char *command);
@@ -195,16 +202,18 @@ int mx_blist_len(t_b_node **head);
 int mx_count_pipes(char **comn);
 int mx_exit(char **command);
 int mx_get_twidth();
-// int mx_read_input(t_ush *ush);
+int mx_jobs_list_len(t_jobs **list);
+int mx_read_input(t_ush *ush);
 int mx_read_input_pro(t_ush *ush);
 int mx_read_from_thread(t_ush *ush);
 int mx_size_of_pipe_matstr(char **comn, int *i, int *j);
 int mx_strarrlen(char **arr);
 int mx_strcmp_export(const char *s1, const char *s2);
-int mx_variable_list_len(t_variable **head);
+int mx_variable_list_len(t_variable **list);
 // t_env *mx_envnode_creation(void);
 t_env_flags *mx_create_env_flags(void);
 t_jobs *mx_creat_jobs_node(void);
+t_pid *mx_creat_pid_node(int pid);
 t_pwdilda *mx_creat_pwdilda_node(void);
 t_variable *mx_creat_variable_node(void);
 void mx_adding_variable(t_ush *ush, char **command, char **kv);
@@ -212,6 +221,7 @@ void mx_check_commands(t_ush *ush);
 void mx_child_exvprocess(t_ush *ush, int *pipedes, int *pipedes2, char **command);
 void mx_child_process(t_ush *ush, char **command);
 void mx_constant_variables(t_ush *ush);
+void mx_cntrl_z_printing(char **command);
 void mx_dealloc_termconf(t_termconf **termconf);
 void mx_dealloc_ush(t_ush **ush);
 void mx_del_strararr(char ****arr);
@@ -219,18 +229,25 @@ void mx_env(t_ush *ush, char **command);
 void mx_env_variable_checking(t_variable **list, char *command);
 void mx_error_making(t_ush *ush, char *comn);
 void mx_export(t_ush *ush, char **command);
+void mx_fg(t_ush *ush, char **command);
+void mx_jobs(t_ush *ush);
+void mx_jobs_sign_change(t_jobs **list, int index);
 void mx_outlst(t_ush *ush);
 void mx_pipe_parent_process(t_ush *ush, char ***commat, int *pipedes, int *buf_exit);
 void mx_pipe_process_creator(t_ush *ush, char ***commat);
 void mx_pop_back_variable(t_variable **head);
 void mx_pop_front_export(t_export **head);
+void mx_pop_front_pid(t_pid **head);
 void mx_pop_front_pwdilda(t_pwdilda **head);
 void mx_pop_front_variable(t_variable **head);
+void mx_pop_jobs_node(t_jobs **list, int index);
 void mx_pop_specific(t_variable **list, int index);
 void mx_process_creator(t_ush *ush, char **commands);
 void mx_push_back_export(t_export **export, char **kv);
+void mx_push_back_pid(t_pid **list, int pid);
 void mx_push_back_pwdilda(t_pwdilda **list, char *kay, char *value);
 void mx_push_back_variable(t_variable **list, char **kv);
+void mx_push_jobs_node(t_jobs **list, t_pid **pids, char **command, char ***pipe_command);
 void mx_read_environment(t_export **export_list, char **env);
 void mx_read_termconf(t_termconf *termconf);
 void mx_set_signal(void);
@@ -285,7 +302,7 @@ void mx_del_clone_history(t_termconf **cfg);
 
 // BLOCK LIST
 int mx_set_history_pos(t_termconf **cfg, int type);
-int mx_tlist_len(t_t_node **head);
+int mx_tlist_len(t_t_node **list);
 t_b_node *mx_create_block_node(t_t_node *t_node);
 t_b_node *mx_clone_blocks(t_b_node **head);
 t_b_node *mx_push_block_back(t_b_node **head, t_t_node *t_node);

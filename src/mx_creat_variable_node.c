@@ -8,5 +8,5 @@ t_variable *mx_creat_variable_node(void) {
         node->value = NULL;
         node->next = NULL;
     }
-    return node;	
+    return node;
 }

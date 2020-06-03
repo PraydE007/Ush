@@ -4,6 +4,7 @@ void mx_pop_back(t_list **list) {
     
     if(list != NULL) {
         t_list *pl = *list;
+        
         while (pl->next->next != NULL) {
             pl = pl->next;
         }
