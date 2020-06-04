@@ -1,7 +1,7 @@
 #include "../inc/ush.h"
 
 static bool is_plus_sign_change(t_jobs **list, int index) {
-    t_jobs  *pl = *list;
+    t_jobs *pl = *list;
 
     while (pl->next) {
         if (pl->number == index)
@@ -14,7 +14,7 @@ static bool is_plus_sign_change(t_jobs **list, int index) {
 }
 
 static bool is_minus_sign_change(t_jobs **list, int index) {
-    t_jobs  *pl = *list;
+    t_jobs *pl = *list;
 
     while (pl->next) {
         if (pl->number == index)
@@ -27,7 +27,7 @@ static bool is_minus_sign_change(t_jobs **list, int index) {
 }
 
 static void plus_sign_change(t_jobs **list, int size) {
-    t_jobs  *pl = *list;
+    t_jobs *pl = *list;
 
     while (pl) {
         if (pl->sign == '-')
@@ -41,7 +41,7 @@ static void plus_sign_change(t_jobs **list, int size) {
 }
 
 static void minus_sign_change(t_jobs **list, int size) {
-    t_jobs  *pl = *list;
+    t_jobs *pl = *list;
 
     while (pl) {
         if (pl->serial_number == size - 2)
@@ -51,7 +51,6 @@ static void minus_sign_change(t_jobs **list, int size) {
 }
 
 void mx_jobs_sign_change(t_jobs **list, int index) {
-    t_jobs  *pl = *list;
     int size = mx_jobs_list_len(list);
 
     if ((*list != NULL) && (list != NULL)) {

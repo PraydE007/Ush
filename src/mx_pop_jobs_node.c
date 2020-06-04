@@ -59,8 +59,6 @@ static void pop_anyplace_jobs(t_jobs **list, int index) {
 }
 
 void mx_pop_jobs_node(t_jobs **list, int index) {
-    t_jobs *buf = *list;
-    t_jobs *temp = NULL;
     int lenth = 0;
 
     if ((*list != NULL) && (list != NULL)) {

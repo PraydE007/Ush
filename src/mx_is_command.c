@@ -7,16 +7,13 @@ bool mx_is_command(char *path, bool *flag, int index) {
         if ((lt.st_mode & S_IXUSR) == S_IXUSR) {
             if (!index) {
                 if (flag[1]) {
-                    free(path);
                     return true;
                 }
                 mx_printstr(path);
                 mx_printchar('\n');
             }
-            free(path);
             return true;
         }
     }
-    free(path);
     return false;
 }

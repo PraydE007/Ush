@@ -23,7 +23,6 @@ static bool is_dir(char ***comn) {
 }
 
 void mx_check_commands(t_ush *ush) {
-    struct stat statbuf;
     t_b_node *block = ush->blocks;
     char **comn = NULL;
     char ***pipemat = NULL;
@@ -34,10 +33,10 @@ void mx_check_commands(t_ush *ush) {
                 break;
         else if (mx_is_pipe(comn, NULL)) {
             pipemat = mx_pipe_matrix_creator(ush, comn);
-            pipemat ? mx_pipe_process_creator(ush, pipemat) : 0;
+            pipemat ? mx_pipe_process_creator(ush, pipemat) : (void)0;
         }
         else
-            mx_is_builtin(ush, comn) ? 0 : mx_process_creator(ush, comn);
+            mx_is_builtin(ush, comn) ? (void)0 : mx_process_creator(ush, comn);
         mx_del_strarr(&comn);
         mx_del_strararr(&pipemat);
         block = block->next;

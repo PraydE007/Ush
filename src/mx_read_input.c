@@ -17,7 +17,7 @@ static int c_cases(t_termconf **cfg, unsigned char ch, short type) {
         (*cfg)->c_pos += 1;
     else if (type == 4 || type == 5)
         return mx_set_history_pos(&((*cfg)->clone), type);
-    else if (type == 101 && (*cfg)->clone->buf_size == 1)
+    else if (type == 101 && (*cfg)->clone/*->buf_size == 1*/)
         return 101;
     return 0;
 }

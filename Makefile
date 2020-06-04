@@ -6,6 +6,9 @@ FILES = main \
 	mx_buf_drop \
 	mx_buf_push \
 	mx_buf_safe_realloc \
+	mx_cd \
+	mx_cd_s \
+	mx_cd_P \
 	mx_change_color \
 	mx_check_commands \
 	mx_check_key_allow \
@@ -81,6 +84,7 @@ FILES = main \
 	mx_parse_block \
 	mx_parse_buf \
 	mx_parse_burnish \
+	mx_parser_cd \
 	mx_pipe_matrix_creator \
 	mx_pipe_parent_process \
 	mx_pipe_process_creator \
@@ -177,11 +181,12 @@ install: ush
 
 ush : $(SRC_COMPILE) $(HEADER)
 	@make -C libmx install
-#	@clang $(CFLAGS) -c $(SRC_COMPILE)
-#	@clang $(CFLAGS) $(OBJ) $(LIB_A) -o $(NAME)
-	#TEST MODE
-	@clang -c $(SRC_COMPILE)
-	@clang -ltermcap $(OBJ) $(LIB_A) -o $(NAME)
+	#RELEASE MODE
+	@clang $(CFLAGS) -c $(SRC_COMPILE)
+	@clang $(CFLAGS) -ltermcap $(OBJ) $(LIB_A) -o $(NAME)
+#	TEST MODE
+#	@clang -c $(SRC_COMPILE)
+#	@clang -ltermcap $(OBJ) $(LIB_A) -o $(NAME)
 	@mkdir -p obj
 	@cp $(OBJ) obj/
 	@rm -rf $(OBJ)
