@@ -1,10 +1,14 @@
 #include "../inc/ush.h"
 
-int mx_exit(char **command) {
+int mx_exit(t_ush *ush, char **command) {
     int checker = 1;
 
     mx_printerr("exit\n");
-    if (command[0] && !command[1])
+    if (ush->jobs_list) {
+        mx_printstr("ush: you have suspended jobs.\n");
+        return 999;
+    }
+    else if (command[0] && !command[1])
         return 1;
     else if (command[0] && command[1] && command[2]) {
         mx_printerr("ush: exit: too many arguments\n");

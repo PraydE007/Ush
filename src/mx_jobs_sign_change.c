@@ -34,6 +34,8 @@ static void plus_sign_change(t_jobs **list, int size) {
             pl->sign = '+';
         else if (pl->serial_number == size - 2)
             pl->sign = '-';
+        // else if (size == 2 && pl->sign == ' ')
+        //     pl->sign = '-';
         pl = pl->next;
     }
 }

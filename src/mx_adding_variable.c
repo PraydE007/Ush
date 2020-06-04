@@ -30,7 +30,7 @@ static void exyta_condition(t_ush *ush, char **command,
 }
 
 static void variable_adding_condition(t_ush *ush, char **command,
-                                      char **k_v2, int *count) {
+                                                char **k_v2, int *count) {
     if (k_v2 != NULL ) {
         exyta_condition(ush, command, k_v2, count);
         // if (mx_check_key_allow(NULL, k_v2[0])) {
