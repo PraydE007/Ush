@@ -7,6 +7,9 @@
 #define MX_ETGTN "ush: Could not access the termcap data base.\n"
 #define MX_EBFLOC "ush: Buffer cannot allocate enough memory.\n"
 #define MX_PIZDA "ush: Syntax error -- '%c'\n"
+#define MX_IFLNK  0120000
+#define MX_IFMT   0170000
+#define MX_IFDIR  0040000
 #define PH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki"
 
 #define MX_ZER "\x1B[0m"
@@ -145,6 +148,13 @@ typedef struct s_variable {
     struct s_variable *next;
 }              t_variable;
 
+typedef struct s_cd_info {
+    int P;
+    int s;
+    int rip_42;
+    int minus;
+}              t_cd_info;
+
 typedef struct s_ush {
     bool active;
     bool equals;
@@ -159,6 +169,7 @@ typedef struct s_ush {
     int pid1;
     int pid2;
     t_b_node *blocks;
+    t_cd_info *cd_flags;
     t_env_flags *flags;
     t_jobs *jobs;
     t_termconf *termconf;
@@ -208,6 +219,9 @@ t_jobs *mx_creat_jobs_node(void);
 t_pwdilda *mx_creat_pwdilda_node(void);
 t_variable *mx_creat_variable_node(void);
 void mx_adding_variable(t_ush *ush, char **command, char **kv);
+void mx_cd(char **command, t_ush *ush);
+void mx_cd_P(char *command, t_ush *ush);
+void mx_cd_s(char *command, t_ush *ush);
 void mx_check_commands(t_ush *ush);
 void mx_child_exvprocess(t_ush *ush, int *pipedes, int *pipedes2, char **command);
 void mx_child_process(t_ush *ush, char **command);
@@ -310,6 +324,7 @@ int mx_count_slashes(char *str);
 int mx_one_slash(char **res, char *str, int *i);
 int mx_one_slash_m(char **res, char *str, int *i);
 int mx_parse_buf(t_ush *ush);
+int mx_parser_cd(char **command, t_ush *ush);
 int mx_push_symbol(char **res, char ch, int *res_size);
 int mx_push_symbol_l(char **res, char ch);
 int mx_three_slash(char **res, char *str, int *i);

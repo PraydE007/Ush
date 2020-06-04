@@ -6,6 +6,9 @@ FILES = main \
 	mx_buf_drop \
 	mx_buf_push \
 	mx_buf_safe_realloc \
+	mx_cd \
+	mx_cd_s \
+	mx_cd_P \
 	mx_change_color \
 	mx_check_commands \
 	mx_creat_jobs_node \
@@ -62,6 +65,7 @@ FILES = main \
 	mx_parse_block \
 	mx_parse_buf \
 	mx_parse_burnish \
+	mx_parser_cd \
 	mx_pipe_matrix_creator \
 	mx_pipe_parent_process \
 	mx_pipe_process_creator \
