@@ -53,7 +53,7 @@ static void pipe_matrix_filling(t_ush *ush, char ***pipemat, char **command,
     int commat_size = 0;
 
     ush->size = mx_strarrlen(command);
-    for (ush->i = 0; ush->i <  pipemat_size; ush->i++) {
+    for (ush->i = 0; ush->i < pipemat_size; ush->i++) {
         commat_size = mx_size_of_pipe_matstr(command, &i_count, &j_count);
         pipemat[ush->i] = (char **)malloc(sizeof(char *) * (commat_size + 1));
         if (mx_strcmp(command[ush->k], "|") == 0 || command[ush->k] == NULL)

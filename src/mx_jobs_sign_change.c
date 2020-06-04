@@ -26,7 +26,7 @@ static bool is_minus_sign_change(t_jobs **list, int index) {
     return false;
 }
 
-static void plus_sign_change(t_jobs **list, int index, int size) {
+static void plus_sign_change(t_jobs **list, int size) {
     t_jobs  *pl = *list;
 
     while (pl) {
@@ -34,11 +34,13 @@ static void plus_sign_change(t_jobs **list, int index, int size) {
             pl->sign = '+';
         else if (pl->serial_number == size - 2)
             pl->sign = '-';
+        // else if (size == 2 && pl->sign == ' ')
+        //     pl->sign = '-';
         pl = pl->next;
     }
 }
 
-static void minus_sign_change(t_jobs **list, int index, int size) {
+static void minus_sign_change(t_jobs **list, int size) {
     t_jobs  *pl = *list;
 
     while (pl) {
@@ -54,8 +56,8 @@ void mx_jobs_sign_change(t_jobs **list, int index) {
 
     if ((*list != NULL) && (list != NULL)) {
         if (is_plus_sign_change(list, index))
-            plus_sign_change(list, index, size);
+            plus_sign_change(list, size);
         else if (is_minus_sign_change(list, index))
-            minus_sign_change(list, index, size);
+            minus_sign_change(list, size);
     }
 }
