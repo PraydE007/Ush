@@ -15,7 +15,9 @@ static bool look_in_path(t_ush *ush, char **ways, char *command, bool *flag) {
             a = mx_is_command(command, flag, 0);
         else {
             char *path = mx_strjoin(ways[i], "/");
-            a = mx_is_command(mx_strjoin_free(path, command), flag, 0);
+            char *bufferizatornaya_pushka = mx_strjoin_free(path, command);
+            a = mx_is_command(bufferizatornaya_pushka, flag, 0);
+            free(bufferizatornaya_pushka);
         }
         if (a == 1) {
             if (!flag[0])
@@ -62,8 +64,8 @@ void mx_which(t_ush *ush, char **command) {
     for (; command[i];) {
         if (mx_is_built_in(command[i]) && !flag[1])
             printf("%s: shell built-in command\n", command[i]);
-        if (!mx_is_built_in(command[i]) || (mx_is_built_in(command[i])
-            && flag[0]))
+        if ((!mx_is_built_in(command[i]) || (mx_is_built_in(command[i])
+            && flag[0])) && getenv("PATH"))
             look_in_path(ush, ways, command[i], flag);
         i++;
     }

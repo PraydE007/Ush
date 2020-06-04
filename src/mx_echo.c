@@ -15,7 +15,7 @@ static void print_2_type(char *arr) {
     while (arr[j + 1]) {
         if ((arr[j] == '\\' && arr[j + 1] != '\'')
             || (arr[j] == '\\' && arr[j + 1] != '"')) {
-            mx_echo_func_for_slesh(arr, j + 1);
+            //mx_echo_func_for_slesh(arr, j + 1);
             j++;
         }
         else
@@ -36,7 +36,7 @@ static void part1_of_cycle(char *arr, char *split) {
 static void part2_of_cycle(char *arr) {
     if (arr[0] == '\'')
         print_2_type(arr);
-    else if (arr[0] == '"') 
+    else if (arr[0] == '"')
         print_2_type(arr);
     else
         print_1_type(arr, 0, 0, 0);
@@ -49,13 +49,13 @@ void mx_builtin_echo(char **arr, char *origin) {
     char **split = mx_strsplit(origin, ' ');
 
     memset(echo, 0, sizeof(t_echo));
-    i = mx_parser_4_echo(arr, echo);
+    //i = mx_parser_4_echo(arr, echo);
     while (arr[i]) {
         if (echo->E)
             part1_of_cycle(arr[i], split[point]);
         else
             part2_of_cycle(arr[i]);
-        if (mx_strlen_for_2star(arr) - i != 1)
+        //if (mx_strlen_for_2star(arr) - i != 1)
             mx_printchar(32);
         i++;
         point++;

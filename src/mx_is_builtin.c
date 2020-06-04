@@ -50,6 +50,10 @@ static bool second_part_of_biltin(t_ush *ush, char **command) {
         mx_which(ush, command);
         return true;
     }
+    else if (mx_strcmp("cd", command[0]) == 0) {
+        mx_cd(command, ush);
+        return true;
+    }
     return false;
 }
 
