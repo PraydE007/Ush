@@ -1,7 +1,7 @@
 #include "../inc/ush.h"
 
-int mx_variable_list_len(t_variable **head) {
-    t_variable *p = (*head);
+int mx_variable_list_len(t_variable **list) {
+    t_variable *p = (*list);
     int len = 0;
 
     while (p != NULL) {

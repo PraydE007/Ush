@@ -11,5 +11,5 @@ t_lints *mx_create_lintnode() {
     node->newL = 0;
     node->newR = 0;
     }
-    return node;    
+    return node;
 }

@@ -22,6 +22,14 @@ static bool first_part_of_biltin(t_ush *ush, char **command) {
         mx_unset(command, ush);
         return true;
     }
+    else if (mx_strcmp("fg", command[0]) == 0) {
+        mx_fg(ush, command);
+        return true;
+    }
+    else if (mx_strcmp("jobs", command[0]) == 0) {
+        mx_jobs(ush);
+        return true;
+    }
     return false;
 }
 
