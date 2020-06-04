@@ -24,7 +24,6 @@ static int slash_handling(char **res, char *str, int *i) {
 
 char *mx_slash_parse(char *str, int *piv) {
     char *res = mx_strnew_x(1);
-    int len = mx_strlen(str);
     int i = 0;
 
     if (!slash_handling(&res, str, &i))

@@ -34,6 +34,6 @@ void mx_pipe_process_creator(t_ush *ush, char ***commat) {
             mx_pipe_parent_process(ush, commat, pipedes, &buf_exit);
     }
     else
-        mx_is_builtin(ush, commat[0]) ? 0 : mx_process_creator(ush, commat[0]);
+        mx_is_builtin(ush, commat[0]) ? (void)0 : mx_process_creator(ush, commat[0]);
     ush_zeroing(ush);
 }

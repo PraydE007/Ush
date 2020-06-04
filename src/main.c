@@ -1,6 +1,6 @@
 #include "../inc/ush.h"
 
-int main(int argc, char *argv[]) {
+int main() {
     t_ush *ush = mx_create_ush();
     int exit_code = 0;
     int func_exit = 0;
@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
         if (!(func_exit = mx_read_input_pro(ush))) {
             mx_parse_buf(ush);
             //1
-            printf("ush->exit_code_main: %d\n", ush->exit_code);
+            // printf("ush->exit_code_main: %d\n", ush->exit_code);
             //2
         }
         else if (func_exit == 101) {

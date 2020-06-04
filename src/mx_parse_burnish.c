@@ -24,7 +24,6 @@ static void burnish_cycle(t_b_node **blocks, t_b_node **p) {
 }
 
 void mx_parse_burnish(t_ush *ush) {
-    t_b_node *blocks = NULL;
     t_b_node *clone = NULL;
     t_b_node *p = NULL;
 

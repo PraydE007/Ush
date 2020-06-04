@@ -6,6 +6,8 @@ void mx_fg(t_ush *ush, char **command) {
     t_jobs *pl_jobs = ush->jobs_list;
     t_pid *pl_pid = NULL;
 
+    command = command + 1 - 1; // workaround for unused war
+
 if (pl_jobs == NULL) {
     mx_printstr("fg: no current job\n");
     ush->exit_code = 1;

@@ -2,7 +2,6 @@
 
 static void slash_handling(char **res, char *str, int *i) {
     int sl_num = mx_count_slashes(str);
-    int res_size = mx_strlen(*res) + 1;
     int exit_code = 0;
 
     if (sl_num == 1) {
