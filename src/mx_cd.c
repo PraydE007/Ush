@@ -1,16 +1,20 @@
 #include "../inc/ush.h"
 
 static void cd_minus(t_ush *ush) {
+    char *dir = mx_strnew(1024);
+    char *buf = strdup(ush->pwdilda_list->next->value);
+
     chdir(ush->pwdilda_list->value);
     free(ush->pwdilda_list->value);
-    setenv("OLDPWD", strdup(ush->pwdilda_list->next->value),
-            strlen(ush->pwdilda_list->next->value));
+    setenv("OLDPWD", buf, strlen(buf));
     ush->pwdilda_list->value = strdup(ush->pwdilda_list->next->value);
     free(ush->pwdilda_list->next->value);
-    setenv("PWD", getcwd(mx_strnew(1024), 1024), 1024);
-    ush->pwdilda_list->next->value = strdup(getcwd(mx_strnew(1024), 1024));
+    setenv("PWD", dir, 1024);
+    ush->pwdilda_list->next->value = strdup(getcwd(dir, 1024));
     mx_printstr(ush->pwdilda_list->next->value);
     mx_printchar(10);
+    free(dir);
+    free(buf);
 }
 
 static void err_printer(char *path, t_ush *ush) {
@@ -45,14 +49,19 @@ static char *getpath_cd(char **command, t_ush *ush, int i) {
 }
 
 static void changedir(char *path, t_ush *ush) {
+    char *dir = mx_strnew(1024);
+    char *buf = strdup(ush->pwdilda_list->next->value);
+
     chdir(path);
+    getcwd(dir, 1024);
     free(ush->pwdilda_list->value);
-    setenv("OLDPWD", strdup(ush->pwdilda_list->next->value),
-            strlen(ush->pwdilda_list->next->value));
+    setenv("OLDPWD", buf, strlen(buf));
     ush->pwdilda_list->value = strdup(ush->pwdilda_list->next->value);
     free(ush->pwdilda_list->next->value);
-    setenv("PWD", getcwd(mx_strnew(1024), 1024), 1024);
-    ush->pwdilda_list->next->value = strdup(getcwd(mx_strnew(1024), 1024));
+    setenv("PWD", dir, 1024);
+    ush->pwdilda_list->next->value = strdup(dir);
+    free(dir);
+    free(buf);
 }
 
 void mx_cd(char **command, t_ush *ush) {
