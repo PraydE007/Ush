@@ -292,7 +292,8 @@ int mx_drop_n_char(t_termconf **cfg);
 int mx_buf_push(char **buf, int *buf_size, char ch);
 int mx_push_n_char(t_termconf **cfg, char ch);
 char *mx_sixteen_ez_fix(char **str, int *size);
-short mx_get_buf_type(unsigned char *ch);
+short mx_get_buf_type(unsigned char ch);
+//short mx_get_buf_type(unsigned char *ch);
 // short mx_get_buf_type(unsigned char ch);
 void mx_restore_buffer(t_termconf *cfg);
 
