@@ -2,7 +2,6 @@
 
 char *mx_tild_parse(char *str, int *piv, int *type) {
     char *res = mx_strnew_x(1);
-    int len = mx_strlen(str);
 
     (*type) = 2;
     if (str[0] == '+')

@@ -30,7 +30,7 @@ static void exyta_condition(t_ush *ush, char **command,
 }
 
 static void variable_adding_condition(t_ush *ush, char **command,
-                                      char **k_v2, int *count) {
+                                                char **k_v2, int *count) {
     if (k_v2 != NULL ) {
         exyta_condition(ush, command, k_v2, count);
         // if (mx_check_key_allow(NULL, k_v2[0])) {
@@ -81,7 +81,6 @@ static void variable_adding_cycle(t_ush *ush, char **command,
 void mx_adding_variable(t_ush *ush, char **command, char **kv) {
     char **k_v2 = NULL;
     int count = 1;
-    int lenth = 0;
 
     if (mx_isvariable(ush, kv)) {
         mx_push_back_variable(&ush->variable_list, kv);

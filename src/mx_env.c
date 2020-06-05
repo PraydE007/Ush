@@ -11,7 +11,7 @@ static bool is_builtin(t_ush *ush, char **command) {
     char **kv = mx_key_value_creation(ush, command[0]);
 
     if (mx_strcmp("exit", command[0]) == 0) {
-        ush->exit_code = mx_exit(command);
+        ush->exit_code = mx_exit(ush, command);
         return true;
     }
     else if (mx_strcmp("env", command[0]) == 0) {

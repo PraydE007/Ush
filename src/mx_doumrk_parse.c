@@ -27,6 +27,7 @@ char *mx_doumrk_parse(t_ush *ush, char *str, int *piv) {
     int len = mx_strlen(str);
     int i = 0;
 
+    ush->active = ush->active; // workaround for unused war
     while (i <= len) {
         // OTHER CASES
         if (str[i] == '\0')

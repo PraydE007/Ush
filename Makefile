@@ -181,11 +181,12 @@ install: ush
 
 ush : $(SRC_COMPILE) $(HEADER)
 	@make -C libmx install
-#	@clang $(CFLAGS) -c $(SRC_COMPILE)
-#	@clang $(CFLAGS) $(OBJ) $(LIB_A) -o $(NAME)
-	#TEST MODE
-	@clang -c $(SRC_COMPILE)
-	@clang -ltermcap $(OBJ) $(LIB_A) -o $(NAME)
+	#RELEASE MODE
+	@clang $(CFLAGS) -c $(SRC_COMPILE)
+	@clang $(CFLAGS) -ltermcap $(OBJ) $(LIB_A) -o $(NAME)
+#	TEST MODE
+#	@clang -c $(SRC_COMPILE)
+#	@clang -ltermcap $(OBJ) $(LIB_A) -o $(NAME)
 	@mkdir -p obj
 	@cp $(OBJ) obj/
 	@rm -rf $(OBJ)

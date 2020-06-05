@@ -2,8 +2,11 @@
 
 static bool first_part_of_biltin(t_ush *ush, char **command) {
     if (mx_strcmp("exit", command[0]) == 0) {
-        ush->exit_code = mx_exit(command);
-        ush->active = false;
+        ush->exit_code = mx_exit(ush, command);
+        if (ush->exit_code == 999)
+            ush->exit_code = 0;
+        else
+            ush->active = false;
         return true;
     }
 //    else if (mx_strcmp("env", command[0]) == 0) {
