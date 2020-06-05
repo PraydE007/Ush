@@ -9,10 +9,10 @@ static bool first_part_of_biltin(t_ush *ush, char **command) {
             ush->active = false;
         return true;
     }
-    else if (mx_strcmp("env", command[0]) == 0) {
-        mx_env(ush, command);
-        return true;
-    }
+//    else if (mx_strcmp("env", command[0]) == 0) {
+//        mx_env(ush, command);
+//        return true;
+//    }
     //else if (mx_strcmp("echo", command[0]) == 0) {
     //    mx_echo(ush, command);
     //    return true;
