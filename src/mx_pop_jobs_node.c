@@ -1,12 +1,12 @@
 #include "../inc/ush.h"
 
-static void serial_number_setting(t_jobs **list, int lenth) {
-    t_jobs *pl = *list;
+static void serial_number_setting(t_jobs **list, t_jobs **pl) {
+    t_jobs *pl2 = *list;
 
-    while (pl) {
-        if (pl->serial_number >= lenth)
-            pl->serial_number = pl->serial_number - 1;
-        pl = pl->next;
+    while (pl2) {
+        if (pl2->serial_number > (*pl)->serial_number)
+                pl2->serial_number = pl2->serial_number - 1;
+        pl2 = pl2->next;
     }
 }
 
@@ -59,15 +59,23 @@ static void pop_anyplace_jobs(t_jobs **list, int index) {
 }
 
 void mx_pop_jobs_node(t_jobs **list, int index) {
+    t_jobs *pl = *list;
     int lenth = 0;
+    int node_check = 0;
 
     if ((*list != NULL) && (list != NULL)) {
+        while (pl) {
+            node_check++;
+            if (pl->number == index)
+                break;
+            pl = pl->next;
+        }
         lenth = mx_jobs_list_len(list);
         mx_jobs_sign_change(list, index);
-        if (index == 1 || lenth == 1)
+        serial_number_setting(list, &pl);
+        if (index == 1 || lenth == 1 || node_check == 1)
             pop_front_jobs(list);
         else
             pop_anyplace_jobs(list, index);
-        serial_number_setting(list, lenth);
     }
 }

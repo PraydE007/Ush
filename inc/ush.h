@@ -244,6 +244,7 @@ void mx_env_variable_checking(t_variable **list, char *command);
 void mx_error_making(char *comn);
 void mx_export(t_ush *ush, char **command);
 void mx_fg(t_ush *ush, char **command);
+void mx_fg_signal(t_ush *ush, t_jobs **pl_jobs, int lenth);
 void mx_jobs(t_ush *ush);
 void mx_jobs_sign_change(t_jobs **list, int index);
 void mx_outlst(t_ush *ush);
