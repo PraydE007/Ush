@@ -50,6 +50,7 @@ FILES = main \
 	mx_export_matrix_creator \
 	mx_exportnode_creation \
 	mx_fg \
+	mx_fg_signal \
 	mx_four_slash \
 	mx_four_slash_m \
 	mx_four_slash_s \
