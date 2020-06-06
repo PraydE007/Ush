@@ -244,6 +244,7 @@ void mx_env_variable_checking(t_variable **list, char *command);
 void mx_error_making(char *comn);
 void mx_export(t_ush *ush, char **command);
 void mx_fg(t_ush *ush, char **command);
+void mx_fg_signal(t_ush *ush, t_jobs **pl_jobs, int lenth);
 void mx_jobs(t_ush *ush);
 void mx_jobs_sign_change(t_jobs **list, int index);
 void mx_outlst(t_ush *ush);
@@ -293,6 +294,8 @@ int mx_buf_push(char **buf, int *buf_size, char ch);
 int mx_push_n_char(t_termconf **cfg, char ch);
 char *mx_sixteen_ez_fix(char **str, int *size);
 short mx_get_buf_type(unsigned char *ch);
+short mx_get_buf_type_for_clion(unsigned char *ch);
+//short mx_get_buf_type(unsigned char *ch);
 // short mx_get_buf_type(unsigned char ch);
 void mx_restore_buffer(t_termconf *cfg);
 
