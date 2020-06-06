@@ -45,6 +45,7 @@ t_b_node *mx_parse_block(t_ush *ush, t_t_node **head, int err_ch, int type) {
             check_for_parse(&wa, p, &i, &type);
             if (!check_error(blocks, wa->p_b, wa->buf, type)) {
                 fprintf(stderr, MX_PIZDA, p->text[err_ch]);
+                free(wa);
                 return NULL;
             }
         }

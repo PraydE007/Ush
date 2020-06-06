@@ -159,7 +159,10 @@ FILES = main \
 	mx_variable_list_len \
 	mx_which \
 	mx_which_str \
-	
+	mx_doumrk_subst \
+	mx_replace_subst_nested \
+	mx_doumrk_dollar \
+	mx_replace_var_nested \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

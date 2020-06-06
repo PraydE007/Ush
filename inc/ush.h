@@ -367,6 +367,10 @@ int mx_two_slash_s(char **res, char *str, int *i);
 int mx_three_slash_s(char **res, char *str, int *i);
 int mx_four_slash_s(char **res, char *str, int *i);
 int mx_four_slash_m(char **res, char *str, int *i);
+int mx_doumrk_subst(t_ush *ush, char **res, char *str, int *piv);
+void mx_replace_subst_nested(t_ush *ush, char **res, char **var);
+int mx_doumrk_dollar(t_ush *ush, char **res, char *str, int *piv);
+void mx_replace_var_nested(t_ush *ush, char **res, char **var);
 
 // Workarounds
 t_wa *mx_create_workaround(t_ush *ush);
