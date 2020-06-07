@@ -7,7 +7,6 @@ int mx_one_slash_s(char **res, char *str, int *i) {
         return 0;
     }
     else {
-        mx_push_symbol_l(res, '\\');
         return mx_push_symbol_l(res, str[(*i)]);
     }
 }

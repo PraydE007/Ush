@@ -50,6 +50,7 @@ FILES = main \
 	mx_export_matrix_creator \
 	mx_exportnode_creation \
 	mx_fg \
+	mx_fg_signal \
 	mx_four_slash \
 	mx_four_slash_m \
 	mx_four_slash_s \
@@ -160,7 +161,10 @@ FILES = main \
 	mx_variable_list_len \
 	mx_which \
 	mx_which_str \
-	
+	mx_doumrk_subst \
+	mx_replace_subst_nested \
+	mx_doumrk_dollar \
+	mx_replace_var_nested \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

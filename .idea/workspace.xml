@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
-    <generated>
-      <config projectName="ush" targetName="ush" />
-    </generated>
+    <generated />
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
@@ -12,16 +10,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da62e3c-02c0-4480-ae94-83fd9bd8ff7d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/mx_pwd.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/Ush.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mx_doumrk_dollar.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mx_doumrk_subst.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mx_fg_signal.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mx_replace_subst_nested.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mx_replace_var_nested.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mx_serial_number_setting.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ush.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ush.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/ush.h" beforeDir="false" afterPath="$PROJECT_DIR$/inc/ush.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mx_cd.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_cd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mx_cd_P.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_cd_P.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mx_cd_s.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_cd_s.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_child_exvprocess.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_child_exvprocess.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_command_matrix_creator.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_command_matrix_creator.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_doumrk_dol_parse.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_doumrk_parse.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_doumrk_parse.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mx_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_env.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_exit.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_exit.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_fg.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_fg.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mx_is_builtin.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_is_builtin.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mx_unset.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_unset.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ush" beforeDir="false" afterPath="$PROJECT_DIR$/ush" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_jobs.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_jobs.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_jobs_sign_change.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_jobs_sign_change.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_one_slash_s.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_one_slash_s.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_parse_block.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_parse_block.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_parse_burnish.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_parse_burnish.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_pop_jobs_node.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_pop_jobs_node.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_replace_subst.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_replace_subst.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mx_text_parse.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/mx_text_parse.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ush" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +49,6 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -57,13 +74,6 @@
     <option name="myCommands">
       <command value="zsh" />
     </option>
-  </component>
-  <component name="RunManager">
-    <configuration name="ush" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ush" TARGET_NAME="ush" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ush" RUN_TARGET_NAME="ush">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -94,7 +104,7 @@
       <workItem from="1591362849240" duration="162000" />
       <workItem from="1591364463906" duration="969000" />
       <workItem from="1591368285284" duration="7425000" />
-      <workItem from="1591526730097" duration="5483000" />
+      <workItem from="1591526730097" duration="5880000" />
     </task>
     <servers />
   </component>

@@ -8,13 +8,15 @@ char *mx_text_parse(char *str, int *piv) {
     while (i <= len) {
         if (str[i] == ' ' || str[i] == '\\'
             || str[i] == '\'' || str[i] == '\"'
-            || str[i] == '$' || str[i] == '\0') {
-            res = mx_strnew_x(i);
+            || str[i] == '$' || str[i] == '\0'
+            || str[i] == '`') {
+            res = mx_strnew_x(i + 1);
             strncpy(res, &str[0], i);
             break;
         }
         i++;
     }
+    res[i] = '\0';
     (*piv) += i - 1;
     return res;
 }

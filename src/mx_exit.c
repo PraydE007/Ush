@@ -3,7 +3,6 @@
 int mx_exit(t_ush *ush, char **command) {
     int checker = 1;
 
-    mx_printerr("exit\n");
     if (ush->jobs_list) {
         mx_printstr("ush: you have suspended jobs.\n");
         return 999;

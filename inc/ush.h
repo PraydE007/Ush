@@ -248,6 +248,7 @@ void mx_env_variable_checking(t_variable **list, char *command);
 void mx_error_making(char *comn);
 void mx_export(t_ush *ush, char **command);
 void mx_fg(t_ush *ush, char **command);
+void mx_fg_signal(t_ush *ush, t_jobs **pl_jobs, int lenth);
 void mx_jobs(t_ush *ush);
 void mx_jobs_sign_change(t_jobs **list, int index);
 void mx_outlst(t_ush *ush);
@@ -374,6 +375,10 @@ int mx_two_slash_s(char **res, char *str, int *i);
 int mx_three_slash_s(char **res, char *str, int *i);
 int mx_four_slash_s(char **res, char *str, int *i);
 int mx_four_slash_m(char **res, char *str, int *i);
+int mx_doumrk_subst(t_ush *ush, char **res, char *str, int *piv);
+void mx_replace_subst_nested(t_ush *ush, char **res, char **var);
+int mx_doumrk_dollar(t_ush *ush, char **res, char *str, int *piv);
+void mx_replace_var_nested(t_ush *ush, char **res, char **var);
 
 // Workarounds
 t_wa *mx_create_workaround(t_ush *ush);
