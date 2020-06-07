@@ -16,7 +16,6 @@ char *mx_text_parse(char *str, int *piv) {
         }
         i++;
     }
-    res[i] = '\0';
     (*piv) += i - 1;
     return res;
 }
