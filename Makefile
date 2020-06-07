@@ -101,6 +101,7 @@ FILES = main \
 	mx_print_history \
 	mx_process_creator \
 	mx_programm_finder \
+	mx_pwd \
 	mx_push_back_export \
 	mx_push_back_pid \
 	mx_push_back_pwdilda \

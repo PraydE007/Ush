@@ -7,9 +7,12 @@
 #define MX_ETGTN "ush: Could not access the termcap data base.\n"
 #define MX_EBFLOC "ush: Buffer cannot allocate enough memory.\n"
 #define MX_PIZDA "ush: Syntax error -- '%c'\n"
-#define MX_IFLNK  0120000
-#define MX_IFMT   0170000
-#define MX_IFDIR  0040000
+#define MX_IFLNK 0120000
+#define MX_IFMT 0170000
+#define MX_IFDIR 0040000
+#define MX_P 0
+#define MX_L 1
+#define MX_END 2
 #define PH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki"
 
 #define MX_ZER "\x1B[0m"
@@ -216,6 +219,7 @@ int mx_get_twidth();
 int mx_jobs_list_len(t_jobs **list);
 int mx_read_input(t_ush *ush);
 int mx_read_input_pro(t_ush *ush);
+int mx_read_input_pro_for_clion(t_ush *ush);
 int mx_read_from_thread(t_ush *ush);
 int mx_size_of_pipe_matstr(char **comn, int *i, int *j);
 int mx_strarrlen(char **arr);
@@ -293,7 +297,7 @@ int mx_buf_push(char **buf, int *buf_size, char ch);
 int mx_push_n_char(t_termconf **cfg, char ch);
 char *mx_sixteen_ez_fix(char **str, int *size);
 short mx_get_buf_type(unsigned char *ch);
-short mx_get_buf_type_for_clion(unsigned char *ch);
+short mx_get_buf_type_for_clion(unsigned char ch);
 //short mx_get_buf_type(unsigned char *ch);
 // short mx_get_buf_type(unsigned char ch);
 void mx_restore_buffer(t_termconf *cfg);
@@ -351,6 +355,7 @@ int mx_two_slash(char **res, char *str, int *i);
 int mx_two_slash_m(char **res, char *str, int *i);
 t_b_node *mx_parse_block(t_ush *ush, t_t_node **head, int err_ch, int type);
 void mx_parse_burnish(t_ush *ush);
+void mx_pwd(char **command, t_ush *ush);
 void mx_replace_subst(t_ush *ush, t_b_node **node);
 void mx_replace_tild(t_pwdilda **list, t_b_node **node);
 void mx_replace_variables(t_ush *ush, t_b_node **node);
