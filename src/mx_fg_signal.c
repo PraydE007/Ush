@@ -38,7 +38,7 @@ static void serial_number_sign_setting(t_jobs **list, t_jobs **pl_jobs,
 }
 
 static void signal_end(t_ush *ush, t_jobs **pl_jobs, int status, int lenth) {
-    if (mx_strcmp((*pl_jobs)->name[0], "man") == 0) {
+    if (mx_strcmp((*pl_jobs)->name[0], "ls") != 0) {
         tcsetpgrp(1, getpid());
         continued_process(pl_jobs);
     }

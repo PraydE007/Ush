@@ -195,6 +195,7 @@ typedef struct s_wa {
 
 bool mx_check_key_allow(t_ush *ush, char *kay);
 bool mx_have_equals(t_ush *ush, char *env);
+bool mx_is_fg_command(char *jobs_name, char *command);
 bool mx_is_builtin(t_ush *ush, char **command);
 bool mx_is_built_in(char *str);
 bool mx_is_command(char *path, bool *flag, int index);

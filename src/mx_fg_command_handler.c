@@ -32,7 +32,8 @@ static void first_char_percent(t_ush *ush, t_jobs **pl_jobs, char *command,
         for (; lenth > 0; lenth--) {
             while (*pl_jobs) {
                 if ((*pl_jobs)->serial_number == lenth
-                    && mx_strcmp((*pl_jobs)->name[0], &command[1]) == 0)
+                    && (mx_strcmp((*pl_jobs)->name[0], &command[1]) == 0
+                    || mx_is_fg_command((*pl_jobs)->name[0], &command[1])))
                     return;
                 *pl_jobs = (*pl_jobs)->next;
             }
@@ -47,7 +48,8 @@ static void without_percent(t_ush *ush, t_jobs **pl_jobs, char *command,
     for (; lenth > 0; lenth--) {
         while (*pl_jobs) {
             if ((*pl_jobs)->serial_number == lenth
-                && mx_strcmp((*pl_jobs)->name[0], command) == 0)
+                && (mx_strcmp((*pl_jobs)->name[0], command) == 0
+                || mx_is_fg_command((*pl_jobs)->name[0], command)))
                 return;
             *pl_jobs = (*pl_jobs)->next;
         }
