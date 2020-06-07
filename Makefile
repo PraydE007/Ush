@@ -69,6 +69,7 @@ FILES = main \
 	mx_is_built_in \
 	mx_is_command \
 	mx_is_control_slash \
+	mx_is_fg_command \
 	mx_is_pipe \
 	mx_is_slash \
 	mx_isvariable \
