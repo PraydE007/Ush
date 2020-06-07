@@ -8,10 +8,10 @@ int mx_exit(t_ush *ush, char **command) {
         return 999;
     }
     else if (command[0] && !command[1])
-        return 1;
+        return ush->exit_code;
     else if (command[0] && command[1] && command[2]) {
         mx_printerr("ush: exit: too many arguments\n");
-        return 1;
+        return ush->exit_code;
     }
     else if (command[0] && command[1]) {
          for (int i = 0; command[1][i]; i++)
@@ -20,8 +20,8 @@ int mx_exit(t_ush *ush, char **command) {
         if (checker == 1)
             return mx_atoi(command[1]);
         else
-            return 1;
+            return ush->exit_code;
     }
     else
-        return 1;
+        return ush->exit_code;
 }
