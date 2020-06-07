@@ -1,17 +1,17 @@
 #include "../inc/ush.h"
 
 static void cntrl_z_printing(char ***commat) {
-    mx_printstr("\nush: suspended  ");
+    mx_printerr("\nush: suspended  ");
     for (int i = 0; commat[i]; i++) {
         for (int j = 0; commat[i][j]; j++) {
-            mx_printstr(commat[i][j]);
+            mx_printerr(commat[i][j]);
             if (commat[i][j + 1])
-                mx_printstr(" ");
+                mx_printerr(" ");
         }
         if (commat[i + 1])
-            mx_printstr(" | ");
+            mx_printerr(" | ");
     }
-    mx_printstr("\n");
+    mx_printerr("\n");
 }
 
 static void error_status(t_ush *ush, int status) {

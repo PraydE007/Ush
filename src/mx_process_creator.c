@@ -47,7 +47,7 @@ void mx_process_creator(t_ush *ush, char **command) {
         mx_child_process(ush, command);
     else if (ush->pid2 < 0)
         perror("ush");
-    else if (ush->pid2> 0) {
+    else if (ush->pid2 > 0) {
         setpgid(ush->pid2, ush->pid2);
         tcsetpgrp(1, ush->pid2);
         wpid = waitpid(ush->pid2, &status, WUNTRACED);

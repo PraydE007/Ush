@@ -1,11 +1,11 @@
 #include "../inc/ush.h"
 
 void mx_cntrl_z_printing(char **command) {
-    mx_printstr("\nush: suspended  ");
+    mx_printerr("\nush: suspended  ");
     for (int i = 0; command[i]; i++) {
-        mx_printstr(command[i]);
+        mx_printerr(command[i]);
         if (command[i + 1])
-            mx_printstr(" ");
+            mx_printerr(" ");
     }
-    mx_printstr("\n");
+    mx_printerr("\n");
 }

@@ -16,8 +16,6 @@ char *mx_text_parse(char *str, int *piv) {
         }
         i++;
     }
-printf("i: %d\n", i);
-printf("res: %s\n", res);
     (*piv) += i - 1;
     return res;
 }
