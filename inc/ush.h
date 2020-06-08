@@ -7,9 +7,12 @@
 #define MX_ETGTN "ush: Could not access the termcap data base.\n"
 #define MX_EBFLOC "ush: Buffer cannot allocate enough memory.\n"
 #define MX_PIZDA "ush: Syntax error -- '%c'\n"
-#define MX_IFLNK  0120000
-#define MX_IFMT   0170000
-#define MX_IFDIR  0040000
+#define MX_IFLNK 0120000
+#define MX_IFMT 0170000
+#define MX_IFDIR 0040000
+#define MX_P 0
+#define MX_L 1
+#define MX_END 2
 #define PH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki"
 
 #define MX_ZER "\x1B[0m"
@@ -177,7 +180,6 @@ typedef struct s_ush {
     t_pid *pid_list;
     t_jobs *jobs_list;
     t_termconf *termconf;
-    // t_export *export_list;
     t_pwdilda *pwdilda_list;
     t_variable *variable_list;
 }                t_ush;
@@ -190,6 +192,7 @@ typedef struct s_wa {
 
 bool mx_check_key_allow(t_ush *ush, char *kay);
 bool mx_have_equals(t_ush *ush, char *env);
+bool mx_is_fg_command(char *jobs_name, char *command);
 bool mx_is_builtin(t_ush *ush, char **command);
 bool mx_is_built_in(char *str);
 bool mx_is_command(char *path, bool *flag, int index);
@@ -214,12 +217,12 @@ int mx_get_twidth(void);
 int mx_jobs_list_len(t_jobs **list);
 int mx_read_input(t_ush *ush);
 int mx_read_input_pro(t_ush *ush);
+int mx_read_input_pro_for_clion(t_ush *ush);
 int mx_read_from_thread(t_ush *ush);
 int mx_size_of_pipe_matstr(char **comn, int *i, int *j);
 int mx_strarrlen(char **arr);
 int mx_strcmp_export(const char *s1, const char *s2);
 int mx_variable_list_len(t_variable **list);
-// t_env *mx_envnode_creation(void);
 t_env_flags *mx_create_env_flags(void);
 t_jobs *mx_creat_jobs_node(void);
 t_pid *mx_creat_pid_node(int pid);
@@ -242,6 +245,7 @@ void mx_env_variable_checking(t_variable **list, char *command);
 void mx_error_making(char *comn);
 void mx_export(t_ush *ush, char **command);
 void mx_fg(t_ush *ush, char **command);
+void mx_fg_command_handler(t_ush *ush, t_jobs **pl_jobs, char **command, int lenth);
 void mx_fg_signal(t_ush *ush, t_jobs **pl_jobs, int lenth);
 void mx_jobs(t_ush *ush);
 void mx_jobs_sign_change(t_jobs **list, int index);
@@ -249,27 +253,23 @@ void mx_outlst(t_ush *ush);
 void mx_pipe_parent_process(t_ush *ush, char ***commat, int *pipedes, int *buf_exit);
 void mx_pipe_process_creator(t_ush *ush, char ***commat);
 void mx_pop_back_variable(t_variable **head);
-void mx_pop_front_export(t_export **head);
 void mx_pop_front_pid(t_pid **head);
 void mx_pop_front_pwdilda(t_pwdilda **head);
 void mx_pop_front_variable(t_variable **head);
 void mx_pop_jobs_node(t_jobs **list, int index);
 void mx_pop_specific(t_variable **list, int index);
 void mx_process_creator(t_ush *ush, char **command);
-void mx_push_back_export(t_export **export, char **kv);
 void mx_push_back_pid(t_pid **list, int pid);
 void mx_push_back_pwdilda(t_pwdilda **list, char *kay, char *value);
 void mx_push_back_variable(t_variable **list, char **kv);
 void mx_push_jobs_node(t_jobs **list, t_pid **pids, char **command, char ***pipe_command);
-void mx_read_environment(t_export **export_list, char **env);
 void mx_read_termconf(t_termconf *termconf);
-void mx_set_signal(void);
 void mx_signal_end(t_ush *ush, char ***commat, int status, int *buf_exit);
 void mx_sig_init(void);
 void mx_sub_error_printing(int *pipedes);
 void mx_unset(char **command, t_ush *ush);
+void mx_variable_cleaning(t_ush *ush, int *count);
 void mx_which(t_ush *ush, char **command);
-void mx_unset(char **command, t_ush *ush);
 
 // ALL TERM OUTPUTS
 void mx_rd_print_color(t_termconf **cfg);
@@ -279,7 +279,6 @@ void mx_rd_print_old(t_termconf **cfg);
 // TERM AND USH
 int mx_term_width_check(t_termconf **cfg);
 // t_env *mx_envnode_creation(void);
-t_export *mx_exportnode_creation(void);
 t_termconf *mx_create_termconf(void);
 t_ush *mx_create_ush(void);
 void mx_open_tty(t_termconf **cfg);
@@ -292,7 +291,7 @@ int mx_buf_push(char **buf, int *buf_size, char ch);
 int mx_push_n_char(t_termconf **cfg, char ch);
 char *mx_sixteen_ez_fix(char **str, int *size);
 short mx_get_buf_type(unsigned char *ch);
-short mx_get_buf_type_for_clion(unsigned char *ch);
+short mx_get_buf_type_for_clion(unsigned char ch);
 //short mx_get_buf_type(unsigned char *ch);
 // short mx_get_buf_type(unsigned char ch);
 void mx_restore_buffer(t_termconf *cfg);
@@ -350,6 +349,7 @@ int mx_two_slash(char **res, char *str, int *i);
 int mx_two_slash_m(char **res, char *str, int *i);
 t_b_node *mx_parse_block(t_ush *ush, t_t_node **head, int err_ch, int type);
 void mx_parse_burnish(t_ush *ush);
+void mx_pwd(char **command, t_ush *ush);
 void mx_replace_subst(t_ush *ush, t_b_node **node);
 void mx_replace_tild(t_pwdilda **list, t_b_node **node);
 void mx_replace_variables(t_ush *ush, t_b_node **node);

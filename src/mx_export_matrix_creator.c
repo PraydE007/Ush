@@ -17,12 +17,15 @@ static void sort_export(char **env) {
 char **mx_export_matrix_creator(char **env) {
     int size = mx_strarrlen(env);
     char **copy = NULL;
+    int j = 0;
 
     copy = (char **)malloc(sizeof(char *) * (size));
     copy[size - 1] = NULL;
     for (int i = 0; env[i]; i++) {
-        if (mx_strcmp("_=/usr/bin/env", env[i]) != 0)
-            copy[i] = mx_strdup(env[i]);
+        if (mx_strcmp("_=/usr/bin/env", env[i]) != 0) {
+            copy[j] = mx_strdup(env[i]);
+            j++;
+        }
     }
     if (copy)
         sort_export(copy);

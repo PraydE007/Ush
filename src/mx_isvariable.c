@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-//CHECK WORK AND DELETE COMMENTS
+
 static void set_variable (char **k_v) {
     if (k_v[1] != NULL)
         setenv(k_v[0], k_v[1], 1);
@@ -12,10 +12,6 @@ bool mx_isvariable (t_ush *ush, char **k_v) {
 
     if (getenv(k_v[0]) != 0) {
         set_variable (k_v);
-        // if (k_v[1] != NULL)
-        //     setenv(k_v[0], k_v[1], 1);
-        // else
-        //     setenv(k_v[0], "", 1);
         ush->trigger = true;
     }
     while (pl) {

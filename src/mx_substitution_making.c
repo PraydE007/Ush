@@ -53,8 +53,7 @@ static void returning_char(char **buf, int *pipedes) {
     close(pipedes[0]);
 }
 
-static void pipe_creator(char ***comforsub, char **buf,
-                                                                int *pipedes) {
+static void pipe_creator(char ***comforsub, char **buf, int *pipedes) {
     pid_t pid = 0;
     pid_t wpid = 0;
     int status = 0;

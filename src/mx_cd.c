@@ -49,18 +49,15 @@ static char *getpath_cd(char **command, t_ush *ush, int i) {
 }
 
 static void changedir(char *path, t_ush *ush) {
-    char *dir = mx_strnew(1024);
     char *buf = strdup(ush->pwdilda_list->next->value);
 
     chdir(path);
-    getcwd(dir, 1024);
     free(ush->pwdilda_list->value);
     setenv("OLDPWD", buf, strlen(buf));
     ush->pwdilda_list->value = strdup(ush->pwdilda_list->next->value);
     free(ush->pwdilda_list->next->value);
-    setenv("PWD", dir, 1024);
-    ush->pwdilda_list->next->value = strdup(dir);
-    free(dir);
+    setenv("PWD", path, 1024);
+    ush->pwdilda_list->next->value = strdup(path);
     free(buf);
 }
 
@@ -70,7 +67,6 @@ void mx_cd(char **command, t_ush *ush) {
     char *path;
 
     memset(ush->cd_flags, 0, sizeof(t_cd_info));
-    ush->cd_flags->P = 0;
     i = mx_parser_cd(command, ush);
     path = getpath_cd(command, ush, i);
     if (!ush->cd_flags->rip_42) {

@@ -1,5 +1,9 @@
 #include "../inc/ush.h"
-// A LOT OF LINES
+<<<<<<< HEAD
+
+=======
+// A LOT OF LINES and COMMENTS
+>>>>>>> kos-ush
 static void print_env(char **env) {
     for (int i = 0; env[i]; i++) {
         mx_printstr(env[i]);
@@ -7,82 +11,51 @@ static void print_env(char **env) {
     }
 }
 
-static bool is_builtin(t_ush *ush, char **command) {
-    char **kv = mx_key_value_creation(ush, command[0]);
+static void env_filler(char **env, char **unset, char **environ) {
+    int j = 0;
+    int flag = 1;
+    char **buf = NULL;
 
-    if (mx_strcmp("exit", command[0]) == 0) {
-        ush->exit_code = mx_exit(ush, command);
-        return true;
-    }
-    else if (mx_strcmp("env", command[0]) == 0) {
-        mx_env(ush, command);
-        return true;
-    }
-    else if (mx_strcmp("export", command[0]) == 0) {
-        mx_export(ush, command);
-        return true;
-    }
-    else if (mx_strcmp("unset", command[0]) == 0) {
-        mx_unset(command, ush);
-        return true;
-    }
-    else if (mx_strcmp("which", command[0]) == 0) {
-        mx_which(ush, command);
-        return true;
-    }
-    else if (kv != NULL || ush->equals) {
-        if (kv != NULL) {
-            mx_adding_variable(ush, command, kv);
-            mx_del_strarr(&kv);
+    for (int i = 0; environ[i]; i++) {
+        for (int y = 0; unset[y]; y++) {
+            buf = mx_strsplit(environ[i], '=');
+            if (!strcmp(unset[y], buf[0]) && strcmp(buf[0], "_")) {
+                flag = 0;
+            }
         }
-        ush->equals = false;
-        return true;
+        if (flag == 1) {
+            env[j] = strdup(environ[i]);
+            j++;
+        }
+        flag = 1;
     }
-    mx_del_strarr(&kv);
-    return false;
 }
 
-static void env_process_creator(t_ush *ush, char **command, t_list *unset, int i) {
+static void env_process_creator(t_ush *ush, char **command, char **unset, int i) {
     pid_t pid = 0;
     pid_t wpid = 0;
     int status = 0;
-    
+    extern char **environ;
+    int env_size = mx_strarrlen(environ);
+    char **env = (char **)malloc(sizeof(char *) * env_size + 1);
 
+    env_filler(env, unset, environ);
     pid = fork();
-    if (pid == 0) {
-        extern char **environ;
-        printf("\nI = %d", i);
-        //for (int i = 0; command[i]; i++)
-         //if (ush->flags->i)
-         //   for (int i = 0; environ[i]; i++) {
-         //       printf("environ[%d]\n", i);
-         //       unsetenv(strdup(environ[i]));
-         //   }
-        while (unset) {
-            unsetenv(strdup(unset->data));
-            unset = unset->next;
-        }
-        if (is_builtin(ush, &command[i])) {
-            printf("ZALUPA");
-            exit(1);
-        }
-        else if (ush->flags->i) {
-            printf("WHICH_STR = %s\n", mx_which_str(command[i]));
+    if (pid != 0) {
+        if (ush->flags->i) {
             if (execve(mx_which_str(command[i]), &command[i], NULL) == -1)
                 perror("ush");
             exit(1);
         }
-        else if (getenv("PATH")) {
-            if (execvp(command[i], &command[i]) == -1)
-                perror("ush");
-            exit(1);
-        }
         else {
-            if (execv(command[i], &command[i]) == -1)
+            printf("COMMAND = %s\n", command[i]);
+            for (int i = 0; &command[i]; i++)
+                printf("WTF? | %s\n", command[i]);
+            printf("WHICH_STR = %s\n", mx_which_str(command[i]));
+            if (execve(mx_which_str(command[i]), &command[i], env) == -1)
                 perror("ush");
             exit(1);
         }
-        exit(EXIT_FAILURE);
     }
     else if (pid < 0)
         perror("ush");
@@ -92,6 +65,7 @@ static void env_process_creator(t_ush *ush, char **command, t_list *unset, int i
             wpid = waitpid(pid, &status, WUNTRACED);
         }
     }
+    mx_del_strarr(&env);
 }
 
 static char *check_args(char **command) {
@@ -102,9 +76,10 @@ static char *check_args(char **command) {
     return res;
 }
 
-static int flags_trig(t_ush *ush, char **command, t_list *unset) {
+static int flags_trig(t_ush *ush, char **command, char **unset) {
     int i = 1;
     int index = 0;
+    int u = 0;
 
     for (; command[i]; i++) {
         for (int j = 1; command[i][j]; j++) {
@@ -115,12 +90,10 @@ static int flags_trig(t_ush *ush, char **command, t_list *unset) {
                         ush->exit_code = 1;
                         return 0;
                     }
-                    int arrlen = mx_strarrlen(&command[i + 1]);
+                    int arrlen = mx_strarrlen(&command[i]);
                     char **res = (char **)malloc(sizeof(char *) * (arrlen + 1));
-                    printf("\n\n%d\n\n", arrlen);
                     for (int q = i + 1; command[q]; q++) {
                         res[index] = strdup(command[q]);
-                        printf("\n%s\n", res[index]);
                         index++;
                     }
                     res[arrlen] = NULL;
@@ -132,22 +105,28 @@ static int flags_trig(t_ush *ush, char **command, t_list *unset) {
                     ush->flags->i = 1;
                 else if (command[i][1] == 'u') {
                     ush->flags->u = 1;
-                    if (check_args(&command[i]))
-                        mx_push_front(&unset, check_args(&command[i]));
-                    else if (command[i + 1])
-                        mx_push_front(&unset, command[i + 1]);
+                    if (check_args(&command[i])) {
+                        unset[u] = strdup(check_args(&command[i]));
+                        u++;
+                    }
+                    else if (command[i + 1]) {
+                        unset[u] = strdup(command[i + 1]);
+                        u++;
+                    }
                 }
             }
         }
     }
-    //printf("\n\n%s\n\n", unset->data);
     return i;
 }
 
 void mx_env(t_ush *ush, char **command) {
     extern char **environ;
-    t_list *unset = NULL;
+    char **unset = (char **)malloc(sizeof(char *) * mx_strarrlen(command));
+    for (int i = 0; mx_strarrlen(command) >= i; i++)
+        unset[i] = NULL;
 
+    unset[0] = NULL;
     ush->flags = mx_create_env_flags();
     if (!command[1])
         print_env(environ);

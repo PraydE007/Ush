@@ -8,12 +8,8 @@ int main() {
     mx_sig_init();
     mx_constant_variables(ush);
     while (ush->active) {
-        if (!(func_exit = mx_read_input_pro(ush))) {
+        if (!(func_exit = mx_read_input_pro(ush)))
             mx_parse_buf(ush);
-            //1
-            // printf("ush->exit_code_main: %d\n", ush->exit_code);
-            //2
-        }
         else if (func_exit == 101) {
             ush->active = false;
             ush->exit_code = 1;

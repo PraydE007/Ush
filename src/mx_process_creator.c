@@ -1,15 +1,5 @@
 #include "../inc/ush.h"
 
-// static void cntrl_z_printing(char **command) {
-//     mx_printstr("\nush: suspended  ");
-//     for (int i = 0; command[i]; i++) {
-//         mx_printstr(command[i]);
-//         if (command[i + 1])
-//             mx_printstr(" ");
-//     }
-//     mx_printstr("\n");
-// }
-
 static void cntrl_z_condition(t_ush *ush, char **command) {
     t_pid *pid = NULL;
 
@@ -47,7 +37,7 @@ void mx_process_creator(t_ush *ush, char **command) {
         mx_child_process(ush, command);
     else if (ush->pid2 < 0)
         perror("ush");
-    else if (ush->pid2> 0) {
+    else if (ush->pid2 > 0) {
         setpgid(ush->pid2, ush->pid2);
         tcsetpgrp(1, ush->pid2);
         wpid = waitpid(ush->pid2, &status, WUNTRACED);

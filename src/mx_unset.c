@@ -19,10 +19,12 @@ void mx_unset(char **command, t_ush *ush) {
         mx_printerr("unset: not enough arguments\n");
     else {
         for (int j = 1; command[j]; j++) {
-            variable_out(command[j], &ush->variable_list);
-            for (int i = 0; command[i]; i++) {
-                if (getenv(command[i]))
-                    unsetenv(command[i]);
+            if (strcmp(command[j], "_")) {
+                variable_out(command[j], &ush->variable_list);
+                for (int i = 0; command[i]; i++) {
+                    if (getenv(command[i]))
+                        unsetenv(command[i]);
+                }
             }
         }
     }

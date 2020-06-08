@@ -2,17 +2,21 @@
 
 static void part_for_link(char *command, t_ush *ush)  {
     char *link = mx_strnew(1024);
+    char *buf = strdup(ush->pwdilda_list->next->value);
+    char *cwd = mx_strnew(1024);
 
     readlink(command, link, 1024);
     chdir(command);
     free(ush->pwdilda_list->value);
-    setenv("OLDPWD", strdup(ush->pwdilda_list->next->value), strlen(ush->pwdilda_list->next->value));
-    ush->pwdilda_list->value = strdup(ush->pwdilda_list->next->value);
+    setenv("OLDPWD", buf, strlen(buf));
+    ush->pwdilda_list->value = strdup(buf);
     free(ush->pwdilda_list->next->value);
-    setenv("PWD", getcwd(mx_strnew(1024), 1024), 1024);
-    ush->pwdilda_list->next->value = strdup(getcwd(mx_strnew(1024), 1024));
-    mx_strdel(&link);
+    setenv("PWD", getcwd(cwd, 1024), 1024);
+    ush->pwdilda_list->next->value = strdup(getcwd(cwd, 1024));
     ush->cd_flags->P = 1;
+    free(link);
+    free(buf);
+    free(cwd);
 }
 
 void mx_cd_P(char *command, t_ush *ush) {
