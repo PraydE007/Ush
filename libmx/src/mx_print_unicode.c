@@ -28,9 +28,4 @@ void mx_print_unicode(wchar_t c) {
     }
     else
         last_unicode_condition(c, byte);
-        // byte[0] = (c >> 18 & 0x07) | 0xF0;
-        // byte[1] = (c >> 12 & 0x3F) | 0x80;
-        // byte[2] = (c >> 6 & 0x3F) | 0x80;
-        // byte[3] = (c >> 0 & 0x3F) | 0x80;
-        // write(1, &byte, 4);
 }

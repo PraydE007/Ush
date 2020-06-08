@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//CHECK COMMENTS
 // short mx_get_buf_type(unsigned char ch) {
 //     if (32 <= ch && ch <= 126)
 //         return 0;

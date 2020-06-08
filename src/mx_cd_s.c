@@ -1,5 +1,5 @@
-#include "../inc/ush.h"//
-
+#include "../inc/ush.h"
+// A LOT OF LINES
 void mx_cd_s(char *command, t_ush *ush) {
     struct stat lt;
     char *buf = NULL;

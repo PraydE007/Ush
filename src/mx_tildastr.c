@@ -11,27 +11,37 @@ static char *pwdstr(t_pwdilda **list, char *key) {
     }
     return adress;
 }
-//A LOT OF LINES
+
+static bool is_getnv(char **adress, char *variable) {
+        if (!mx_strcmp(variable, "HOME") && getenv(variable) != 0) {
+            (*adress) = mx_strdup_x(getenv("HOME"));
+            return true;
+        }
+        else if (!mx_strcmp(variable, "PWD") && getenv(variable) != 0) {
+            (*adress) = mx_strdup_x(getenv("PWD"));
+            return true;
+        }
+        else if (!mx_strcmp(variable, "OLDPWD") && getenv(variable) != 0) {
+            (*adress) = mx_strdup_x(getenv("OLDPWD"));
+            return true;
+        }
+    return false;
+}
+
 char *mx_tildastr(t_pwdilda **list, char *tilda) {
     char *adress = NULL;
 
     if (mx_strcmp(tilda, "\0") == 0) {
-        if (getenv("HOME") != 0)
-            adress = getenv("HOME");
-        else
-            return adress = mx_strdup(" ");
+        if (!is_getnv(&adress, "HOME"))
+            adress = mx_strdup(" ");
     }
     else if (mx_strcmp(tilda, "+") == 0) {
-        if (getenv("PWD") != 0)
-            adress = getenv("PWD");
-        else
-            return adress = pwdstr(list, "PWD");
+        if (!is_getnv(&adress, "PWD"))
+            adress = pwdstr(list, "PWD");
     }
     else if (mx_strcmp(tilda, "-") == 0) {
-        if (getenv("OLDPWD") != 0)
-            adress = getenv("OLDPWD");
-        else
-            return adress = pwdstr(list, "OLDPWD");
+        if (!is_getnv(&adress, "OLDPWD"))
+            adress = pwdstr(list, "OLDPWD");
     }
-    return mx_strdup_x(adress);
+    return adress;
 }

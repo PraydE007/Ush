@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//A LOT OF LINES
 int mx_exit(t_ush *ush, char **command) {
     int checker = 1;
 

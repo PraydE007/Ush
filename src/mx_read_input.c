@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//A LOT OF FUNCTIONS AND COMMENTS
 static int c_cases(t_termconf **cfg, unsigned char ch, short type) {
     if (type == 0) {
         (*cfg)->c_pos += 1;

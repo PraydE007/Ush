@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+// CHECK COMMENTS
 static void print_1_type(char *arr, int j, int i, int trig) {
     while (arr[j + i]) {
         if (arr[j] == '\\' && trig == 1)

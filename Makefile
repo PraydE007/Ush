@@ -42,13 +42,11 @@ FILES = main \
 	mx_doumrk_parse \
 	mx_drop_n_char \
 	mx_env \
-	mx_envnode_creation \
 	mx_env_variable_checking \
 	mx_error_making \
 	mx_exit \
 	mx_export \
 	mx_export_matrix_creator \
-	mx_exportnode_creation \
 	mx_fg \
 	mx_fg_command_handler \
 	mx_fg_signal \
@@ -93,7 +91,6 @@ FILES = main \
 	mx_pipe_process_creator \
 	mx_pop_back_variable \
 	mx_pop_block_front \
-	mx_pop_front_export \
 	mx_pop_front_pid \
 	mx_pop_front_pwdilda \
 	mx_pop_front_variable \
@@ -104,7 +101,6 @@ FILES = main \
 	mx_print_history \
 	mx_process_creator \
 	mx_programm_finder \
-	mx_push_back_export \
 	mx_push_back_pid \
 	mx_push_back_pwdilda \
 	mx_push_back_variable \
@@ -118,7 +114,6 @@ FILES = main \
 	mx_rd_print_color \
 	mx_rd_print_pbc \
 	mx_rd_print_old \
-	mx_read_environment \
 	mx_read_from_thread \
 	mx_read_input_pro \
 	mx_read_termconf \
@@ -127,7 +122,6 @@ FILES = main \
 	mx_replace_variables \
 	mx_restore_buffer \
 	mx_set_history_pos \
-	mx_set_signal \
 	mx_signal_end \
 	mx_sig_init \
 	mx_sinmrk_parse \
@@ -159,6 +153,7 @@ FILES = main \
 	mx_two_slash_s \
 	mx_two_slash_sinmrk \
 	mx_unset \
+	mx_variable_cleaning \
 	mx_variable_list_len \
 	mx_which \
 	mx_which_str \

@@ -56,5 +56,4 @@ void mx_constant_variables(t_ush *ush) {
     }
     pwd_oldpwd_creation(ush,dir);
     setenv("_", "/usr/bin/env", 1);
-    // mx_strdel(&dir);
 }

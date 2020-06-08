@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//CHECK COMMENTS
 int mx_three_slash_sinmrk(char **res, char *str, int *i) {
     (*i) += 3;
     if (str[(*i)] == '\0') {

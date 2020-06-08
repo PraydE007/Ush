@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+// CHECK COMMENTS
 int mx_two_slash(char **res, char *str, int *i) {
     (*i) += 2;
     if (str[(*i)] == '\0' || str[(*i)] == ' '

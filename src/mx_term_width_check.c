@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+// //CHECK COMMENTS
 int mx_term_width_check(t_termconf **cfg) {
     (*cfg)->ful_len = mx_strlen((*cfg)->chsn->buf) + 4;
     (*cfg)->term_w = mx_get_twidth();

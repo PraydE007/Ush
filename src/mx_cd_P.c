@@ -6,7 +6,8 @@ static void part_for_link(char *command, t_ush *ush)  {
     readlink(command, link, 1024);
     chdir(command);
     free(ush->pwdilda_list->value);
-    setenv("OLDPWD", strdup(ush->pwdilda_list->next->value), strlen(ush->pwdilda_list->next->value));
+    setenv("OLDPWD", strdup(ush->pwdilda_list->next->value),
+           strlen(ush->pwdilda_list->next->value));
     ush->pwdilda_list->value = strdup(ush->pwdilda_list->next->value);
     free(ush->pwdilda_list->next->value);
     setenv("PWD", getcwd(mx_strnew(1024), 1024), 1024);

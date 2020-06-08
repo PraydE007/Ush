@@ -1,6 +1,5 @@
 #include "../inc/ush.h"
 
-
 static void error_end(char *comn) {
     mx_printerr(comn);
     mx_printerr("\n");

@@ -71,17 +71,4 @@ void mx_push_jobs_node(t_jobs **list, t_pid **pids, char **command,
     }
     else
         push_anyplace_jobs(list, node, lenth);
-
-    // while (i < lenth) {
-    //     if (pl->number != (pl->next->number - 1)) {
-    //         node->number = pl->number + 1;
-    //         node->next = pl->next;
-    //         pl = node;
-    //         return;
-    //     }
-    //     i++;
-    //     pl = pl->next;
-    // }
-    // node->number = lenth + 1;
-    // pl->next = node;
 }

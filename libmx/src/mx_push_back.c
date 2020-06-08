@@ -8,7 +8,6 @@ void mx_push_back(t_list **list, void *data) {
         *list = node;
         return;
     }
-
     while (pl->next != NULL) {
         pl = pl->next;
     }
