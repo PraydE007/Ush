@@ -55,4 +55,3 @@ void mx_process_creator(t_ush *ush, char **command) {
         tcsetpgrp(1, getpid());
     } 
 }
-Z
