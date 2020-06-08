@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//CHECK COMMENTS
 char *mx_buf_safe_realloc(char *src, int *size) {
     char *res = NULL;
 

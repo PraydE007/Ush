@@ -4,7 +4,7 @@ static void shell_name(char **sub) {
     if ((*sub)) {
         if ((*sub)[0] == 'z' && (*sub)[1] == 's' && (*sub)[2] == 'h') {
             (*sub)[0] = 'u';
-            mx_printerr((*sub));   
+            mx_printerr((*sub));
         }
     }
 }

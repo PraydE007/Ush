@@ -1,15 +1,5 @@
 #include "../inc/ush.h"
 
-// static void cntrl_z_printing(char **command) {
-//     mx_printstr("\nush: suspended  ");
-//     for (int i = 0; command[i]; i++) {
-//         mx_printstr(command[i]);
-//         if (command[i + 1])
-//             mx_printstr(" ");
-//     }
-//     mx_printstr("\n");
-// }
-
 static void cntrl_z_condition(t_ush *ush, char **command) {
     t_pid *pid = NULL;
 

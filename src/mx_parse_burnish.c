@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//CHECK COMMENTS
 static void burnish_cycle(t_b_node **blocks, t_b_node **p) {
     t_b_node *p_b = NULL;
     t_t_node *p_tt = NULL;
