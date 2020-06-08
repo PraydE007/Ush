@@ -1,9 +1,5 @@
 #include "../inc/ush.h"
-<<<<<<< HEAD
-
-=======
 // A LOT OF LINES and COMMENTS
->>>>>>> kos-ush
 static void print_env(char **env) {
     for (int i = 0; env[i]; i++) {
         mx_printstr(env[i]);
