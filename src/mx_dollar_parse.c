@@ -21,7 +21,8 @@ static char *quote_dol_parse(char *str, int *piv, int *type) {
 }
 
 static int def_handling(char **res, char *str, int *i, int *res_size) {
-    if (str[(*i)] == '\'' || str[(*i)] == '\"')
+    if (str[(*i)] == '\0' || str[(*i)] == ' ' || str[(*i)] == '\"'
+        || str[(*i)] == '\\' || str[(*i)] == '`' || str[(*i)] == ',')
         return 1;
     else if (str[(*i)] == '$' && (*res_size) > 1)
         return 1;

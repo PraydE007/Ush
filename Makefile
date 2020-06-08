@@ -164,6 +164,12 @@ FILES = main \
 	mx_replace_subst_nested \
 	mx_doumrk_dollar \
 	mx_replace_var_nested \
+	mx_check_flags_echo \
+	mx_echo \
+	mx_one_slash_e \
+	mx_two_slash_e \
+	mx_three_slash_e \
+	mx_four_slash_e \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

@@ -11,3 +11,4 @@ test
 libmx.a
 .vscode
 src/uls.h
+.idea

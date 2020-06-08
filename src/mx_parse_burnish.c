@@ -32,20 +32,13 @@ void mx_parse_burnish(t_ush *ush) {
     mx_dealloc_blocks(&(ush->blocks));
     p = clone;
     while (p) {
-        // system("leaks -q ush");
         mx_replace_tild(&(ush->pwdilda_list), &p);
-        // system("leaks -q ush");
         mx_replace_variables(ush, &p);
-        // system("leaks -q ush");
         mx_replace_subst(ush, &p);
-        // system("leaks -q ush");
         burnish_cycle(&(ush->blocks), &p);
-        // system("leaks -q ush");
         if (ush->blocks->t_node)
             mx_check_commands(ush);
-        // system("leaks -q ush");
         mx_dealloc_blocks(&(ush->blocks));
-        // system("leaks -q ush");
         p = p->next;
     }
     mx_dealloc_blocks(&clone);
