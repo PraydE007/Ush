@@ -41,7 +41,7 @@ static int def_dol_parse(char **res, char *str, int *piv) {
 
     while (i <= len) {
         if (str[i] == '\0' || str[i] == ' ' || str[i] == '\"'
-            || str[i] == '\\' || str[i] == '`')
+            || str[i] == '\\' || str[i] == '`' || str[i] == ',')
             break;
         else if (str[i] == '$' && mx_strlen(*res) > 1)
             break;

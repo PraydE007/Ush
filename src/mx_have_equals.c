@@ -5,7 +5,7 @@ bool mx_have_equals(t_ush *ush, char *ev) {
 
     while (ev[i]) {
         if (ev[0] == '=' || (ev[i] == '=' && ev[i + 1] == '=' && ev[i + 2])) {
-            mx_printerr("ush: "); //check maybe it must be one line down
+            mx_printerr("ush: ");
             if (!ush->equals) {
                 if (ev[0] == '=')
                     mx_printerr(&ev[0]);

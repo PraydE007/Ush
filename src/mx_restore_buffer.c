@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//CHECK COMMENTS
 // NOT IN USE
 void mx_restore_buffer(t_termconf *cfg) {
     if (cfg->chsn->buf) {

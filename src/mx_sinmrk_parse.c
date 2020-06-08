@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//CHECK COMMENTS
 static int slash_handling(char **res, char *str, int *i) {
     int sl_num = mx_count_slashes(str);
 

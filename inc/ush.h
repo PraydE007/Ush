@@ -119,9 +119,7 @@ typedef struct s_env_flags {
 
 typedef struct s_echo {
     bool E;
-    bool e;
     bool n;
-    bool end;
 }              t_echo;
 
 // check if needs this structure
@@ -182,7 +180,6 @@ typedef struct s_ush {
     t_pid *pid_list;
     t_jobs *jobs_list;
     t_termconf *termconf;
-    // t_export *export_list;
     t_pwdilda *pwdilda_list;
     t_variable *variable_list;
 }                t_ush;
@@ -216,7 +213,7 @@ char *mx_which_str(char *command);
 int mx_blist_len(t_b_node **head);
 int mx_count_pipes(char **comn);
 int mx_exit(t_ush *ush, char **command);
-int mx_get_twidth();
+int mx_get_twidth(void);
 int mx_jobs_list_len(t_jobs **list);
 int mx_read_input(t_ush *ush);
 int mx_read_input_pro(t_ush *ush);
@@ -226,7 +223,6 @@ int mx_size_of_pipe_matstr(char **comn, int *i, int *j);
 int mx_strarrlen(char **arr);
 int mx_strcmp_export(const char *s1, const char *s2);
 int mx_variable_list_len(t_variable **list);
-// t_env *mx_envnode_creation(void);
 t_env_flags *mx_create_env_flags(void);
 t_jobs *mx_creat_jobs_node(void);
 t_pid *mx_creat_pid_node(int pid);
@@ -257,27 +253,23 @@ void mx_outlst(t_ush *ush);
 void mx_pipe_parent_process(t_ush *ush, char ***commat, int *pipedes, int *buf_exit);
 void mx_pipe_process_creator(t_ush *ush, char ***commat);
 void mx_pop_back_variable(t_variable **head);
-void mx_pop_front_export(t_export **head);
 void mx_pop_front_pid(t_pid **head);
 void mx_pop_front_pwdilda(t_pwdilda **head);
 void mx_pop_front_variable(t_variable **head);
 void mx_pop_jobs_node(t_jobs **list, int index);
 void mx_pop_specific(t_variable **list, int index);
 void mx_process_creator(t_ush *ush, char **command);
-void mx_push_back_export(t_export **export, char **kv);
 void mx_push_back_pid(t_pid **list, int pid);
 void mx_push_back_pwdilda(t_pwdilda **list, char *kay, char *value);
 void mx_push_back_variable(t_variable **list, char **kv);
 void mx_push_jobs_node(t_jobs **list, t_pid **pids, char **command, char ***pipe_command);
-void mx_read_environment(t_export **export_list, char **env);
 void mx_read_termconf(t_termconf *termconf);
-void mx_set_signal(void);
 void mx_signal_end(t_ush *ush, char ***commat, int status, int *buf_exit);
 void mx_sig_init(void);
 void mx_sub_error_printing(int *pipedes);
 void mx_unset(char **command, t_ush *ush);
+void mx_variable_cleaning(t_ush *ush, int *count);
 void mx_which(t_ush *ush, char **command);
-void mx_unset(char **command, t_ush *ush);
 
 // ALL TERM OUTPUTS
 void mx_rd_print_color(t_termconf **cfg);
@@ -287,9 +279,8 @@ void mx_rd_print_old(t_termconf **cfg);
 // TERM AND USH
 int mx_term_width_check(t_termconf **cfg);
 // t_env *mx_envnode_creation(void);
-t_export *mx_exportnode_creation(void);
 t_termconf *mx_create_termconf(void);
-t_ush *mx_create_ush();
+t_ush *mx_create_ush(void);
 void mx_open_tty(t_termconf **cfg);
 void mx_change_color(t_ush *ush, char **commands);
 
@@ -333,7 +324,7 @@ void mx_dealloc_blocks(t_b_node **head);
 void mx_pop_block_front(t_b_node **head);
 
 // STRING OPERATIONS && PARSING
-bool mx_control_slash(char **res, char *str);
+int mx_control_slash(char **res, char ch);
 char *mx_break_on_error(char **str);
 char *mx_dollar_parse(char *str, int *piv, int *type);
 char *mx_doumrk_parse(t_ush *ush, char *str, int *piv);
@@ -381,6 +372,14 @@ int mx_doumrk_subst(t_ush *ush, char **res, char *str, int *piv);
 void mx_replace_subst_nested(t_ush *ush, char **res, char **var);
 int mx_doumrk_dollar(t_ush *ush, char **res, char *str, int *piv);
 void mx_replace_var_nested(t_ush *ush, char **res, char **var);
+
+// PRAYDE ECHO
+t_echo *mx_check_flags_echo(char **arr, int *piv);
+void mx_echo(t_ush *ush, char **arr);
+int mx_one_slash_e(char **res, char *str, int *i);
+int mx_two_slash_e(char **res, char *str, int *i);
+int mx_three_slash_e(char **res, char *str, int *i);
+int mx_four_slash_e(char **res, int *i);
 
 // Workarounds
 t_wa *mx_create_workaround(t_ush *ush);

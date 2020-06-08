@@ -1,66 +1,64 @@
 #include "../inc/ush.h"
 
-static void print_1_type(char *arr, int j, int i, int trig) {
-    while (arr[j + i]) {
-        if (arr[j] == '\\' && trig == 1)
-            j++;
-        mx_printchar(arr[j]);
-        j++;
-    }
+static void slash_handling(char **res, char *str, int *piv) {
+    int sl_num = mx_count_slashes(str);
+    int wa = 0;
+
+    if (sl_num == 1)
+        wa = mx_one_slash_e(res, str, piv);
+    else if (sl_num == 2)
+        wa = mx_two_slash_e(res, str, piv);
+    else if (sl_num == 3)
+        wa = mx_three_slash_e(res, str, piv);
+    else if (sl_num == 4)
+        wa = mx_four_slash_e(res, piv);
 }
 
-static void print_2_type(char *arr) {
-    int j = 1;
-
-    while (arr[j + 1]) {
-        if ((arr[j] == '\\' && arr[j + 1] != '\'')
-            || (arr[j] == '\\' && arr[j + 1] != '"')) {
-            //mx_echo_func_for_slesh(arr, j + 1);
-            j++;
+static void parse_str(t_echo *flags, char **res, char **str, int st) {
+    for (; str[st]; st++) {
+        for (int i = 0; str[st][i] != '\0'; i++) {
+            if (str[st][i] == '\\' && !(flags->E))
+                slash_handling(res, str[st], &i);
+            else
+                mx_push_symbol_l(res, str[st][i]);
         }
-        else
-            mx_printchar(arr[j]);
-        j++;
+        if (str[st + 1])
+            mx_push_symbol_l(res, ' ');
     }
 }
 
-static void part1_of_cycle(char *arr, char *split) {
-    if (arr[0] == '\'')
-        print_1_type(split, 1, 1, 0);
-    else if (arr[0] == '"')
-        print_1_type(arr, 1, 1, 0);
-    else
-        print_1_type(arr, 0, 0, 1);
-}
+static bool check_symbols(char *str) {
+    int i = 0;
 
-static void part2_of_cycle(char *arr) {
-    if (arr[0] == '\'')
-        print_2_type(arr);
-    else if (arr[0] == '"')
-        print_2_type(arr);
-    else
-        print_1_type(arr, 0, 0, 0);
-}
-
-void mx_builtin_echo(char **arr, char *origin) {
-    int i = 1;
-    int point = 2;
-    t_echo *echo = (t_echo *)malloc(sizeof(t_echo));
-    char **split = mx_strsplit(origin, ' ');
-
-    memset(echo, 0, sizeof(t_echo));
-    //i = mx_parser_4_echo(arr, echo);
-    while (arr[i]) {
-        if (echo->E)
-            part1_of_cycle(arr[i], split[point]);
-        else
-            part2_of_cycle(arr[i]);
-        //if (mx_strlen_for_2star(arr) - i != 1)
-            mx_printchar(32);
+    while (str[i]) {
+        if (str[i] >= 32 && 126 >= str[i])
+            return true;
         i++;
-        point++;
     }
-    mx_del_strarr(&split);
-    if (!echo->n)
-        mx_printchar(10);
+    return false;
+}
+
+static void end_of_line(t_ush *ush, t_echo *flags, char *res) {
+    if (!(flags->n))
+        mx_printchar('\n');
+    else {
+        if (!(ush->termconf->isInThread) && check_symbols(res)) {
+            mx_printstr("\033[1;37;7m%\033[0m");
+            for (int i = 0; i < ush->termconf->term_w; i++)
+                mx_printchar(' ');
+            mx_printchar('\r');
+        }
+    }
+}
+
+void mx_echo(t_ush *ush, char **arr) {
+    char *res = mx_strnew_x(1);
+    int st_pos = 1;
+    t_echo *flags = mx_check_flags_echo(arr, &st_pos);
+
+    parse_str(flags, &res, arr, st_pos);
+    mx_printstr(res);
+    end_of_line(ush, flags, res);
+    mx_strdel(&res);
+    free(flags);
 }

@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//CHECK COMMENTS
 char *mx_sixteen_ez_fix(char **str, int *size) {
     int real_siz = 0;
     char *res = NULL;

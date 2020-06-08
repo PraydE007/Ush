@@ -1,6 +1,6 @@
 #include "../inc/ush.h"
 
-t_ush *mx_create_ush() {
+t_ush *mx_create_ush(void) {
     t_ush *ush = (t_ush *)malloc(sizeof(t_ush));
 
     ush->active = true;

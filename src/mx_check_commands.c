@@ -27,7 +27,7 @@ void mx_check_commands(t_ush *ush) {
     char **comn = NULL;
     char ***pipemat = NULL;
 
-    while (block) { // MAYBE NOT NEEDED
+    while (block) {
         comn = mx_command_matrix_creator(&block->t_node);
         if (is_dir(&comn))
                 break;

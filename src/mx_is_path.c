@@ -1,5 +1,5 @@
 //#include "../inc/ush.h"
-//
+//CHECK IF WE NEED THIS FUCTION
 //static void print_not_found(char *command, t_ush *ush) {
 //    mx_printerr(command);
 //    mx_printerr(" not found\n");

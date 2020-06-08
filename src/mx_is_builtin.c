@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//A LOT OF LINES
 static bool first_part_of_biltin(t_ush *ush, char **command) {
     if (mx_strcmp("exit", command[0]) == 0) {
         ush->exit_code = mx_exit(ush, command);
@@ -13,10 +13,10 @@ static bool first_part_of_biltin(t_ush *ush, char **command) {
 //        mx_env(ush, command);
 //        return true;
 //    }
-    //else if (mx_strcmp("echo", command[0]) == 0) {
-    //    mx_echo(ush, command);
-    //    return true;
-    //}
+    else if (mx_strcmp("echo", command[0]) == 0) {
+       mx_echo(ush, command);
+       return true;
+    }
     else if (mx_strcmp("export", command[0]) == 0) {
         mx_export(ush, command);
         return true;

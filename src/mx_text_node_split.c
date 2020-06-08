@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//CHECK COMMENTS
 // Can be troubles
 static void insert_last_part(t_t_node **node, t_t_node **last) {
     t_t_node *p = (*node);

@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+//CHECK COMMENTS
 int mx_four_slash(char **res, char *str, int *i) {
     (*i) += 4;
     mx_push_symbol_l(res, '\\');

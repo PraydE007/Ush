@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-
+// CHECK COMMENTS
 void printStrInt(char *str) {
     int i = 0;
 
