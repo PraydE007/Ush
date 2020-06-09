@@ -122,13 +122,6 @@ typedef struct s_echo {
     bool n;
 }              t_echo;
 
-// check if needs this structure
-typedef struct s_export {
-    char *key;
-    char *value;
-    struct s_export *next;
-}              t_export;
-
 typedef struct s_pid {
     pid_t pid;
     struct s_pid *next;
@@ -200,7 +193,6 @@ bool mx_is_pipe (char **command, char *comstr);
 bool mx_is_slash(char *path);
 bool mx_isvariable (t_ush *ush, char **k_v);
 bool mx_path_is (t_ush *ush);
-char *mx_buf_safe_realloc(char *src, int *size);
 char **mx_command_matrix_creator(t_t_node **comn);
 char **mx_export_matrix_creator(char **env);
 char **mx_key_value_creation(t_ush *ush, char *env);
@@ -210,7 +202,6 @@ char **mx_strararrdup(char ***strararr);
 char **mx_strsplit_first_meeting(const char *s, char c);
 char *mx_substitution_making(t_ush *ush, char *substion);
 char *mx_which_str(char *command);
-int mx_blist_len(t_b_node **head);
 int mx_count_pipes(char **comn);
 int mx_exit(t_ush *ush, char **command);
 int mx_get_twidth(void);
@@ -317,7 +308,6 @@ void mx_del_clone_history(t_termconf **cfg);
 int mx_set_history_pos(t_termconf **cfg, int type);
 int mx_tlist_len(t_t_node **list);
 t_b_node *mx_create_block_node(t_t_node *t_node);
-t_b_node *mx_clone_blocks(t_b_node **head);
 t_b_node *mx_push_block_back(t_b_node **head, t_t_node *t_node);
 void mx_dealloc_blocks(t_b_node **head);
 void mx_pop_block_front(t_b_node **head);

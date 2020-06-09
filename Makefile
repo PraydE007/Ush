@@ -5,7 +5,6 @@ FILES = main \
 	mx_break_on_error \
 	mx_buf_drop \
 	mx_buf_push \
-	mx_buf_safe_realloc \
 	mx_cd \
 	mx_cd_s \
 	mx_cd_P \
@@ -14,7 +13,6 @@ FILES = main \
 	mx_check_key_allow \
 	mx_child_exvprocess \
 	mx_child_process \
-	mx_clone_blocks \
 	mx_clone_history \
 	mx_command_matrix_creator \
 	mx_constant_variables \

@@ -13,18 +13,18 @@ static char *pwdstr(t_pwdilda **list, char *key) {
 }
 
 static bool is_getnv(char **adress, char *variable) {
-        if (!mx_strcmp(variable, "HOME") && getenv(variable) != 0) {
-            (*adress) = mx_strdup_x(getenv("HOME"));
-            return true;
-        }
-        else if (!mx_strcmp(variable, "PWD") && getenv(variable) != 0) {
-            (*adress) = mx_strdup_x(getenv("PWD"));
-            return true;
-        }
-        else if (!mx_strcmp(variable, "OLDPWD") && getenv(variable) != 0) {
-            (*adress) = mx_strdup_x(getenv("OLDPWD"));
-            return true;
-        }
+    if (!mx_strcmp(variable, "HOME") && getenv(variable) != 0) {
+        (*adress) = mx_strdup_x(getenv("HOME"));
+        return true;
+    }
+    else if (!mx_strcmp(variable, "PWD") && getenv(variable) != 0) {
+        (*adress) = mx_strdup_x(getenv("PWD"));
+        return true;
+    }
+    else if (!mx_strcmp(variable, "OLDPWD") && getenv(variable) != 0) {
+        (*adress) = mx_strdup_x(getenv("OLDPWD"));
+        return true;
+    }
     return false;
 }
 
