@@ -72,7 +72,6 @@ int mx_read_input_pro(t_ush *ush) {
     int exit_code = 1;
 
     mx_init_clone(cfg);
-    
     if (!isatty(0))
         return mx_read_from_thread(ush);
     if ((*cfg)->isInThread)
