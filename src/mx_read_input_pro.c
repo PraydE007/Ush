@@ -27,20 +27,13 @@ static void on_read_start(t_termconf **cfg) {
     mx_rd_print_color(cfg);
 }
 
-static void restore_ch(unsigned char *ch) {
-    ch[0] = 0;
-    ch[1] = 0;
-    ch[2] = 0;
-    ch[3] = 0;
-}
-
 static int reading_cycle(t_termconf **cfg) {
     unsigned char ch[4] = {0, 0, 0, 0};
     char *buf = NULL;
     int exit_code = 0;
 
     while (1) {
-        restore_ch(ch);
+        mx_restore_ch(ch);
         read(0, ch, 4);
         if (mx_term_width_check(cfg))
             return 1;

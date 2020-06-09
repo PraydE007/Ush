@@ -282,6 +282,7 @@ void mx_open_tty(t_termconf **cfg);
 void mx_change_color(t_ush *ush, char **commands);
 
 // BUF FUNCTIONS
+void mx_restore_ch(unsigned char *ch);
 // int mx_read_input(t_ush *ush);
 int mx_read_input_pro(t_ush *ush);
 int mx_read_input_pro_for_clion(t_ush *ush);
