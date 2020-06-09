@@ -1,7 +1,7 @@
 #include "../inc/ush.h"
 // CHECK COMMENTS
 static int slash_handling(char **res, char *str, int *i) {
-    int sl_num = mx_count_slashes(str);
+    int sl_num = mx_count_slashes(&str[*i]);
 
     if (sl_num == 1) {
         if (!mx_one_slash_m(res, str, i))
