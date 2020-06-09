@@ -1,14 +1,12 @@
 #include "../inc/ush.h"
-//A LOT OF FUNCTIONS AND COMMENTS
+
 static int c_cases(t_termconf **cfg, unsigned char ch, short type) {
     if (type == 0 && (*cfg)->ful_len < (*cfg)->term_w - 1) {
         (*cfg)->c_pos += 1;
-        // return mx_buf_push(&((*cfg)->clone->buf), &((*cfg)->clone->buf_size), (char)ch);
         return mx_push_n_char(cfg, ch);
     }
     else if (type == 1) {
         (*cfg)->c_pos -= 1;
-        // return mx_buf_drop(&((*cfg)->clone->buf), &((*cfg)->clone->buf_size));
         return mx_drop_n_char(cfg);
     }
     else if (type == 2)
@@ -25,9 +23,7 @@ static int c_cases(t_termconf **cfg, unsigned char ch, short type) {
 }
 
 static void on_read_start(t_termconf **cfg) {
-    // mx_restore_buffer(cfg); //
     tcsetattr(0, TCSAFLUSH, &((*cfg)->tty));
-    // fprintf(stdout, "%su$h> ", (*cfg)->color);
     mx_rd_print_color(cfg);
 }
 
@@ -40,13 +36,11 @@ static void restore_ch(unsigned char *ch) {
 
 static int reading_cycle(t_termconf **cfg) {
     unsigned char ch[4] = {0, 0, 0, 0};
-    // char ch = 0;
     char *buf = NULL;
     int exit_code = 0;
 
     while (1) {
         restore_ch(ch);
-        // read(0, &ch, 1);
         read(0, ch, 4);
         if (mx_term_width_check(cfg))
             return 1;
@@ -64,7 +58,6 @@ static int reading_cycle(t_termconf **cfg) {
 
 static int on_read_ended(t_termconf **cfg) {
     t_h_node *clone = (*cfg)->chsn;
-    //char *new_buf = mx_sixteen_ez_fix(&(clone->buf), &(clone->buf_size));
     char *new_buf = mx_strdup_x(clone->buf);
     int exit_code = 0;
 

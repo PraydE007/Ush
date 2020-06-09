@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-// CHECK COMMENTS
+
 static int slash_handling(char **res, char *str, int *i) {
     int sl_num = mx_count_slashes(&str[*i]);
 
@@ -22,31 +22,39 @@ static int slash_handling(char **res, char *str, int *i) {
     return 1;
 }
 
+static int doumrk_handler(t_ush *ush, char **res, char *str, int *i) {
+    if (str[(*i)] == '\0')
+        return 0;
+    else if (str[(*i)] == '\\') {
+        if (!slash_handling(res, str, i))
+            return 0;
+    }
+    else if (str[(*i)] == '`') {
+        if (!mx_doumrk_subst(ush, res, &str[(*i) + 1], i))
+            return 0;
+    }
+    else if (str[(*i)] == '$') {
+        if (!mx_doumrk_dollar(ush, res, &str[(*i) + 1], i))
+            return 0;
+    }
+    else if (str[(*i)] == '\"')
+        return 1;
+    else
+        mx_push_symbol_l(res, str[(*i)]);
+    return 2;
+}
+
 char *mx_doumrk_parse(t_ush *ush, char *str, int *piv) {
     char *res = mx_strnew_x(1);
     int len = mx_strlen(str);
     int i = 0;
+    int ex = 0;
 
     while (i <= len) {
-        // OTHER CASES
-        if (str[i] == '\0')
+        if (!(ex = doumrk_handler(ush, &res, str, &i)))
             return mx_break_on_error(&res);
-        else if (str[i] == '\\') {
-            if (!slash_handling(&res, str, &i))
-                return mx_break_on_error(&res);
-        }
-        else if (str[i] == '`') {
-            if (!mx_doumrk_subst(ush, &res, &str[i + 1], &i))
-                return mx_break_on_error(&res);
-        }
-        else if (str[i] == '$') {
-            if (!mx_doumrk_dollar(ush, &res, &str[i + 1], &i))
-                return mx_break_on_error(&res);
-        }
-        else if (str[i] == '\"')
+        else if (ex == 1)
             break;
-        else
-            mx_push_symbol_l(&res, str[i]);
         i++;
     }
     (*piv) += i + 1;

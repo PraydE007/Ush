@@ -1,9 +1,7 @@
 #include "../inc/ush.h"
 
-//CHECK COMMENTS
-static t_b_node *burnish_cycle(t_b_node **block) {
+static t_b_node *burnish_cycle(t_b_node **block, t_t_node *p_tt) {
     t_b_node *new = mx_create_block_node(NULL);
-    t_t_node *p_tt = NULL;
     char *buf = NULL;
 
     p_tt = (*block)->t_node;
@@ -29,7 +27,7 @@ void mx_parse_burnish_pro(t_ush *ush, t_b_node **block) {
     mx_replace_tild(&(ush->pwdilda_list), block);
     mx_replace_variables(ush, block);
     mx_replace_subst(ush, block);
-    (*block) = burnish_cycle(block);
+    (*block) = burnish_cycle(block, NULL);
     if ((*block)->t_node)
         mx_check_commands(ush, *block);
 }

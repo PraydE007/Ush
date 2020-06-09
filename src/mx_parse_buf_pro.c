@@ -1,6 +1,5 @@
 #include "../inc/ush.h"
 
-//CHECK COMMENTS
 static char *get_buf(t_ush *ush) {
     t_termconf *cfg = ush->termconf;
     char *str = mx_get_history_last_str(&(cfg->h_node));

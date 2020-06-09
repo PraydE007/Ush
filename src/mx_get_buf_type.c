@@ -1,12 +1,4 @@
 #include "../inc/ush.h"
-//CHECK COMMENTS
-// short mx_get_buf_type(unsigned char ch) {
-//     if (32 <= ch && ch <= 126)
-//         return 0;
-//     else
-//         return 1;
-//     // return 1;
-// }
 
 short cases_part_two(unsigned char *ch) {
     if (32 <= ch[0] && ch[0] <= 126)
@@ -37,7 +29,6 @@ short cases_part_one(unsigned char *ch) {
 short mx_get_buf_type(unsigned char *ch) {
     int res = 0;
 
-    // printf("KEY: %i %i %i %i\n", ch[0], ch[1], ch[2], ch[3]);
     if (ch[0] == 27) {
         if ((res = cases_part_one(ch)) != -1)
             return res;

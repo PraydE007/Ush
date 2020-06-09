@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-// CHECK COMMENTS
+
 void printStrInt(char *str) {
     int i = 0;
 
@@ -14,7 +14,6 @@ void printStrInt(char *str) {
 t_h_node *mx_clone_history(t_h_node **h_node) {
     t_h_node *new_node = NULL;
     t_h_node *p = (*h_node);
-    // char *cl_str = NULL;
 
     if (*h_node && h_node) {
         while (p) {

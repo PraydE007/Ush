@@ -215,9 +215,6 @@ int mx_count_pipes(char **comn);
 int mx_exit(t_ush *ush, char **command);
 int mx_get_twidth(void);
 int mx_jobs_list_len(t_jobs **list);
-int mx_read_input(t_ush *ush);
-int mx_read_input_pro(t_ush *ush);
-int mx_read_input_pro_for_clion(t_ush *ush);
 int mx_read_from_thread(t_ush *ush);
 int mx_size_of_pipe_matstr(char **comn, int *i, int *j);
 int mx_strarrlen(char **arr);
@@ -285,16 +282,17 @@ void mx_open_tty(t_termconf **cfg);
 void mx_change_color(t_ush *ush, char **commands);
 
 // BUF FUNCTIONS
+// int mx_read_input(t_ush *ush);
+int mx_read_input_pro(t_ush *ush);
+int mx_read_input_pro_for_clion(t_ush *ush);
 int mx_buf_drop(char **buf, int *buf_size);
 int mx_drop_n_char(t_termconf **cfg);
 int mx_buf_push(char **buf, int *buf_size, char ch);
 int mx_push_n_char(t_termconf **cfg, char ch);
-char *mx_sixteen_ez_fix(char **str, int *size);
 short mx_get_buf_type(unsigned char *ch);
 short mx_get_buf_type_for_clion(unsigned char ch);
 // short mx_get_buf_type(unsigned char *ch);
 // short mx_get_buf_type(unsigned char ch);
-void mx_restore_buffer(t_termconf *cfg);
 
 // TEXT LIST
 t_t_node *mx_create_text_node(char *text, int type);
@@ -356,7 +354,6 @@ void mx_pwd(char **command, t_ush *ush);
 void mx_replace_subst(t_ush *ush, t_b_node **node);
 void mx_replace_tild(t_pwdilda **list, t_b_node **node);
 void mx_replace_variables(t_ush *ush, t_b_node **node);
-void mx_text_node_split(t_t_node **node);
 void mx_subst_slash_parse(char **res, char *str, int *piv);
 int mx_three_slash_m(char **res, char *str, int *i);
 bool mx_is_control_slash(char ch);

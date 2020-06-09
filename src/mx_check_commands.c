@@ -28,7 +28,7 @@ void mx_check_commands(t_ush *ush, t_b_node *block) {
 
     comn = mx_command_matrix_creator(&block->t_node);
     if (is_dir(&comn))
-        return ;
+        return;
     else if (mx_is_pipe(comn, NULL)) {
         pipemat = mx_pipe_matrix_creator(ush, comn);
         pipemat ? mx_pipe_process_creator(ush, pipemat) : (void)0;

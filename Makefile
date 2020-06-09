@@ -119,13 +119,11 @@ FILES = main \
 	mx_replace_subst \
 	mx_replace_tild \
 	mx_replace_variables \
-	mx_restore_buffer \
 	mx_set_history_pos \
 	mx_signal_end \
 	mx_sig_init \
 	mx_sinmrk_parse \
 	mx_size_of_pipe_matstr \
-	mx_sixteen_ez_fix \
 	mx_slash_parse \
 	mx_space_parse \
 	mx_strararrdup \
@@ -138,7 +136,6 @@ FILES = main \
 	mx_subst_parse \
 	mx_subst_slash_parse \
 	mx_term_width_check \
-	mx_text_node_split \
 	mx_text_parse \
 	mx_three_slash \
 	mx_three_slash_m \

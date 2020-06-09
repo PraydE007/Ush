@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-//CHECK COMMENTS
+
 int mx_four_slash_s(char **res, char *str, int *i) {
     str = str + 1 - 1; // wa for unused var
     (*i) += 3;

@@ -1,7 +1,6 @@
 #include "../inc/ush.h"
-// CHECK COMMENTS
+
 void mx_dealloc_ush(t_ush **ush) {
-//     mx_dealloc_blocks(&((*ush)->blocks));
     while ((*ush)->termconf->h_node)
         mx_pop_h_node_front(&((*ush)->termconf->h_node));
     mx_dealloc_termconf(&((*ush)->termconf));

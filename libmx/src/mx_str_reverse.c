@@ -5,7 +5,7 @@ void mx_str_reverse(char *s) {
     int j = mx_strlen(s) - 1;
 
     if (s == NULL)
-        return ;
+        return;
     while (i < j) {
         mx_swap_char(&s[i], &s[j]);
         i++;
