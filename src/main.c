@@ -8,8 +8,9 @@ static void main_cycle(t_ush *ush) {
     else if (func_exit == 101)
         mx_printchar('\n');
     else if (func_exit == 102) {
+        mx_printchar('\n');
         ush->active = false;
-        ush->exit_code = 1;
+        ush->exit_code = 0;
     }
 }
 
