@@ -22,7 +22,7 @@ static void parse_str(t_echo *flags, char **res, char **str, int st) {
             else
                 mx_push_symbol_l(res, str[st][i]);
         }
-        if (str[st + 1])
+        if (str[st + 1] && str[st + 1][0] != '\0')
             mx_push_symbol_l(res, ' ');
     }
 }
@@ -61,4 +61,5 @@ void mx_echo(t_ush *ush, char **arr) {
     end_of_line(ush, flags, res);
     mx_strdel(&res);
     free(flags);
+    ush->exit_code = 0;
 }
