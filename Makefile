@@ -41,7 +41,6 @@ FILES = main \
 	mx_dollar_parse \
 	mx_doumrk_parse \
 	mx_drop_n_char \
-	mx_env \
 	mx_env_variable_checking \
 	mx_error_making \
 	mx_exit \
@@ -80,11 +79,10 @@ FILES = main \
 	mx_one_slash_s \
 	mx_one_slash_sinmrk \
 	mx_open_tty \
-	mx_outlst \
 	mx_path_is \
-	mx_parse_block \
-	mx_parse_buf \
-	mx_parse_burnish \
+	mx_parse_block_pro \
+	mx_parse_buf_pro \
+	mx_parse_burnish_pro \
 	mx_parser_cd \
 	mx_pipe_matrix_creator \
 	mx_pipe_parent_process \

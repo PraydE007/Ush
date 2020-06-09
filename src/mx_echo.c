@@ -1,7 +1,7 @@
 #include "../inc/ush.h"
 
 static void slash_handling(char **res, char *str, int *piv) {
-    int sl_num = mx_count_slashes(str);
+    int sl_num = mx_count_slashes(&str[*piv]);
     int wa = 0;
 
     if (sl_num == 1)

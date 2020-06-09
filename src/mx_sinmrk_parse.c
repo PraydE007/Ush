@@ -1,7 +1,7 @@
 #include "../inc/ush.h"
 //CHECK COMMENTS
 static int slash_handling(char **res, char *str, int *i) {
-    int sl_num = mx_count_slashes(str);
+    int sl_num = mx_count_slashes(&str[*i]);
 
     if (sl_num == 1) {
         if (!mx_one_slash_sinmrk(res, str, i))
@@ -49,7 +49,7 @@ char *mx_sinmrk_parse(char *str, int *piv) {
         if (str[i] == '\0')
             return mx_break_on_error(&res);
         else if (str[i] == '\\')
-            slash_handling(&res, &str[i], &i);
+            slash_handling(&res, str, &i);
         else if (str[i] == '\'')
             break;
         else

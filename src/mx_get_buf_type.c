@@ -13,8 +13,10 @@ short cases_part_two(unsigned char *ch) {
         return 0;
     else if (ch[0] == 127)
         return 1;
-    else if (ch[0] == 4)
+    else if (ch[0] == 3)
         return 101;
+    else if (ch[0] == 4)
+        return 102;
     return -1;
 }
 
@@ -35,6 +37,7 @@ short cases_part_one(unsigned char *ch) {
 short mx_get_buf_type(unsigned char *ch) {
     int res = 0;
 
+    // printf("KEY: %i %i %i %i\n", ch[0], ch[1], ch[2], ch[3]);
     if (ch[0] == 27) {
         if ((res = cases_part_one(ch)) != -1)
             return res;

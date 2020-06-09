@@ -9,6 +9,7 @@ int mx_one_slash_sinmrk(char **res, char *str, int *i) {
         return mx_push_symbol_l(res, '\\');
     }
     else {
+        // (*i) -= 1;
         mx_push_symbol_l(res, '\\');
         return mx_push_symbol_l(res, str[(*i)]);
     }
