@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-//A LOT OF LINES
+
 int mx_exit(t_ush *ush, char **command) {
     int checker = 1;
 
@@ -14,13 +14,10 @@ int mx_exit(t_ush *ush, char **command) {
         return ush->exit_code;
     }
     else if (command[0] && command[1]) {
-         for (int i = 0; command[1][i]; i++)
+        for (int i = 0; command[1][i]; i++)
             if (!mx_isdigit(command[1][i]))
                 checker = 0;
-        if (checker == 1)
-            return mx_atoi(command[1]);
-        else
-            return ush->exit_code;
+        return (checker == 1) ? mx_atoi(command[1]) : ush->exit_code;
     }
     else
         return ush->exit_code;

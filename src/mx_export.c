@@ -77,4 +77,5 @@ void  mx_export(t_ush *ush, char **command) {
     }
     else 
         export_making(ush, command);
+    ush->exit_code = 0;
 }
