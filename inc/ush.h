@@ -122,13 +122,6 @@ typedef struct s_echo {
     bool n;
 }              t_echo;
 
-// check if needs this structure
-typedef struct s_export {
-    char *key;
-    char *value;
-    struct s_export *next;
-}              t_export;
-
 typedef struct s_pid {
     pid_t pid;
     struct s_pid *next;

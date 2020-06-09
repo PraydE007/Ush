@@ -11,13 +11,14 @@ int main() {
         if (!(func_exit = mx_read_input_pro(ush)))
             mx_parse_buf(ush);
         else if (func_exit == 101) {
+            mx_printstr("\n");
             ush->active = false;
-            ush->exit_code = 1;
+            ush->exit_code = 0;
         }
         mx_del_clone_history(&(ush->termconf));
     }
     exit_code = ush->exit_code;
     mx_dealloc_ush(&ush);
-    system("leaks -q ush");
+    // system("leaks -q ush");
     return exit_code;
 }

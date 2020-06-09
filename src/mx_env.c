@@ -28,13 +28,13 @@ static int check_for_P(char *path, char *exe) {
     struct stat lt;
 
     lstat(exe, &lt);
-    if ((lt.st_mode & MX_IXUSR) == MX_IXUSR) {
-        free(command);
+    // if ((lt.st_mode & MX_IXUSR) == MX_IXUSR) {
+    //     free(command);
         return 2;
-    }
+    // }
     lstat(command, &lt);
-    if ((lt.st_mode & MX_IXUSR) == MX_IXUSR)
-        res = 1;
+    // if ((lt.st_mode & MX_IXUSR) == MX_IXUSR)
+    //     res = 1;
     free(command);
     return res;
 }
