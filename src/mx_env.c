@@ -20,7 +20,7 @@ void mx_env(t_ush *ush, char **command) {
     else {
         int i = mx_parser_env(ush, command, unset);
         if (i != 0 && !ush->flags->end)
-            env_process_creator(ush, command, unset, i - 1);
+            mx_env_process_creator(ush, command, unset, i - 1);
     }
     free(ush->flags);
     mx_del_strarr(&unset);

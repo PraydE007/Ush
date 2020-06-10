@@ -84,7 +84,7 @@ static void main_part(char **command, char **env, t_ush *ush, int i) {
     }
 }
 
-void env_process_creator(t_ush *ush, char **command, char **unset, int i) {
+void mx_env_process_creator(t_ush *ush, char **command, char **unset, int i) {
     pid_t pid = 0;
     pid_t wpid = 0;
     int status = 0;

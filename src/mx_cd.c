@@ -50,7 +50,7 @@ static char *getpath_cd(char **command, t_ush *ush, int i) {
         ush->cd_flags->rip_42 = 1;
     }
     if (lstat(path, &lt) < 0 && !ush->cd_flags->rip_42)
-        err_printer(path, ush);
+        mx_err_printer(path, ush);
     if (command[i] && command[i + 1]
         && !command[i + 2] && !ush->cd_flags->rip_42) {
         printf("%s\n", ush->pwdilda_list->next->value);

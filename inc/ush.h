@@ -185,9 +185,6 @@ typedef struct s_wa {
     t_ush *ush;
 }              t_wa;
 
-void env_process_creator(t_ush *ush, char **command, char **unset, int i);
-int mx_parser_env(t_ush *ush, char **command, char **unset);
-void err_printer(char *path, t_ush *ush);
 
 bool mx_check_key_allow(t_ush *ush, char *kay);
 bool mx_have_equals(t_ush *ush, char *env);
@@ -212,6 +209,7 @@ int mx_count_pipes(char **comn);
 int mx_exit(t_ush *ush, char **command);
 int mx_get_twidth(void);
 int mx_jobs_list_len(t_jobs **list);
+int mx_parser_env(t_ush *ush, char **command, char **unset);
 int mx_read_from_thread(t_ush *ush);
 int mx_size_of_pipe_matstr(char **comn, int *i, int *j);
 int mx_strarrlen(char **arr);
@@ -235,7 +233,9 @@ void mx_dealloc_termconf(t_termconf **termconf);
 void mx_dealloc_ush(t_ush **ush);
 void mx_del_strararr(char ****arr);
 void mx_env(t_ush *ush, char **command);
+void mx_env_process_creator(t_ush *ush, char **command, char **unset, int i);
 void mx_env_variable_checking(t_variable **list, char *command);
+void mx_err_printer(char *path, t_ush *ush);
 void mx_error_making(char *comn);
 void mx_export(t_ush *ush, char **command);
 void mx_fg(t_ush *ush, char **command);

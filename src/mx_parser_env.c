@@ -23,7 +23,7 @@ static void flag_P(char **command, int i, t_ush *ush, char **unset) {
         index++;
     }
     ush->flags->P = 1;
-    env_process_creator(ush, res, unset, i);
+    mx_env_process_creator(ush, res, unset, i);
     ush->flags->end = 1;
     mx_del_strarr(&res);
 }

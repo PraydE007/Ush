@@ -39,8 +39,11 @@ FILES = main \
 	mx_dollar_parse \
 	mx_doumrk_parse \
 	mx_drop_n_char \
+	mx_env \
+	mx_env_process_creator \
 	mx_env_variable_checking \
 	mx_error_making \
+	mx_err_printer \
 	mx_exit \
 	mx_export \
 	mx_export_matrix_creator \
@@ -98,13 +101,11 @@ FILES = main \
 	mx_process_creator \
 	mx_programm_finder \
 	mx_pwd \
-	mx_env_process_creator \
 	mx_parser_env \
 	mx_push_back_pid \
 	mx_push_back_pwdilda \
 	mx_push_back_variable \
 	mx_push_block_back \
-	mx_cd_err_printer \
 	mx_push_h_node_back \
 	mx_push_jobs_node \
 	mx_push_n_char \
@@ -186,12 +187,8 @@ install: ush
 
 ush : $(SRC_COMPILE) $(HEADER)
 	@make -C libmx install
-	#RELEASE MODE
 	@clang $(CFLAGS) -c $(SRC_COMPILE)
 	@clang $(CFLAGS) -ltermcap $(OBJ) $(LIB_A) -o $(NAME)
-#	TEST MODE
-#	@clang -c $(SRC_COMPILE)
-#	@clang -ltermcap $(OBJ) $(LIB_A) -o $(NAME)
 	@mkdir -p obj
 	@cp $(OBJ) obj/
 	@rm -rf $(OBJ)

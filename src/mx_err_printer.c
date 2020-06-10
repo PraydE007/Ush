@@ -1,6 +1,6 @@
 #include "../inc/ush.h"
 
-void err_printer(char *path, t_ush *ush) {
+void mx_err_printer(char *path, t_ush *ush) {
     mx_printerr("cd: no such file or directory: ");
     mx_printerr(path);
     mx_printerr("\n");
