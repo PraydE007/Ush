@@ -102,6 +102,8 @@ FILES = main \
 	mx_process_creator \
 	mx_programm_finder \
 	mx_pwd \
+	mx_env_process_creator \
+	mx_parser_env \
 	mx_push_back_pid \
 	mx_push_back_pwdilda \
 	mx_push_back_variable \
