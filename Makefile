@@ -104,6 +104,7 @@ FILES = main \
 	mx_push_back_pwdilda \
 	mx_push_back_variable \
 	mx_push_block_back \
+	mx_cd_err_printer \
 	mx_push_h_node_back \
 	mx_push_jobs_node \
 	mx_push_n_char \

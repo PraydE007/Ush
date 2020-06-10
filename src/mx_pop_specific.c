@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-//A LOT OF LINES
+
 void mx_pop_specific(t_variable **list, int index) {
     t_variable *buf = *list;
     t_variable *temp = NULL;

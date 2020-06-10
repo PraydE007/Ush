@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-// CHECK IF WE DO NOT NEED IS_PATH FUNCTION - RENAME
+
 bool mx_path_is (t_ush *ush) {
     t_variable *pl = ush->variable_list;
 

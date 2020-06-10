@@ -187,6 +187,7 @@ typedef struct s_wa {
 
 void env_process_creator(t_ush *ush, char **command, char **unset, int i);
 int mx_parser_env(t_ush *ush, char **command, char **unset);
+void err_printer(char *path, t_ush *ush);
 
 bool mx_check_key_allow(t_ush *ush, char *kay);
 bool mx_have_equals(t_ush *ush, char *env);
