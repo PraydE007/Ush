@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-// A LOT OF LINES
+
 static void print_not_found(char *command, t_ush *ush) {
     mx_printerr(command);
     mx_printerr(" not found\n");
@@ -30,7 +30,7 @@ static bool look_in_path(t_ush *ush, char **ways, char *command, bool *flag) {
         print_not_found(command, ush);
     return a;
 }
-// A LOT OF LINES
+
 static int flag_parser(char **command, t_ush *ush, bool *flag) {
     int i = 1;
 
@@ -62,7 +62,7 @@ void mx_which(t_ush *ush, char **command) {
     int i = flag_parser(command, ush, flag);
 
     for (; command[i];) {
-        if (mx_is_built_in(command[i]) && !flag[1])
+        if (mx_is_built_in(command[i]))
             printf("%s: shell built-in command\n", command[i]);
         if ((!mx_is_built_in(command[i]) || (mx_is_built_in(command[i])
             && flag[0])) && getenv("PATH"))

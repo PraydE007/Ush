@@ -10,6 +10,7 @@
 #define MX_IFLNK 0120000
 #define MX_IFMT 0170000
 #define MX_IFDIR 0040000
+#define MX_IXUSR 0000100
 #define MX_P 0
 #define MX_L 1
 #define MX_END 2
@@ -115,6 +116,7 @@ typedef struct s_env_flags {
     bool u;
     bool i;
     bool P;
+    bool end;
 }              t_env_flags;
 
 typedef struct s_echo {
@@ -182,6 +184,9 @@ typedef struct s_wa {
     char *buf;
     t_ush *ush;
 }              t_wa;
+
+void env_process_creator(t_ush *ush, char **command, char **unset, int i);
+int mx_parser_env(t_ush *ush, char **command, char **unset);
 
 bool mx_check_key_allow(t_ush *ush, char *kay);
 bool mx_have_equals(t_ush *ush, char *env);

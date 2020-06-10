@@ -6,5 +6,6 @@ t_env_flags *mx_create_env_flags(void) {
     flags->i = 0;
     flags->P = 0;
     flags->u = 0;
+    flags->end = 0;
     return flags;
 }

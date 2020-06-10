@@ -1,5 +1,25 @@
 #include "../inc/ush.h"
 
+static void tilda_for_minus(t_ush *ush) {
+    char *log = getlogin();
+    char *tilda = mx_strjoin("Users/", log);
+    char *buf_1 = NULL;
+    int len = mx_strlen(tilda);
+    char *res = strstr(ush->pwdilda_list->next->value, tilda);
+
+    if (res) {
+        res = strdup("~");
+        buf_1 = mx_strjoin(res, &(ush->pwdilda_list->next->value)[len + 1]);
+    }
+    else
+        buf_1 = strdup(ush->pwdilda_list->next->value);
+    mx_printstr(buf_1);
+    mx_printchar(10);
+    free(buf_1);
+    free(tilda);
+    free(res);
+}
+
 static void cd_minus(t_ush *ush) {
     char *dir = mx_strnew(1024);
     char *buf = strdup(ush->pwdilda_list->next->value);
@@ -11,8 +31,7 @@ static void cd_minus(t_ush *ush) {
     free(ush->pwdilda_list->next->value);
     setenv("PWD", dir, 1024);
     ush->pwdilda_list->next->value = strdup(getcwd(dir, 1024));
-    mx_printstr(ush->pwdilda_list->next->value);
-    mx_printchar(10);
+    tilda_for_minus(ush);
     free(dir);
     free(buf);
 }
