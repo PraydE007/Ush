@@ -242,7 +242,6 @@ void mx_fg_command_handler(t_ush *ush, t_jobs **pl_jobs, char **command, int len
 void mx_fg_signal(t_ush *ush, t_jobs **pl_jobs, int lenth);
 void mx_jobs(t_ush *ush);
 void mx_jobs_sign_change(t_jobs **list, int index);
-// void mx_outlst(t_ush *ush);
 void mx_pipe_parent_process(t_ush *ush, char ***commat, int *pipedes, int *buf_exit);
 void mx_pipe_process_creator(t_ush *ush, char ***commat);
 void mx_pop_back_variable(t_variable **head);

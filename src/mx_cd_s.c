@@ -1,4 +1,4 @@
-#include "../inc/ush.h"//
+#include "../inc/ush.h"
 
 static void zatichka_v_ushi(char *command, t_ush *ush) {
     mx_printerr("cd: not a directory: ");
